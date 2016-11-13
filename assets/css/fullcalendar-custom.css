@@ -33,18 +33,29 @@ table {
   border-collapse: collapse;
   border-spacing: 0; }
 
-button, .button, a.button, [type=submit], [type=button] {
+.fc-state-active {
+  box-shadow: none; }
+
+.fc-state-default {
   background-color: #C98D00;
+  box-shadow: none;
+  background-image: none;
+  text-shadow: none; }
+
+.fc-state-disabled {
+  background-image: none; }
+
+.fc-state-down {
+  box-shadow: none; }
+
+.fc-event,
+.fc-agenda, .fc-event-time,
+.fc-event a {
+  background-color: purple;
+  border-color: purple;
   color: white; }
 
-#calendar {
-  width: 80%;
-  height: 80%;
-  padding: 5px;
-  float: right; }
-
-#sidebar {
-  display: fixed;
-  float: left;
-  width: 20%;
-  height: 100%; }
+.fc-state-down,
+.fc-state-active {
+  box-shadow: none;
+  background-image: none; }

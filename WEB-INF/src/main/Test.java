@@ -7,7 +7,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -35,7 +34,7 @@ public class Test extends HttpServlet {
 			r = st.executeQuery();
 			if (r.next())
 				out.println("There are " + r.getInt(1) + " users!");
-		} catch (NamingException | SQLException e) {
+		} catch (SQLException e) {
 			out.println(e.toString());
 		} finally {
 			try {

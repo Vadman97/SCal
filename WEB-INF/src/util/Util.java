@@ -10,10 +10,15 @@ import javax.sql.DataSource;
 
 public class Util {
 
-	public static Connection getConn() throws NamingException, SQLException {
-		Context initCtx = new InitialContext();
-		Context envCtx = (Context) initCtx.lookup("java:comp/env");
-		DataSource ds = (DataSource) envCtx.lookup("jdbc/db");
-		return ds.getConnection();
+	public static Connection getConn() throws SQLException {
+		try {
+			Context initCtx = new InitialContext();
+			Context envCtx = (Context) initCtx.lookup("java:comp/env");
+			DataSource ds = (DataSource) envCtx.lookup("jdbc/db");
+			return ds.getConnection();
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 }

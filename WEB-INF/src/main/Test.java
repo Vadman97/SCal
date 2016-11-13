@@ -7,15 +7,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
 import javax.naming.NamingException;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.sql.DataSource;
+
+import util.Util;
 
 public class Test extends HttpServlet {
 	private static final long serialVersionUID = 5729439952621174381L;
@@ -26,12 +24,8 @@ public class Test extends HttpServlet {
 
 		Connection conn = null;
 		try {
-			Context initCtx = new InitialContext();
-			Context envCtx = (Context) initCtx.lookup("java:comp/env");
-			DataSource ds = (DataSource) envCtx.lookup("jdbc/db");
-
 			// Allocate and use a connection from the pool
-			conn = ds.getConnection();
+			conn = Util.getConn();
 			PreparedStatement st = conn.prepareStatement("SELECT * FROM Users");
 			ResultSet r = st.executeQuery();
 			while (r.next()) {

@@ -8,7 +8,19 @@ public class UserData {
 	String username;
 	String email;
 	String password;
-	int age;
+	
+	final protected static char[] hexArray = "0123456789ABCDEF".toCharArray();
+	
+	public static String bytesToHex(byte[] bytes) {
+	    char[] hexChars = new char[bytes.length * 2];
+	    for ( int j = 0; j < bytes.length; j++ ) {
+	        int v = bytes[j] & 0xFF;
+	        hexChars[j * 2] = hexArray[v >>> 4];
+	        hexChars[j * 2 + 1] = hexArray[v & 0x0F];
+	    }
+	    return new String(hexChars);
+	}
+
 
 	public void setUsername(String value) {
 		username = value;
@@ -18,17 +30,13 @@ public class UserData {
 		email = value;
 	}
 
-	public void setAge(int value) {
-		age = value;
-	}
-
 	public void setPassword(String password) {
 		this.password = null;
 		try {
-			MessageDigest md = MessageDigest.getInstance("SHA-256");
+			MessageDigest md = MessageDigest.getInstance("SHA-512");
 			md.update(password.getBytes("UTF-8"));
 			byte[] digest = md.digest();
-			this.password = new String(digest, "UTF-8"); 
+			this.password = bytesToHex(digest);
 		} catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
@@ -41,9 +49,13 @@ public class UserData {
 	public String getEmail() {
 		return email;
 	}
-
-	public int getAge() {
-		return age;
+	
+	public String getPassword() {
+		return password;
 	}
-
+	
+	public void write()
+    {
+		throw new RuntimeException();
+    }
 }

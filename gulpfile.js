@@ -5,22 +5,12 @@ var autoPrefixer	= require('gulp-autoprefixer');
 var browserSync		= require('browser-sync');
 
 // 'sass' task
-// -- compiles *.scss into *.css
-// -- *.scss files and their directory are ignored on git
+// -- compiles styles.scss into css
+// -- styles.scss contains imports of all other necessary stylesheets
 gulp.task('sass', function() {
-	return gulp.src('assets/scss/*.scss')
+	return gulp.src('assets/scss/styles.scss')
 	.pipe(sass({style: 'expanded'}))
 	.pipe(autoPrefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6'))
-	.pipe(gulp.dest('assets/css'))
-	.pipe(browserSync.reload({stream: true}));
-});
-
-// 'concatCss' task
-// -- takes compiled css from assets/css and concatenates into one master css files
-// -- master css file named 'styles.css'
-gulp.task('concatCss', ['sass'], function() {
-	return gulp.src(['assets/css/*.css', '!assets/css/styles.css'])
-	.pipe(concat('styles.css'))
 	.pipe(gulp.dest('assets/css'))
 	.pipe(browserSync.reload({stream: true}));
 });
@@ -28,14 +18,14 @@ gulp.task('concatCss', ['sass'], function() {
 // 'serve' task
 // -- serves files from root directory
 // -- also watches files/directories for live uploading during development
-gulp.task('serve', ['concatCss'], function() {
+gulp.task('serve', ['sass'], function() {
 	browserSync.init({
 		server: {
 			basedir: "./"
 		}
 	});
 
-	gulp.watch('assets/scss/*.scss', ['sass', 'concatCss']);
+	gulp.watch('assets/scss/*.scss', ['sass']);
 	gulp.watch('*.html').on('change', browserSync.reload);
 });
 

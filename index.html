@@ -7,7 +7,7 @@
 
     <!-- full calendar css link -->
     <link rel="stylesheet" href="bower_components/fullcalendar/dist/fullcalendar.css" />
-
+    <link rel="stylesheet" src="assets/css/fullcalendar-custom.css" />
     <!-- jquery, moment, and angular have to get included before fullcalendar -->
     <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript" src="bower_components/moment/min/moment.min.js"></script>
@@ -21,8 +21,21 @@
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="assets/css/styles.css">
+
+    <script type="text/javascript">
+        $(function() {
+            $("#sidebar").load("partials/sidebar.html")
+        });
+    </script>
   </head>
   <body ng-app="calendar" ng-controller="calendarController">
-    <div ui-calendar="uiConfig.calendar" ng-model="eventSources"></div>
+
+    <!-- Calendar module -->
+    <!-- This is handled by ui-calendar -->
+    <div id="calendar" ui-calendar="uiConfig.calendar" ng-model="eventSources"></div>
+
+    <!-- Sidebar module -->
+    <!-- imported via jQuery load call -->
+    <div id="sidebar"></div>
   </body>
 </html>

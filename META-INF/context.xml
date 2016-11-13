@@ -1,2 +1,27 @@
-<Context path=""
-	antiResourceLocking="false" />
+<Context path="" antiResourceLocking="false" reloadable="true">
+	<Resource name="jdbc/db"
+	          auth="Container"
+	          type="javax.sql.DataSource"
+	          factory="org.apache.tomcat.jdbc.pool.DataSourceFactory"
+	          testWhileIdle="true"
+	          testOnBorrow="true"
+	          testOnReturn="false"
+	          validationQuery="SELECT 1"
+	          validationInterval="30000"
+	          timeBetweenEvictionRunsMillis="30000"
+	          maxActive="1000"
+	          minIdle="10"
+	          maxWait="10000"
+	          initialSize="10"
+	          removeAbandonedTimeout="60"
+	          removeAbandoned="true"
+	          logAbandoned="true"
+	          minEvictableIdleTimeMillis="30000"
+	          jmxEnabled="true"
+	          jdbcInterceptors="org.apache.tomcat.jdbc.pool.interceptor.ConnectionState;
+	            org.apache.tomcat.jdbc.pool.interceptor.StatementFinalizer"
+	          username="cs201"
+	          password="W3b8todIC762"
+	          driverClassName="com.mysql.jdbc.Driver"
+	          url="jdbc:mysql://tutorhub.xyz:3310/cs201_fp?useSSL=false"/>
+</Context>

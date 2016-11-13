@@ -56,6 +56,9 @@ public class UserData {
 	
 	public void write()
     {
-		throw new RuntimeException();
+//		try {
+//			Connection con = Util.getConn();
+//			con.prepareStatement("INSERT INTO Users(username, password, email) VALUES (?, ?, ?)");
+//		}
     }
 }

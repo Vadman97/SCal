@@ -4,7 +4,6 @@
 # Development assets
 bower_components/
 node_modules/
-gulpfile.js
 
 # *.scss files that are eventually compiled into working css
 assets/scss/

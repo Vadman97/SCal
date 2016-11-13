@@ -15,7 +15,7 @@ Using Gulp as a build system. Gulpfile is currently set up to monitor all change
 Gulp serves files to port 3000. To view the page, go to `localhost:3000`
 
 ## Dependencies
-FullCalendar
-AngularJS
-jQuery
-Moment.js
+1. FullCalendar
+2. AngularJS
+3. jQuery
+4. Moment.js

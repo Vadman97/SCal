@@ -1,0 +1,21 @@
+{
+  "name": "csci201-final-project",
+  "homepage": "https://github.com/CSCI201-fall2016/fp_team_04",
+  "authors": [
+    "CliffLee <leecliff@usc.edu>"
+  ],
+  "description": "",
+  "main": "index.html",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-ui-calendar": "^1.0.2"
+  }
+}

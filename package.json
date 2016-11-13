@@ -1,0 +1,26 @@
+{
+  "name": "csci201-final-project",
+  "version": "1.0.0",
+  "description": "- Samuel Breck breck@usc.edu 29909 - Prachi Nawathe pnawathe@usc.edu 29909 - Clifford Lee leecliff@usc.edu 29909 - Gautam Paranjape gparanja@usc.edu 29909 - Vadim Korolik korolik@usc.edu 29909",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CSCI201-fall2016/fp_team_04.git"
+  },
+  "author": "Clifford Lee",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CSCI201-fall2016/fp_team_04/issues"
+  },
+  "homepage": "https://github.com/CSCI201-fall2016/fp_team_04#readme",
+  "devDependencies": {
+    "browser-sync": "^2.17.5",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^3.1.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-sass": "^2.3.2"
+  }
+}

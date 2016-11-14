@@ -1,12 +1,8 @@
-body {
-  height: 100%; }
-
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
   margin: 0;
   padding: 0;
   border: 0;
   font-size: 100%;
-  font: inherit;
   vertical-align: baseline; }
 
 article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
@@ -33,18 +29,109 @@ table {
   border-collapse: collapse;
   border-spacing: 0; }
 
-button, .button, a.button, [type=submit], [type=button] {
-  background-color: #C98D00;
-  color: white; }
+* {
+  font-family: "Helvetica", "Arial", sans-serif; }
+
+html,
+body {
+  height: 100%;
+  background-color: #F5F4F1; }
+
+.container {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: row;
+      flex-direction: row;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+  -ms-flex-align: center;
+      align-items: center;
+  height: 100%; }
+
+button:focus, .button:focus, a.button:focus, [type=submit]:focus, [type=button]:focus {
+  outline: 0; }
+
+.btn {
+  background-color: #2A2D33;
+  border: none;
+  box-shadow: none;
+  text-decoration: none; }
+
+.notif {
+  outline: green solid 1px;
+  height: 20%; }
 
 #calendar {
-  width: 80%;
-  height: 80%;
-  padding: 5px;
-  float: right; }
+  padding: 2% 2%;
+  width: 80%; }
 
 #sidebar {
-  display: fixed;
-  float: left;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-flow: column nowrap;
+      flex-flow: column nowrap;
+  -ms-flex-line-pack: stretch;
+      align-content: stretch;
   width: 20%;
   height: 100%; }
+
+.sidebar-container-logo {
+  -ms-flex: 1;
+      flex: 1;
+  height: 10%; }
+  .sidebar-container-logo img {
+    max-height: 100%;
+    min-width: 100%; }
+
+.sidebar-container-user {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-flow: row nowrap;
+      flex-flow: row nowrap;
+  -ms-flex: 1;
+      flex: 1;
+  -ms-flex-align: center;
+      align-items: center;
+  background-color: #656B7E; }
+  .sidebar-container-user-icon {
+    margin: 0 20px;
+    border-radius: 50%;
+    max-height: 50px;
+    vertical-align: middle; }
+  .sidebar-container-user h2 {
+    display: inline-block;
+    text-decoration: none;
+    color: #FEFEFE;
+    font-weight: 300; }
+  .sidebar-container-user a {
+    width: 100%;
+    height: 100%; }
+
+.sidebar-container-function {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-flow: column nowrap;
+      flex-flow: column nowrap;
+  background-color: #2A2D33;
+  -ms-flex: 2.5;
+      flex: 2.5; }
+  .sidebar-container-function-element {
+    color: #CFCFCF;
+    text-align: left;
+    padding: 2vh 0 2vh 20%;
+    letter-spacing: 0.8px;
+    font-size: 16px;
+    font-weight: 100; }
+    .sidebar-container-function-element:hover {
+      color: #EFEFEF; }
+
+.sidebar-container-notifs {
+  -ms-flex: 5.5;
+      flex: 5.5;
+  background-color: #656B7E; }
+
+.sidebar-btn {
+  width: 100%;
+  transition: 0.2s; }
+  .sidebar-btn:hover {
+    background-color: #656B7E; }

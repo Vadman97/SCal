@@ -1,6 +1,6 @@
 var app = angular.module('calendar', ['ui.calendar']);
 
-app.controller('calendarCtrl', ['$scope', '$compile', '$timeout', 'uiCalendarConfig'], function($scope, $compile, $timeout, uiCalendarConfig) {
+app.controller('calendarCtrl', function($scope, $compile, $timeout, uiCalendarConfig) {
     var date = new Date();
     var d = date.getDate();
     var m = date.getMonth();
@@ -23,15 +23,7 @@ app.controller('calendarCtrl', ['$scope', '$compile', '$timeout', 'uiCalendarCon
       {title: 'Click for Google',start: new Date(y, m, 28),end: new Date(y, m, 29),url: 'http://google.com/'}
     ];
 
-    /* event source that calls a function on every view switch */
-    $scope.eventsF = function (start, end, timezone, callback) {
-      var s = new Date(start).getTime() / 1000;
-      var e = new Date(end).getTime() / 1000;
-      var m = new Date(start).getMonth();
-      var events = [{title: 'Feed Me ' + m,start: s + (50000),end: s + (100000),allDay: false, className: ['customFeed']}];
-      callback(events);
-    };
-
+    /* event source with custom events and cool colors :) */
     $scope.calEventsExt = {
        color: '#f00',
        textColor: 'yellow',
@@ -41,6 +33,16 @@ app.controller('calendarCtrl', ['$scope', '$compile', '$timeout', 'uiCalendarCon
           {type:'party',title: 'Click for Google',start: new Date(y, m, 28),end: new Date(y, m, 29),url: 'http://google.com/'}
         ]
     };
+
+    /* event source that calls a function on every view switch */
+    $scope.eventsF = function (start, end, timezone, callback) {
+      var s = new Date(start).getTime() / 1000;
+      var e = new Date(end).getTime() / 1000;
+      var m = new Date(start).getMonth();
+      var events = [{title: 'Feed Me ' + m,start: s + (50000),end: s + (100000),allDay: false, className: ['customFeed']}];
+      callback(events);
+    };
+
     /* alert on eventClick */
     $scope.alertOnEventClick = function( date, jsEvent, view){
         $scope.alertMessage = (date.title + ' was clicked ');

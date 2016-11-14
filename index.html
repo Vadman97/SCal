@@ -20,24 +20,26 @@
     <!-- calendar front end javascript -->
     <script type="text/javascript" src="app/calendar.js"></script>
 
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="assets/css/styles.css">
-
     <script type="text/javascript">
         $(function() {
             $("#sidebar").load("partials/sidebar.html")
         });
     </script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/styles.css">
+    
   </head>
   <body ng-app="calendar" ng-controller="calendarCtrl">
 
-    <!-- Sidebar module -->
-    <!-- imported via jQuery load call -->
-    <div id="sidebar"></div>
+    <div class="container">
+        <!-- Sidebar module -->
+        <!-- imported via jQuery load call -->
+        <div id="sidebar"></div>
 
-    <!-- Calendar module -->
-    <!-- This is handled by ui-calendar -->
-    <div id="calendar" ui-calendar="uiConfig.calendar" ng-model="eventSources"></div>
-
+        <!-- Calendar module -->
+        <!-- This is handled by ui-calendar -->
+        <div id="calendar" ui-calendar="uiConfig.calendar" ng-model="eventSources"></div>
+    </div>
   </body>
 </html>

@@ -36,7 +36,17 @@ public class UserData {
 	}
 
 	public void setPassword(String password) {
-		this.password = hashPassword(password);
+		if (password == null) {
+			this.password = null;
+		} else {
+			this.password = hashPassword(password);
+		}
+	}
+	
+	public void clear() {
+		this.username = null;
+		this.password = null;
+		this.email = null;
 	}
 	
 	private String hashPassword(String password) {
@@ -44,7 +54,7 @@ public class UserData {
 			MessageDigest md = MessageDigest.getInstance("SHA-512");
 			md.update(password.getBytes("UTF-8"));
 			byte[] digest = md.digest();
-			this.password = bytesToHex(digest);
+			return bytesToHex(digest);
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
 		} catch (UnsupportedEncodingException e) {
@@ -88,6 +98,11 @@ public class UserData {
 	}
 
 	public boolean login(String username, String password) {
+		if (username == null || password == null)
+			return false;
+		if (username.length() == 0 || password.length() == 0)
+			return false;
+
 		try {
 			ResultSet rs = getUser(Util.getConn(), username, password);
 			if (rs.next()) {
@@ -115,7 +130,8 @@ public class UserData {
 	private ResultSet getUser(Connection con, String username, String raw_password) throws SQLException {
 		PreparedStatement s = con.prepareStatement("SELECT * FROM Users WHERE username=? AND password=?");
 		s.setString(1, username);
-		s.setString(2, hashPassword(password));
+		s.setString(2, hashPassword(raw_password));
+		System.out.println(s.toString());
 		return s.executeQuery();
 	}
 }

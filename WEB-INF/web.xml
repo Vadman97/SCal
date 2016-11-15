@@ -7,8 +7,13 @@
     <display-name>USCalendar</display-name>
 
     <servlet>
-        <servlet-name>HelloServlet</servlet-name>
-        <servlet-class>main.Hello</servlet-class>
+        <servlet-name>LoginServlet</servlet-name>
+        <servlet-class>user.Login</servlet-class>
+    </servlet>
+    
+    <servlet>
+        <servlet-name>CreateServlet</servlet-name>
+        <servlet-class>user.Create</servlet-class>
     </servlet>
 
     <servlet>
@@ -17,8 +22,13 @@
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>HelloServlet</servlet-name>
-        <url-pattern>/hello</url-pattern>
+        <servlet-name>LoginServlet</servlet-name>
+        <url-pattern>/login</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>CreateServlet</servlet-name>
+        <url-pattern>/create_user</url-pattern>
     </servlet-mapping>
 
     <servlet-mapping>

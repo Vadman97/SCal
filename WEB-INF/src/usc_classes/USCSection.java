@@ -1,4 +1,4 @@
-package backend;
+package usc_classes;
 
 public class USCSection {
 	private int id; 

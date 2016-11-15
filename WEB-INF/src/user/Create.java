@@ -15,7 +15,7 @@ public class Create extends HttpServlet {
 		PrintWriter out = res.getWriter();
 		if (req.getParameterMap().containsKey("username") && req.getParameterMap().containsKey("password") 
 														  && req.getParameterMap().containsKey("email")) {
-			UserData user = new UserData();
+			User user = new User();
 			user.setUsername(req.getParameter("username"));
 			user.setPassword(req.getParameter("password"));
 			user.setEmail(req.getParameter("email"));

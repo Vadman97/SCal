@@ -14,7 +14,7 @@ public class Login extends HttpServlet {
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		PrintWriter out = res.getWriter();
 		if (req.getParameterMap().containsKey("username") && req.getParameterMap().containsKey("password")) {
-			UserData user = new UserData();
+			User user = new User();
 			req.getSession().setAttribute("user", user);
 			String json = "{success: ";
 			json += user.login(req.getParameter("username"), req.getParameter("password")); 

@@ -1,4 +1,4 @@
-package backend;
+package main;
 
 public class Constants {
 	public static final int owned = 0;

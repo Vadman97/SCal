@@ -1,4 +1,4 @@
-package backend;
+package usc_classes;
 
 import java.io.Serializable;
 

@@ -1,4 +1,6 @@
-package backend;
+package usc_classes;
+
+import main.Constants;
 
 public class Lab extends USCSection {
 	

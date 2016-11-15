@@ -1,4 +1,4 @@
-package backend;
+package calendar;
 
 public class EventRelationships {
 	private int user_id;

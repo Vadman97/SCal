@@ -12,8 +12,8 @@ public class Logout extends HttpServlet {
 
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		Object o = req.getSession().getAttribute("user");
-		if (o != null && o instanceof UserData) { 
-			((UserData)o).clear();
+		if (o != null && o instanceof User) { 
+			((User)o).clear();
 		}
 		res.getWriter().close();
 	}

@@ -37,7 +37,9 @@ public class UserData {
 			md.update(password.getBytes("UTF-8"));
 			byte[] digest = md.digest();
 			this.password = bytesToHex(digest);
-		} catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
 	}

@@ -110,7 +110,6 @@ button:focus, .button:focus, a.button:focus, [type=submit]:focus, [type=button]:
     -ms-flex-positive: 1;
         flex-grow: 1;
     display: inline-block;
-    text-decoration: none;
     color: #FEFEFE;
     font-weight: 300; }
   .sidebar-container-user a {
@@ -120,6 +119,7 @@ button:focus, .button:focus, a.button:focus, [type=submit]:focus, [type=button]:
         flex-flow: row nowrap;
     -ms-flex-align: center;
         align-items: center;
+    text-decoration: none;
     width: 100%;
     height: 100%; }
 

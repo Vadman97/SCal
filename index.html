@@ -23,13 +23,16 @@
     <!-- calendar front end javascript -->
     <script type="text/javascript" src="app/calendar.js"></script>
 
+    <!-- Load all .js files here -->
     <script type="text/javascript">
         $(function() {
             $("#sidebar").load("partials/sidebar.html");
             $("#loginModal").load("partials/loginModal.html");
 
             $.getScript("app/modal.js");
+            $.getScript("app/login.js");
         });
+        
     </script>
 
     <!-- Custom CSS -->

@@ -8,7 +8,7 @@ var browserSync		= require('browser-sync');
 // -- compiles styles.scss into css
 // -- styles.scss contains imports of all other necessary stylesheets
 gulp.task('sass', function() {
-	return gulp.src(['assets/scss/styles.scss', '!assets/scss/fullcalendar.scss'])
+	return gulp.src(['assets/scss/styles.scss', '!assets/scss/fullcalendar-custom.scss'])
 	.pipe(sass({style: 'expanded'}))
 	.pipe(autoPrefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6'))
 	.pipe(gulp.dest('assets/css'))
@@ -18,7 +18,7 @@ gulp.task('sass', function() {
 // 'fcSass' task
 // -- Unique task for compiling custom full calendar scss file into its own css files
 gulp.task('fcSass', function() {
-	return gulp.src('assets/scss/fullcalendar.scss')
+	return gulp.src('assets/scss/fullcalendar-custom.scss')
 	.pipe(sass({style: 'expanded'}))
 	.pipe(autoPrefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6'))
 	.pipe(gulp.dest('assets/css'))
@@ -28,13 +28,7 @@ gulp.task('fcSass', function() {
 // 'serve' task
 // -- serves files from root directory
 // -- also watches files/directories for live uploading during development
-gulp.task('serve', ['sass'], function() {
-	browserSync.init({
-		server: {
-			basedir: "./"
-		}
-	});
-
+gulp.task('serve', ['sass', 'fcSass'], function() {
 	gulp.watch('assets/scss/**/*.scss', ['sass', 'fcSass']);
 	gulp.watch(['index.html', 'partials/**/*.html']).on('change', browserSync.reload);
 });

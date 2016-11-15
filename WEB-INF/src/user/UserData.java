@@ -1,4 +1,4 @@
-package db;
+package user;
 
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;

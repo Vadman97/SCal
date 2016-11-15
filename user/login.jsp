@@ -1,4 +1,4 @@
-<jsp:useBean id="user" class="db.UserData" scope="session"/>
+<jsp:useBean id="user" class="user.UserData" scope="session"/>
 <HTML>
 <BODY>
 <%!

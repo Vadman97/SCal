@@ -7,8 +7,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import db.UserData;
-
 public class Logout extends HttpServlet {
 	private static final long serialVersionUID = 5729439952621174381L;
 

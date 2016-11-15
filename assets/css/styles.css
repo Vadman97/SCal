@@ -70,6 +70,80 @@ button:focus, .button:focus, a.button:focus, [type=submit]:focus, [type=button]:
   border-radius: 15px;
   box-shadow: 0px 5px 2px #888; }
 
+/* The Modal (background) */
+.modal {
+  display: none;
+  /* Hidden by default */
+  position: fixed;
+  /* Stay in place */
+  z-index: 2;
+  /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%;
+  /* Full width */
+  height: 100%;
+  /* Full height */
+  overflow: auto;
+  /* Enable scroll if needed */
+  background-color: black;
+  /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4);
+  /* Black w/ opacity */ }
+
+/* Modal Content/Box */
+.login-modal {
+  background-color: #fefefe;
+  margin: 10% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 30%;
+  height: 50%;
+  border-radius: 15px; }
+  .login-modal-content {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-flow: column nowrap;
+        flex-flow: column nowrap;
+    -ms-flex-pack: distribute;
+        justify-content: space-around;
+    -ms-flex-align: center;
+        align-items: center; }
+    .login-modal-content input[type="text"],
+    .login-modal-content input[type="password"] {
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+      border-radius: 5px;
+      border-style: solid;
+      border-width: 1px;
+      width: 100%; }
+      .login-modal-content input[type="text"]:focus,
+      .login-modal-content input[type="password"]:focus {
+        outline: none; }
+    .login-modal-content h2 {
+      font-size: 32px;
+      font-weight: 100; }
+    .login-modal-content .login-form {
+      width: 80%; }
+    .login-modal-content .login-submit {
+      display: -ms-flexbox;
+      display: flex;
+      -ms-flex-flow: row nowrap;
+          flex-flow: row nowrap; }
+
+/* The Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold; }
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer; }
+
 #calendar {
   padding: 2% 2%;
   width: 80%; }
@@ -111,8 +185,9 @@ button:focus, .button:focus, a.button:focus, [type=submit]:focus, [type=button]:
         flex-grow: 1;
     display: inline-block;
     color: #FEFEFE;
-    font-weight: 300; }
-  .sidebar-container-user a {
+    font-weight: 300;
+    font-size: 16px; }
+  .sidebar-container-user button {
     display: -ms-flexbox;
     display: flex;
     -ms-flex-flow: row nowrap;
@@ -121,7 +196,9 @@ button:focus, .button:focus, a.button:focus, [type=submit]:focus, [type=button]:
         align-items: center;
     text-decoration: none;
     width: 100%;
-    height: 100%; }
+    height: 100%;
+    background-color: #656B7E;
+    border: none; }
 
 .sidebar-container-function {
   display: -ms-flexbox;
@@ -136,7 +213,7 @@ button:focus, .button:focus, a.button:focus, [type=submit]:focus, [type=button]:
     -ms-flex-positive: 1;
         flex-grow: 1;
     text-align: left;
-    padding: 2vh 0 2vh 20%;
+    padding: 2vh 0 2vh 10%;
     letter-spacing: 0.8px;
     cursor: pointer;
     font-size: 16px;

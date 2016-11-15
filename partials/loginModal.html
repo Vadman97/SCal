@@ -3,12 +3,10 @@
     <div class="login-modal-content">
         <h2>Sign In</h2>
         <form class="login-form" action="" method="post">
-            <input type="text" name="Email" value="" placeholder="Email">
-            <input type="password" name="Password" value="" placeholder="Password">
-            <div class="login-submit">
-                <input type="submit" name="register" value="Register">
-                <input type="submit" name="login" value="Log In">
-            </div>
+            <input type="text" name="Email" value="" placeholder="Email" id="username">
+            <input type="password" name="Password" value="" placeholder="Password" id="password">
+            <input type="button" value="Login" id="submit" onclick="validateLogin()"/>
+            <input type="button" value="Register" id="register" onclick="validateCreate()"/>
         </form>
     </div>
 </div>

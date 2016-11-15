@@ -6,6 +6,7 @@ git pull;
 # INSTALL FRONTEND DEPENDENCIES
 npm install;
 bower install;
+gulp build;
 
 # COMPILE JAVA
 cd WEB-INF; 

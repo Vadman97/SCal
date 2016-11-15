@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # System files
 .DS_Store
 
@@ -8,3 +9,11 @@ node_modules/
 # *.scss files that are eventually compiled into working css
 assets/scss/
 *.scss
+
+# Backend Ignores
+*.class
+/bin/
+*.classpath
+#*.project
+*/classes
+>>>>>>> 9ab7e14b9085427d0b369704b5647f8a3e8feec6

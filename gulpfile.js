@@ -29,6 +29,12 @@ gulp.task('fcSass', function() {
 // -- serves files from root directory
 // -- also watches files/directories for live uploading during development
 gulp.task('serve', ['sass', 'fcSass'], function() {
+	browserSync.init({
+		server: {
+			basedir: "./"
+		}
+	});
+	
 	gulp.watch('assets/scss/**/*.scss', ['sass', 'fcSass']);
 	gulp.watch(['index.html', 'partials/**/*.html']).on('change', browserSync.reload);
 });

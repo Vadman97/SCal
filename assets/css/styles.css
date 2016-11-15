@@ -48,6 +48,9 @@ body {
       align-items: center;
   height: 100%; }
 
+.content {
+  width: 100%; }
+
 button:focus, .button:focus, a.button:focus, [type=submit]:focus, [type=button]:focus {
   outline: 0; }
 
@@ -58,8 +61,14 @@ button:focus, .button:focus, a.button:focus, [type=submit]:focus, [type=button]:
   text-decoration: none; }
 
 .notif {
-  outline: green solid 1px;
-  height: 20%; }
+  margin: 10px;
+  padding: 10px;
+  min-height: 20%;
+  max-height: 25%;
+  overflow: auto;
+  background-color: #EFEFEF;
+  border-radius: 15px;
+  box-shadow: 0px 5px 2px #888; }
 
 #calendar {
   padding: 2% 2%;
@@ -75,14 +84,6 @@ button:focus, .button:focus, a.button:focus, [type=submit]:focus, [type=button]:
   min-width: 92.7px;
   width: 20%;
   height: 100%; }
-
-.sidebar-notif {
-  -ms-flex: 1;
-      flex: 1;
-  margin: 10px;
-  padding: 10px;
-  background-color: #EFEFEF;
-  border-radius: 15px; }
 
 .sidebar-container-logo {
   -ms-flex: 1;
@@ -137,10 +138,13 @@ button:focus, .button:focus, a.button:focus, [type=submit]:focus, [type=button]:
     text-align: left;
     padding: 2vh 0 2vh 20%;
     letter-spacing: 0.8px;
+    cursor: pointer;
     font-size: 16px;
-    font-weight: 100; }
+    font-weight: 100;
+    transition: 0.2s; }
     .sidebar-container-function-element:hover {
-      color: #EFEFEF; }
+      color: #EFEFEF;
+      zoom: 1.2; }
 
 .sidebar-container-notifs {
   display: -ms-flexbox;
@@ -149,7 +153,8 @@ button:focus, .button:focus, a.button:focus, [type=submit]:focus, [type=button]:
       flex-flow: column nowrap;
   -ms-flex: 5.5;
       flex: 5.5;
-  background-color: #656B7E; }
+  background-color: #656B7E;
+  overflow: scroll; }
 
 .sidebar-btn {
   width: 100%;

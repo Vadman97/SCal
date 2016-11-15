@@ -131,7 +131,6 @@ public class UserData {
 		PreparedStatement s = con.prepareStatement("SELECT * FROM Users WHERE username=? AND password=?");
 		s.setString(1, username);
 		s.setString(2, hashPassword(raw_password));
-		System.out.println(s.toString());
 		return s.executeQuery();
 	}
 }

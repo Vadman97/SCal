@@ -13,9 +13,8 @@ import db.UserData;
 public class Login extends HttpServlet {
 	private static final long serialVersionUID = 5729439952621174381L;
 
-	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		PrintWriter out = res.getWriter();
-		
 		if (req.getParameterMap().containsKey("username") && req.getParameterMap().containsKey("password")) {
 			UserData user = new UserData();
 			req.getSession().setAttribute("user", user);

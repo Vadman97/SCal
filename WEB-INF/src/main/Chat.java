@@ -18,6 +18,7 @@ package main;
 
 import java.io.IOException;
 import java.util.Set;
+import java.util.Vector;
 import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -35,12 +36,16 @@ public class Chat{
     private static final AtomicInteger connectionIds = new AtomicInteger(0);
     private static final Set<Chat> connections =
             new CopyOnWriteArraySet<>();
-
+//    private Vector<String> nameCollection = new Vector<>();
     private final String nickname;
     private Session session;
 
     public Chat() {
         nickname = GUEST_PREFIX + connectionIds.getAndIncrement();
+//        nameCollection.add(nickname);
+//        for(String s : nameCollection){
+//        	System.out.println(s);
+//        }
     }
 
 
@@ -68,12 +73,13 @@ public class Chat{
         String filteredMessage = String.format("%s: %s",
                 nickname, message.toString());
         System.out.println("message: " + filteredMessage);
-        if(message.contains(nickname))
-            //broadcast2(filteredMessage, nickname);
-            broadcast("You have the name: " + nickname);
-        else 
-            broadcast(filteredMessage);
-        broadcast(message);
+        
+        for(Chat c: connections){
+        	if(filteredMessage.contains(c.nickname)){
+        		broadcast2(filteredMessage, c.nickname);
+        		System.out.println(c.nickname);
+        	}
+        }
     }
 
 
@@ -90,6 +96,28 @@ public class Chat{
             try {
                 synchronized (client) {
                     client.session.getBasicRemote().sendText(msg);
+                }
+            } catch (IOException e) {
+                System.out.println("Chat Error: Failed to send message to client: " + e);
+                connections.remove(client);
+                try {
+                    client.session.close();
+                } catch (IOException e1) {
+                    // Ignore
+                }
+                String message = String.format("* %s %s",
+                        client.nickname, "has been disconnected.");
+                broadcast(message);
+            }
+        }
+    }
+    private static void broadcast2(String msg, String _nickname) {
+        for (Chat client : connections) {
+            try {
+                synchronized (client) {
+                	if(client.nickname.equals(_nickname)){
+                		client.session.getBasicRemote().sendText(msg);
+                	}
                 }
             } catch (IOException e) {
                 System.out.println("Chat Error: Failed to send message to client: " + e);

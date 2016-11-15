@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # UPDATE MASTER BRANCH CODE
+cd /var/lib/tomcat8/webapps/ROOT
 git pull; 
 
 # INSTALL FRONTEND DEPENDENCIES

@@ -6,50 +6,64 @@ var modal = document.getElementById('loginModal');
 function validateLogin() {
     var username = document.getElementById("username").value;
     var password = document.getElementById("password").value;
-    
-    // Handle POST request here
-    
-    if ( username == "Clifford" && password == "Lee"){
-        console.log("Login successfully");
         
-        modal.style.display = "none";
-        
-        var formData = {username: username,password: password};
+    var formData = {username: username,password: password};
     
-        $.ajax({
-            url : "/login",
-            type: "POST",
-            data : formData,
-            success: function(data, textStatus, jqXHR)
-            {
-	           //data: data from server 
-            },
-            error: function(jqXHR, textStatus, errorThrown)
-            {
-
+    $.ajax({
+        url : "/login",
+        type: "POST",
+        data : formData,
+        success: function(data, textStatus, jqXHR)
+        {
+            //data: data from server
+            if(JSON.parse(data)["success"]) {
+                // Redirecting to other page.
+                // POPULATE Calendar with Data
+                
+                modal.style.display = "none";
+                return false;
+            } else {
+            
+                
             }
-        });
-        
-        // Redirecting to other page.
-        return false;
-    }
-    else{
-        attempt --;// Decrementing by one.
-        alert("You have left "+attempt+" attempt;");
-        
-        // Disabling fields after 3 attempts.
-        if( attempt == 0){
-            
-        document.getElementById("username").disabled = true;
-        document.getElementById("password").disabled = true;
-        document.getElementById("submit").disabled = true;
-            
-        return false;
+        },
+        error: function(jqXHR, textStatus, errorThrown)
+        {
+
         }
-    }
+    }); 
 }
 
 function validateCreate() {
+    var username = document.getElementById("username").value;
+    var password = document.getElementById("password").value;
     
+    // Handle POST request here
+        
+    var formData = {username: username,password: password};
+    
+    $.ajax({
+        url : "/create_user",
+        type: "POST",
+        data : formData,
+        success: function(data, textStatus, jqXHR)
+        {
+            //data: data from server
+            if(JSON.parse(data)["success"]) {
+                // Redirecting to other page.
+                // POPULATE Calendar with Data
+                
+                modal.style.display = "none";
+                return false;
+            } else {
+            
+                
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown)
+        {
+
+        }
+    }); 
     
 }

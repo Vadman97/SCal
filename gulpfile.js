@@ -41,3 +41,4 @@ gulp.task('serve', ['sass', 'fcSass'], function() {
 
 // 'default' task
 gulp.task('default', ['serve']);
+gulp.task('build', ['sass', 'fcSass']);

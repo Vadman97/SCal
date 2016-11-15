@@ -29,7 +29,7 @@ import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
 
 @ServerEndpoint(value = "/chat")
-public class Chat {
+public class Chat{
 
     private static final String GUEST_PREFIX = "Guest";
     private static final AtomicInteger connectionIds = new AtomicInteger(0);
@@ -49,7 +49,7 @@ public class Chat {
         this.session = session;
         connections.add(this);
         String message = String.format("* %s %s", nickname, "has joined.");
-        //broadcast(message);
+        broadcast(message);
     }
 
 
@@ -58,7 +58,7 @@ public class Chat {
         connections.remove(this);
         String message = String.format("* %s %s",
                 nickname, "has disconnected.");
-        //broadcast(message);
+        broadcast(message);
     }
 
 
@@ -68,12 +68,12 @@ public class Chat {
         String filteredMessage = String.format("%s: %s",
                 nickname, message.toString());
         System.out.println("message: " + filteredMessage);
-        // if(message.contains(nickname))
-        //     //broadcast2(filteredMessage, nickname);
-        //     broadcast("You have the name: " + nickname);
-        // else 
-        //     broadcast(filteredMessage);
-        //broadcast(message);
+        if(message.contains(nickname))
+            //broadcast2(filteredMessage, nickname);
+            broadcast("You have the name: " + nickname);
+        else 
+            broadcast(filteredMessage);
+        broadcast(message);
     }
 
 
@@ -86,23 +86,23 @@ public class Chat {
 
 
     private static void broadcast(String msg) {
-        // for (Chat client : connections) {
-        //     try {
-        //         synchronized (client) {
-        //             client.session.getBasicRemote().sendText(msg);
-        //         }
-        //     } catch (IOException e) {
-        //         System.out.println("Chat Error: Failed to send message to client: " + e);
-        //         connections.remove(client);
-        //         try {
-        //             client.session.close();
-        //         } catch (IOException e1) {
-        //             // Ignore
-        //         }
-        //         String message = String.format("* %s %s",
-        //                 client.nickname, "has been disconnected.");
-        //         broadcast(message);
-        //     }
-        // }
+        for (Chat client : connections) {
+            try {
+                synchronized (client) {
+                    client.session.getBasicRemote().sendText(msg);
+                }
+            } catch (IOException e) {
+                System.out.println("Chat Error: Failed to send message to client: " + e);
+                connections.remove(client);
+                try {
+                    client.session.close();
+                } catch (IOException e1) {
+                    // Ignore
+                }
+                String message = String.format("* %s %s",
+                        client.nickname, "has been disconnected.");
+                broadcast(message);
+            }
+        }
     }
 }

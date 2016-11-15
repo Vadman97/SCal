@@ -3,24 +3,29 @@ package db;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import util.Util;
 
 public class UserData {
-	String username;
-	String email;
-	String password;
-	
-	final protected static char[] hexArray = "0123456789ABCDEF".toCharArray();
-	
-	public static String bytesToHex(byte[] bytes) {
-	    char[] hexChars = new char[bytes.length * 2];
-	    for ( int j = 0; j < bytes.length; j++ ) {
-	        int v = bytes[j] & 0xFF;
-	        hexChars[j * 2] = hexArray[v >>> 4];
-	        hexChars[j * 2 + 1] = hexArray[v & 0x0F];
-	    }
-	    return new String(hexChars);
-	}
+	String username = null;
+	String email = null;
+	String password = null;
 
+	final protected static char[] hexArray = "0123456789ABCDEF".toCharArray();
+
+	public static String bytesToHex(byte[] bytes) {
+		char[] hexChars = new char[bytes.length * 2];
+		for (int j = 0; j < bytes.length; j++) {
+			int v = bytes[j] & 0xFF;
+			hexChars[j * 2] = hexArray[v >>> 4];
+			hexChars[j * 2 + 1] = hexArray[v & 0x0F];
+		}
+		return new String(hexChars);
+	}
 
 	public void setUsername(String value) {
 		username = value;
@@ -31,7 +36,10 @@ public class UserData {
 	}
 
 	public void setPassword(String password) {
-		this.password = null;
+		this.password = hashPassword(password);
+	}
+	
+	private String hashPassword(String password) {
 		try {
 			MessageDigest md = MessageDigest.getInstance("SHA-512");
 			md.update(password.getBytes("UTF-8"));
@@ -42,6 +50,7 @@ public class UserData {
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
+		return null;
 	}
 
 	public String getUsername() {
@@ -51,16 +60,62 @@ public class UserData {
 	public String getEmail() {
 		return email;
 	}
-	
+
 	public String getPassword() {
 		return password;
 	}
+
+	public boolean write() {
+		try {
+			Connection con = Util.getConn();
+			PreparedStatement s = con.prepareStatement("SELECT * FROM Users WHERE username=? OR email=?");
+			s.setString(1, username);
+			s.setString(2, email);
+			ResultSet rs = s.executeQuery();
+			// if such a user does not exist
+			if (!rs.next()) {
+				s = con.prepareStatement("INSERT INTO Users(username, password, email) VALUES (?, ?, ?)");
+				s.setString(1, username);
+				s.setString(2, password);
+				s.setString(3, email);
+				s.executeUpdate();
+				return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	public boolean login(String username, String password) {
+		try {
+			ResultSet rs = getUser(Util.getConn(), username, password);
+			if (rs.next()) {
+				// assert only one such user
+				if (rs.isFirst() && rs.isLast()) {
+					setUsername(username);
+					setPassword(password);
+					setEmail(rs.getString(4));
+					return true;
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		setUsername(null);
+		setPassword(null);
+		setEmail(null);
+		return false;
+	}
 	
-	public void write()
-    {
-//		try {
-//			Connection con = Util.getConn();
-//			con.prepareStatement("INSERT INTO Users(username, password, email) VALUES (?, ?, ?)");
-//		}
-    }
+	public boolean isLoggedIn() {
+		return (username != null);
+	}
+	
+	private ResultSet getUser(Connection con, String username, String raw_password) throws SQLException {
+		PreparedStatement s = con.prepareStatement("SELECT * FROM Users WHERE username=? AND password=?");
+		s.setString(1, username);
+		s.setString(2, hashPassword(password));
+		return s.executeQuery();
+	}
 }

@@ -25,7 +25,10 @@
 
     <script type="text/javascript">
         $(function() {
-            $("#sidebar").load("partials/sidebar.html")
+            $("#sidebar").load("partials/sidebar.html");
+            $("#loginModal").load("partials/loginModal.html");
+
+            $.getScript("app/modal.js");
         });
     </script>
 
@@ -39,6 +42,8 @@
         <!-- Sidebar module -->
         <!-- imported via jQuery load call -->
         <div id="sidebar"></div>
+
+        <div id="loginModal" class="modal"></div>
 
         <!-- Calendar module -->
         <!-- This is handled by ui-calendar -->

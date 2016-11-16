@@ -90,49 +90,9 @@ button:focus, .button:focus, a.button:focus, [type=submit]:focus, [type=button]:
   /* Fallback color */
   background-color: rgba(0, 0, 0, 0.4);
   /* Black w/ opacity */
-  box-shadow: 20px 20px 10px #888; }
-  .modal-active {
-    display: block; }
-
-/* Modal Content/Box */
-.login-modal {
-  background-color: #fefefe;
-  margin: 10% auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 30%;
-  height: 50%;
-  border-radius: 15px; }
-  .login-modal-content {
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-flow: column nowrap;
-        flex-flow: column nowrap;
-    -ms-flex-pack: distribute;
-        justify-content: space-around;
-    -ms-flex-align: center;
-        align-items: center; }
-    .login-modal-content input[type="text"],
-    .login-modal-content input[type="password"] {
-      -ms-flex-positive: 1;
-          flex-grow: 1;
-      border-radius: 5px;
-      border-style: solid;
-      border-width: 1px;
-      width: 100%; }
-      .login-modal-content input[type="text"]:focus,
-      .login-modal-content input[type="password"]:focus {
-        outline: none; }
-    .login-modal-content h2 {
-      font-size: 32px;
-      font-weight: 100; }
-    .login-modal-content .login-form {
-      width: 80%; }
-    .login-modal-content .login-submit {
-      display: -ms-flexbox;
-      display: flex;
-      -ms-flex-flow: row nowrap;
-          flex-flow: row nowrap; }
+  transition: 0.3s; }
+  .modal-content {
+    box-shadow: 0px 10px 5px #666; }
 
 /* The Close Button */
 .close {
@@ -146,6 +106,46 @@ button:focus, .button:focus, a.button:focus, [type=submit]:focus, [type=button]:
   color: black;
   text-decoration: none;
   cursor: pointer; }
+
+/* Modal Content/Box */
+.modal-login {
+  background-color: #fefefe;
+  margin: 10% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 30%;
+  height: 50%;
+  border-radius: 15px; }
+  .modal-login-content {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-flow: column nowrap;
+        flex-flow: column nowrap;
+    -ms-flex-pack: distribute;
+        justify-content: space-around;
+    -ms-flex-align: center;
+        align-items: center; }
+    .modal-login-content input[type="text"],
+    .modal-login-content input[type="password"] {
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+      border-radius: 5px;
+      border-style: solid;
+      border-width: 1px;
+      width: 100%; }
+      .modal-login-content input[type="text"]:focus,
+      .modal-login-content input[type="password"]:focus {
+        outline: none; }
+    .modal-login-content h2 {
+      font-size: 32px;
+      font-weight: 300; }
+    .modal-login-content .login-form {
+      width: 80%; }
+    .modal-login-content .login-submit {
+      display: -ms-flexbox;
+      display: flex;
+      -ms-flex-flow: row nowrap;
+          flex-flow: row nowrap; }
 
 #calendar {
   padding: 2% 2%;

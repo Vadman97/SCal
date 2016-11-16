@@ -50,6 +50,7 @@
         .buttongroup {
             display: flex;
             flex-flow: row nowrap;
+            justify-content: space-around;
         }
         .login-form {
             width: 80%;

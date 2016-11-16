@@ -27,7 +27,7 @@ var closeModal = function() {
     var span = document.getElementsByClassName("close")[0];
     span.onclick = function() {
         $('#modal').toggleClass("modal-active");
-        // modal.style.display = "none";
+        $('#modal').html("<div></div>")
     }
 
     // When the user clicks anywhere outside of the modal, close it
@@ -35,7 +35,7 @@ var closeModal = function() {
 
 window.onclick = function(event) {
     if (event.target == modal) {
+        $('#modal').html("<div></div>")
         $('#modal').toggleClass("modal-active");
-        // modal.style.display = "none";
     }
 }

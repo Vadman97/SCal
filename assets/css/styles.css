@@ -92,7 +92,7 @@ button:focus, .button:focus, a.button:focus, [type=submit]:focus, [type=button]:
   /* Black w/ opacity */
   transition: 0.3s; }
   .modal-content {
-    box-shadow: 0px 10px 5px #666; }
+    box-shadow: -2px 5px 0px #666; }
   .modal-active {
     display: block; }
 

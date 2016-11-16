@@ -12,13 +12,13 @@ var span = document.getElementsByClassName("close")[0];
 // When the user clicks on the button, open the modal
 loginBtn.onclick = function() {
     $('#modal').load("partials/loginModal.html", closeModal);
-    $('#modal').css("display", "block");
+    $('#modal').toggleClass("modal-active");
     // modal.style.display = "block";
 }
 
 uploadBtn.onclick = function() {
     $('#modal').load("partials/uploadModal.html", closeModal);
-    $('#modal').css("display", "block");
+    $('#modal').toggleClass("modal-active");
     // modal.style.display = "block";
 }
 
@@ -26,20 +26,17 @@ uploadBtn.onclick = function() {
 var closeModal = function() {
     var span = document.getElementsByClassName("close")[0];
     span.onclick = function() {
-        $('#modal').css("display", "none");
+        $('#modal').toggleClass("modal-active");
         // modal.style.display = "none";
     }
 
     // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            $('#modal').css("display", "none");
-            // modal.style.display = "none";
-        }
+}
+
+window.onclick = function(event) {
+    if (event.target == modal) {
+        console.log("hell o");
+        $('#modal').toggleClass("modal-active");
+        // modal.style.display = "none";
     }
 }
-//
-// span.onclick = function() {
-//     console.log("wtf");
-//     modal.style.display = "none";
-// }

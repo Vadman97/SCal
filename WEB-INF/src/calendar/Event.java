@@ -30,12 +30,13 @@ public class Event {
 	private Timestamp start_time, end_time; 
 	private String location, description; 
 	private String color; 
+	private String relationship;
 	private boolean notify;
 	
 	private transient Vector<User> shared = new Vector<User>();
 	
 	// used from Calendar when loading all events from db
-	public Event(long id, String name, Timestamp start, Timestamp end, String location, String description, String color, boolean notify) {
+	public Event(long id, String name, Timestamp start, Timestamp end, String location, String description, String color, boolean notify, String relationship) {
 		setId(id);
 		setName(name);
 		setStartTimestamp(start);
@@ -44,6 +45,7 @@ public class Event {
 		setDescription(description);
 		setColor(color);
 		setNotify(notify);
+		setRelationship(relationship);
 		loadSharedWith();
 	}
 	
@@ -84,6 +86,8 @@ public class Event {
 			e.setName(updates.getName());
 		if (updates.getStartTimestamp() != null)
 			e.setStartTimestamp(updates.getStartTimestamp());
+		if (updates.getRelationship() != null)
+			e.setRelationship(updates.getRelationship());
 		
 		return e;
 	}
@@ -105,8 +109,9 @@ public class Event {
 					setStartTimestamp(rs.getTimestamp(3));
 					setEndTimestamp(rs.getTimestamp(4));
 					setLocation(rs.getString(5));
-					setColor(rs.getString(6));
-					setNotify(rs.getBoolean(7));
+					setDescription(rs.getString(6));
+					setColor(rs.getString(7));
+					setNotify(rs.getBoolean(8));
 					loadSharedWith();
 				} else {
 					setId(0);
@@ -164,19 +169,20 @@ public class Event {
 			}
 			if (id != 0 && rs.next()) {
 				// event exists, update
-				st2 = conn.prepareStatement("UPDATE Events SET name=?, start_time=?, end_time=?, location=?, color=?, notify=? WHERE id=?");
-				st2.setLong(7, id);
+				st2 = conn.prepareStatement("UPDATE Events SET name=?, start_time=?, end_time=?, location=?, description=?, color=?, notify=? WHERE id=?");
+				st2.setLong(8, id);
 			} else {
 				// event does not exist
 				insert = true;
-				st2 = conn.prepareStatement("INSERT INTO Events (name, start_time, end_time, location, color, notify) VALUES (?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
+				st2 = conn.prepareStatement("INSERT INTO Events (name, start_time, end_time, location, description, color, notify) VALUES (?, ?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
 			}
 			st2.setString(1, name);
 			st2.setTimestamp(2, start_time);
 			st2.setTimestamp(3, end_time);
 			st2.setString(4, location);
-			st2.setString(5, color);
-			st2.setBoolean(6, notify);
+			st2.setString(5, description);
+			st2.setString(6, color);
+			st2.setBoolean(7, notify);
 			st2.executeUpdate();
 			conn.commit();
 			if (insert) {
@@ -330,5 +336,13 @@ public class Event {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public String getRelationship() {
+		return relationship;
+	}
+
+	public void setRelationship(String relationship) {
+		this.relationship = relationship;
 	}
 }

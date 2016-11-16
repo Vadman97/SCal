@@ -8,6 +8,10 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 
+import javax.servlet.http.HttpServletRequest;
+
+import com.google.gson.GsonBuilder;
+
 import user.User;
 import util.Util;
 
@@ -16,9 +20,11 @@ public class Calendar {
 		DAY, WEEK, MONTH
 	}
 
-	private View view;
-	private Date viewDate;
-	private ArrayList<Event> events; //used for GSON object serialization
+	// used for maintaining information about the cache state
+	public View view;
+	public Date viewDate;
+	
+	private ArrayList<Event> events; // used for GSON object serialization
 	private transient User current_user;
 	public static final String ERROR_JSON = "{success: false}";
 	public static final String EVENT_SELECT_SQL = "SELECT * FROM Events JOIN EventRelationships ON Events.id=EventRelationships.event_id WHERE EventRelationships.user_id=?";
@@ -28,35 +34,73 @@ public class Calendar {
 		events = new ArrayList<Event>();
 	}
 
-	public String getEvents(Date start, View v) {
+	public String getEvents(HttpServletRequest req, Date start, View v) {
 		Connection conn = null;
 		try {
 			conn = Util.getConn();
 			PreparedStatement st = conn.prepareStatement(EVENT_SELECT_SQL + " AND start_time>=? AND start_time <=?");
 			st.setLong(1, current_user.getId());
-			
-			//TODO(Vadim): We need to round the start day to the beginning of the day to midnight
-			//				and add the right offset. Months have different logic? (How many days in the month)
+
+			// We need to round the start day to the beginning of
+			// the day to midnight and add the right offset.
+			Timestamp startTs = null;
+			Timestamp endTs = null;
+
 			java.util.Calendar c = java.util.Calendar.getInstance();
 			c.setTime(start);
-			st.setTimestamp(2, new Timestamp(c.getTime().getTime()));
-			
-			int dayOffset = 0;
+			c.set(java.util.Calendar.HOUR_OF_DAY, 0);
+			c.set(java.util.Calendar.MINUTE, 0);
+			c.set(java.util.Calendar.SECOND, 0);
+			c.set(java.util.Calendar.MILLISECOND, 0);
+
+			view = v;
 			switch (v) {
-				case WEEK: dayOffset = 7; break;
-				case MONTH: /*TODO(Vadim)*/ break;
-				default: dayOffset = 1; break;
+			case WEEK:
+				c.set(java.util.Calendar.DAY_OF_WEEK, c.getFirstDayOfWeek());
+				startTs = new Timestamp(c.getTime().getTime());
+				viewDate = c.getTime();
+				c.add(java.util.Calendar.DAY_OF_WEEK_IN_MONTH, 1);
+				endTs = new Timestamp(c.getTime().getTime());
+				break;
+			case MONTH:
+				c.set(java.util.Calendar.DAY_OF_WEEK, c.getFirstDayOfWeek());
+				c.set(java.util.Calendar.DAY_OF_WEEK_IN_MONTH, 1);
+				startTs = new Timestamp(c.getTime().getTime());
+				viewDate = c.getTime();
+				c.add(java.util.Calendar.MONTH, 1);
+				endTs = new Timestamp(c.getTime().getTime());
+				break;
+			default:
+				startTs = new Timestamp(c.getTime().getTime());
+				viewDate = c.getTime();
+				c.add(java.util.Calendar.DATE, 1);
+				endTs = new Timestamp(c.getTime().getTime());
+				break;
 			}
-			c.add(java.util.Calendar.DATE, dayOffset);
-			st.setTimestamp(3, new Timestamp(c.getTime().getTime()));
+
+			// cache the current calendar based on view / viewdate?
+			// cached in backend session
+//			if (req != null && req.getSession().getAttribute("calendar") != null) {
+//				if (req.getSession().getAttribute("calendar") instanceof Calendar) {
+//					Calendar cal = (Calendar) req.getSession().getAttribute("calendar");
+//					if (cal.view.equals(view) && cal.viewDate.equals(viewDate))
+//						return cal.toString();
+//				}
+//			}
 			
+			st.setTimestamp(2, startTs);
+			st.setTimestamp(3, endTs);
 			ResultSet rs = st.executeQuery();
+			events.clear();
 			while (rs.next()) {
-				//add to events
+				// add to events
+				events.add(new Event(rs.getLong(1), rs.getString(2), rs.getTimestamp(3), rs.getTimestamp(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getBoolean(8), rs.getString(11)));
 			}
-			//cache the json string as the current string
-			//maybe based on view / viewdate?
-			//return json string
+			
+//			if (req != null)
+//				 req.getSession().setAttribute("calendar", this);
+			
+			return toString();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -70,15 +114,19 @@ public class Calendar {
 		return ERROR_JSON;
 	}
 
-	public String getDayEvents(Date d) {
-		return getEvents(d, View.DAY);
+	public String getDayEvents(HttpServletRequest req, Date d) {
+		return getEvents(req, d, View.DAY);
 	}
 
-	public String getWeekEvents(Date d) {
-		return getEvents(d, View.WEEK);
+	public String getWeekEvents(HttpServletRequest req, Date d) {
+		return getEvents(req, d, View.WEEK);
 	}
 
-	public String getMonthEvents(Date d) {
-		return getEvents(d, View.MONTH);
+	public String getMonthEvents(HttpServletRequest req, Date d) {
+		return getEvents(req, d, View.MONTH);
+	}
+	
+	public String toString() {
+		return new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create().toJson(this);
 	}
 }

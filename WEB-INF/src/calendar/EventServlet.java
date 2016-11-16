@@ -30,8 +30,6 @@ public class EventServlet extends HttpServlet {
 		}
 		e.write(u);
 		Util.close(res, true);
-		
-		//TODO(Vadim): share create
 	}
 	
 	public void doDelete(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
@@ -52,8 +50,6 @@ public class EventServlet extends HttpServlet {
 			Event e = new Event(o.get("id").getAsLong());
 			Util.close(res, e.delete());
 		}
-		
-		//TODO(Vadim): share remove
 	}
 	
 	public void doPut(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {

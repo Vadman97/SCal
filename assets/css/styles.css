@@ -155,7 +155,9 @@ button:focus, .button:focus, a.button:focus, [type=submit]:focus, [type=button]:
       display: -ms-flexbox;
       display: flex;
       -ms-flex-flow: row nowrap;
-          flex-flow: row nowrap; }
+          flex-flow: row nowrap;
+      -ms-flex-pack: distribute;
+          justify-content: space-around; }
     .modal-login-content .login-form {
       width: 80%; }
 

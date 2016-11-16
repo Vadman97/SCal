@@ -158,6 +158,10 @@ public class User {
 	public void setUsername(String value) {
 		username = value;
 	}
+	
+	public String toString() {
+		return "User " + username;
+	}
 
 	public boolean write() {
 		Connection con = null;

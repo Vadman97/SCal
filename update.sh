@@ -1,7 +1,8 @@
 #!/bin/bash
+TOMCAT=tomcat8
 
 # UPDATE MASTER BRANCH CODE
-cd /var/lib/tomcat8/webapps/ROOT
+cd /var/lib/$TOMCAT/webapps/ROOT
 git pull; 
 
 # INSTALL FRONTEND DEPENDENCIES
@@ -9,7 +10,10 @@ npm install;
 bower install;
 gulp build;
 
+# CONFIGURE BACKEND DEPENDENCIES
+sudo cp lib/* /usr/share/$TOMCAT/lib
+
 # COMPILE JAVA
 cd WEB-INF; 
 shopt -s globstar;
-javac -cp /usr/share/tomcat8/lib/\*:/usr/share/java/mysql.jar -d classes src/**/*.java;
+javac -cp /usr/share/$TOMCAT/lib/\*:/usr/share/java/mysql.jar -d classes src/**/*.java;

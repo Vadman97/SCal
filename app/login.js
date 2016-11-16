@@ -19,17 +19,16 @@ function validateLogin() {
             if(JSON.parse(data)["success"]) {
                 // Redirecting to other page.
                 // POPULATE Calendar with Data
-
+                
                 lmodal.style.display = "none";
                 return false;
             } else {
-
-
+                
             }
         },
         error: function(jqXHR, textStatus, errorThrown)
         {
-
+            alert("Server Not Connected");
         }
     });
 }
@@ -67,3 +66,7 @@ function validateCreate() {
     });
 
 }
+
+$( function() {
+    $( "#tabs" ).tabs();
+} );

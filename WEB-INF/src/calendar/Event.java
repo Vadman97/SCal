@@ -30,13 +30,9 @@ public class Event {
 	
 	private transient Vector<User> shared;
 	
-	public Event() {
-		shared = new Vector<User>();
-	}
-	
 	// used from Calendar when loading all events from db
 	public Event(long id, String name, Timestamp start, Timestamp end, String location, String description, Color color, boolean notify) {
-		this();
+		shared = new Vector<User>();
 		setId(id);
 		setName(name);
 		setStartTimestamp(start);

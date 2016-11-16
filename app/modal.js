@@ -35,7 +35,6 @@ var closeModal = function() {
 
 window.onclick = function(event) {
     if (event.target == modal) {
-        console.log("hell o");
         $('#modal').toggleClass("modal-active");
         // modal.style.display = "none";
     }

@@ -25,8 +25,22 @@ public class User {
 		PreparedStatement s = con.prepareStatement("SELECT username, password, email FROM Users WHERE id=?");
 		s.setLong(1, user_id);
 		ResultSet rs = s.executeQuery();
-		if (rs.next())
-			return new User(rs.getString(1), rs.getString(2), rs.getString(3));
+		if (rs.next()) {
+			User u = new User(rs.getString(1), rs.getString(2), rs.getString(3));
+			u.setId(user_id);
+			return u;
+		}
+		return null;
+	}
+	public static User getUser(Connection con, String username) throws SQLException {
+		PreparedStatement s = con.prepareStatement("SELECT id, username, password, email FROM Users WHERE username=?");
+		s.setString(1, username);
+		ResultSet rs = s.executeQuery();
+		if (rs.next()) {
+			User u = new User(rs.getString(2), rs.getString(3), rs.getString(4));
+			u.setId(rs.getLong(1));
+			return u;
+		}
 		return null;
 	}
 	private static String hashPassword(String password) {

@@ -30,6 +30,12 @@
         <servlet-name>CalendarServlet</servlet-name>
         <servlet-class>calendar.CalendarServlet</servlet-class>
     </servlet>
+    
+    <servlet>
+        <servlet-name>EventShareServlet</servlet-name>
+        <servlet-class>calendar.EventShareServlet</servlet-class>
+    </servlet>
+
 
 
 
@@ -59,4 +65,8 @@
         <url-pattern>/calendar</url-pattern>
     </servlet-mapping>
 
+	<servlet-mapping>
+        <servlet-name>EventShareServlet</servlet-name>
+        <url-pattern>/share</url-pattern>
+    </servlet-mapping>
 </web-app>

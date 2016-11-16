@@ -8,8 +8,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import db.UserData;
-
 public class Create extends HttpServlet {
 	private static final long serialVersionUID = 5729439952621174381L;
 
@@ -17,7 +15,7 @@ public class Create extends HttpServlet {
 		PrintWriter out = res.getWriter();
 		if (req.getParameterMap().containsKey("username") && req.getParameterMap().containsKey("password") 
 														  && req.getParameterMap().containsKey("email")) {
-			UserData user = new UserData();
+			User user = new User();
 			user.setUsername(req.getParameter("username"));
 			user.setPassword(req.getParameter("password"));
 			user.setEmail(req.getParameter("email"));

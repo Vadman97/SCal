@@ -191,11 +191,6 @@ function validateCreate() {
     });
 
 }
-
-$( function() {
-    $( "#tabs" ).tabs();
-} );
-
 var modal           = document.getElementById('modal');
 
 var loginBtn        = document.getElementById('loginButton');

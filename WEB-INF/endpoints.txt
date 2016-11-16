@@ -13,7 +13,7 @@ POST /event 				Data: {share: true, target_username: <username>}
 DELETE /event 				Data: {share: true, target_username: <username>}
 
 //FOR EVENT LOADING (TODO: Vadim)
-GET /calendar 				Data: {view: [day, week, month], day: day or any day of current week or any day of current month}
+GET /calendar 				view=[day, week, month]&day=day or any day of current week or any day of current month}
 							Response: [{id, event attributes, owner:true/false}, {id, event attributes, owner:true/false}, ...]
 							
 							Event attributes: "name", "start_time", "end_time", "location", "description", "color", "notify"

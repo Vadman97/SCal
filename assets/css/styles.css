@@ -118,6 +118,9 @@ button:focus, .button:focus, a.button:focus, [type=submit]:focus, [type=button]:
   width: 30%;
   height: 50%;
   border-radius: 15px; }
+  .modal-login .login-form {
+    width: 100%;
+    margin: 6vh 0; }
   .modal-login-content {
     display: -ms-flexbox;
     display: flex;
@@ -129,25 +132,32 @@ button:focus, .button:focus, a.button:focus, [type=submit]:focus, [type=button]:
         align-items: center; }
     .modal-login-content input[type="text"],
     .modal-login-content input[type="password"] {
-      -ms-flex-positive: 1;
-          flex-grow: 1;
-      border-radius: 5px;
-      border-style: solid;
-      border-width: 1px;
-      width: 100%; }
+      border-radius: 10px;
+      border: #888 solid 0.1px;
+      margin: 10px 0;
+      padding: 5px 10px;
+      height: 3vh;
+      width: 100%;
+      font-size: 16px;
+      font-weight: 100; }
       .modal-login-content input[type="text"]:focus,
       .modal-login-content input[type="password"]:focus {
         outline: none; }
+    .modal-login-content input[type="button"] {
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+      max-width: 50%; }
     .modal-login-content h2 {
+      margin-top: 40px;
       font-size: 32px;
       font-weight: 300; }
-    .modal-login-content .login-form {
-      width: 80%; }
-    .modal-login-content .login-submit {
+    .modal-login-content .buttongroup {
       display: -ms-flexbox;
       display: flex;
       -ms-flex-flow: row nowrap;
           flex-flow: row nowrap; }
+    .modal-login-content .login-form {
+      width: 80%; }
 
 .modal-upload {
   background-color: #fefefe;
@@ -172,6 +182,12 @@ button:focus, .button:focus, a.button:focus, [type=submit]:focus, [type=button]:
   min-width: 92.7px;
   width: 20%;
   height: 100%; }
+
+.sidebar-user {
+  cursor: pointer;
+  transition: 0.5s; }
+  .sidebar-user:hover {
+    background-color: #515867; }
 
 .sidebar-container-logo {
   -ms-flex: 1;
@@ -250,6 +266,4 @@ button:focus, .button:focus, a.button:focus, [type=submit]:focus, [type=button]:
 
 .sidebar-btn {
   width: 100%;
-  transition: 0.2s; }
-  .sidebar-btn:hover {
-    background-color: #656B7E; }
+  transition: 0.3s; }

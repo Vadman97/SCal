@@ -10,6 +10,13 @@
 }
 
 .sidebar {
+    &-user {
+        cursor: pointer;
+        transition: 0.5s;
+        &:hover {
+            background-color: #515867;
+        }
+    }
 	&-container {
         &-logo {
             flex: 1;
@@ -83,9 +90,6 @@
 	}
     &-btn {
         width: 100%;
-        transition: 0.2s;
-        &:hover {
-            background-color: $grey;
-        }
+        transition: 0.3s;
     }
 }

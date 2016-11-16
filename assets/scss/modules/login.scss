@@ -10,6 +10,11 @@
     height: 50%;
     border-radius: 15px;
 
+    .login-form {
+        width: 100%;
+        margin: 6vh 0;
+    }
+
     &-content {
         display: flex;
         flex-flow: column nowrap;
@@ -17,27 +22,37 @@
         align-items: center;
         input[type="text"],
         input[type="password"] {
-            flex-grow: 1;
-            border-radius: 5px;
-            border-style: solid;
-            border-width: 1px;
+            border-radius: 10px;
+            border: #888 solid 0.1px;
+            margin: 10px 0;
+            padding: 5px 10px;
+            height: 3vh;
             width: 100%;
+            font: {
+                size: 16px;
+                weight: 100;
+            }
             &:focus {
                 outline: none;
             }
         }
+        input[type="button"] {
+            flex-grow: 1;
+            max-width: 50%;
+        }
         h2 {
+            margin-top: 40px;
             font: {
                 size: 32px;
                 weight: 300;
             }
         }
-        .login-form {
-            width: 80%;
-        }
-        .login-submit {
+        .buttongroup {
             display: flex;
             flex-flow: row nowrap;
+        }
+        .login-form {
+            width: 80%;
         }
     }
 }

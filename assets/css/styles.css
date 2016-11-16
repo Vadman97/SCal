@@ -89,7 +89,10 @@ button:focus, .button:focus, a.button:focus, [type=submit]:focus, [type=button]:
   background-color: black;
   /* Fallback color */
   background-color: rgba(0, 0, 0, 0.4);
-  /* Black w/ opacity */ }
+  /* Black w/ opacity */
+  box-shadow: 20px 20px 10px #888; }
+  .modal-active {
+    display: block; }
 
 /* Modal Content/Box */
 .login-modal {
@@ -174,7 +177,8 @@ button:focus, .button:focus, a.button:focus, [type=submit]:focus, [type=button]:
       flex-flow: row nowrap;
   -ms-flex: 1;
       flex: 1;
-  background-color: #656B7E; }
+  background-color: #656B7E;
+  cursor: pointer; }
   .sidebar-container-user-icon {
     margin: 0 20px;
     border-radius: 50%;

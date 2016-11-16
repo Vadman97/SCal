@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>USCalendar</title>
+    <title>SCal</title>
 
     <!-- full calendar css link -->
     <link rel="stylesheet" href="bower_components/fullcalendar/dist/fullcalendar.css" />
@@ -17,7 +17,7 @@
     <script type="text/javascript" src="bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
     <script type="text/javascript" src="bower_components/fullcalendar/dist/gcal.js"></script>
 
-    <!-- Font awesome -->
+    <!-- Other front end links -->
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
     <!-- calendar front end javascript -->
@@ -27,7 +27,6 @@
     <script type="text/javascript">
         $(function() {
             $("#sidebar").load("partials/sidebar.html");
-            $("#loginModal").load("partials/loginModal.html");
 
             $.getScript("app/modal.js");
             $.getScript("app/login.js");
@@ -46,7 +45,8 @@
         <!-- imported via jQuery load call -->
         <div id="sidebar"></div>
 
-        <div id="loginModal" class="modal"></div>
+        <!-- My army of modals -->
+        <div id="modal" class="modal"></div>
 
         <!-- Calendar module -->
         <!-- This is handled by ui-calendar -->

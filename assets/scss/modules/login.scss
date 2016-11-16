@@ -1,7 +1,7 @@
 // login.scss
 
 /* Modal Content/Box */
-.login-modal {
+.modal-login {
     background-color: #fefefe;
     margin: 10% auto;
     padding: 20px;
@@ -29,7 +29,7 @@
         h2 {
             font: {
                 size: 32px;
-                weight: 100;
+                weight: 300;
             }
         }
         .login-form {
@@ -40,19 +40,4 @@
             flex-flow: row nowrap;
         }
     }
-}
-
-/* The Close Button */
-.close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
 }

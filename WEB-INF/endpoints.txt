@@ -1,0 +1,12 @@
+POST /user/create
+POST /user/login
+POST /user/logout
+
+//FOR EVENT MANIPULATION
+POST /event {event attributes...}
+PUT /event Data: {event attributes to update..., id: <event id>}
+DELETE /event Data: {id: <event id>}
+
+//FOR EVENT SHARING MANIPULATION
+POST /event Data: {share: true, target_username: <username>}
+DELETE /event Data: {share: true, target_username: <username>}

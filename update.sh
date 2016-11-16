@@ -11,7 +11,7 @@ bower install;
 gulp build;
 
 # CONFIGURE BACKEND DEPENDENCIES
-sudo cp lib/* /usr/share/$TOMCAT/lib
+cp lib/* /usr/share/$TOMCAT/lib
 
 # COMPILE JAVA
 cd WEB-INF; 

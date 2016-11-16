@@ -26,10 +26,8 @@
         <servlet-class>calendar.EventServlet</servlet-class>
     </servlet>
 
-    <servlet>
-        <servlet-name>TestServlet</servlet-name>
-        <servlet-class>main.Test</servlet-class>
-    </servlet>
+
+
 
     <servlet-mapping>
         <servlet-name>UserLoginServlet</servlet-name>
@@ -49,11 +47,6 @@
     <servlet-mapping>
         <servlet-name>EventServlet</servlet-name>
         <url-pattern>/event</url-pattern>
-    </servlet-mapping>
-
-    <servlet-mapping>
-        <servlet-name>TestServlet</servlet-name>
-        <url-pattern>/test</url-pattern>
     </servlet-mapping>
 
 </web-app>

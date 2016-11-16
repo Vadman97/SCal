@@ -8,18 +8,22 @@ import java.sql.Timestamp;
 import java.util.Vector;
 
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.mysql.jdbc.Statement;
 
 import user.User;
 import util.Util;
-
-//import java.util.Date;
 
 public class Event {
 	public final class RelationshipTypes {
 		public final static String OWNED = "owned";
 		public final static String SHARED = "shared";
 	}
+	
+//	private static final String[] expectedParams = {
+//		"name", "start_time", "end_time", "location", "description", "color", "notify"
+//	};
 	
 	private long id;
 	private String name;
@@ -57,16 +61,91 @@ public class Event {
 		return e;
 	}
 	
+	public static Event update(String json) {
+		JsonObject jobj = new JsonParser().parse(json).getAsJsonObject();
+		if (!jobj.has("id"))
+			return null;
+		Event e = new Event(jobj.get("id").getAsLong());
+		if (e.getId() == 0)
+			return null;
+		Event updates = Event.parse(json);
+		if (updates == null) 
+			return null;
+		
+		if (updates.getColor() != null)
+			e.setColor(updates.getColor());
+		if (updates.getDescription() != null)
+			e.setDescription(updates.getDescription());
+		if (updates.getEndTimestamp() != null)
+			e.setEndTimestamp(updates.getEndTimestamp());
+		if (updates.getLocation() != null)
+			e.setLocation(updates.getLocation());
+		if (updates.getName() != null)
+			e.setName(updates.getName());
+		if (updates.getStartTimestamp() != null)
+			e.setStartTimestamp(updates.getStartTimestamp());
+		
+		return e;
+	}
+	
 	public String toJson() {
 		return new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create().toJson(this);
 	}
 	
-	public void load() {
-		
+	private void load() {
+		if (id != 0) {
+			Connection conn = null;
+			try {
+				conn = Util.getConn();
+				PreparedStatement st = conn.prepareStatement("SELECT * FROM Events WHERE id=?");
+				st.setLong(1, id);
+				ResultSet rs = st.executeQuery();
+				if (rs.next()) {
+					setName(rs.getString(2));
+					setStartTimestamp(rs.getTimestamp(3));
+					setEndTimestamp(rs.getTimestamp(4));
+					setLocation(rs.getString(5));
+					setColor(rs.getString(6));
+					setNotify(rs.getBoolean(7));
+					loadSharedWith();
+				} else {
+					setId(0);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				try {
+					if (conn != null)
+						conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
 	}
 	
-	public void delete() {
-		
+	public boolean delete() {
+		if (id != 0) {
+			Connection conn = null;
+			boolean deleted = false;
+			try {
+				conn = Util.getConn();
+				PreparedStatement st = conn.prepareStatement("DELETE FROM Events WHERE id=?");
+				st.setLong(1, id);
+				deleted = (st.executeUpdate() != 0);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				try {
+					if (conn != null)
+						conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			return deleted;
+		}
+		return false;
 	}
 	
 	public void write(User current_user) {
@@ -77,6 +156,7 @@ public class Event {
 
 			PreparedStatement st2 = null;
 			ResultSet rs = null;
+			boolean insert = false;
 			if (id != 0) {
 				PreparedStatement st = conn.prepareStatement("SELECT id FROM Events WHERE id=?");
 				st.setLong(1, id);
@@ -88,6 +168,7 @@ public class Event {
 				st2.setLong(7, id);
 			} else {
 				// event does not exist
+				insert = true;
 				st2 = conn.prepareStatement("INSERT INTO Events (name, start_time, end_time, location, color, notify) VALUES (?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
 			}
 			st2.setString(1, name);
@@ -98,7 +179,7 @@ public class Event {
 			st2.setBoolean(6, notify);
 			st2.executeUpdate();
 			conn.commit();
-			if (id == 0) {
+			if (insert) {
 				ResultSet keys = st2.getGeneratedKeys();
 				if (keys.next()) {
 					setId(keys.getLong(1));
@@ -161,7 +242,7 @@ public class Event {
 			e.printStackTrace();
 		}
 	}
-
+	
 	public long getId() {
 		return id;
 	}
@@ -226,7 +307,28 @@ public class Event {
 		this.notify = notify;
 	}
 	
+	/*
+	 * Call Event.write(...) after to save
+	 */
 	public void addShared(User u) {
 		shared.add(u);
+	}
+	
+	/*
+	 * Automatically saves the change to db
+	 */
+	public void removeShare(User u) {
+		try {
+			Connection conn = Util.getConn();
+			PreparedStatement st = conn.prepareStatement("DELETE FROM EventRelationships WHERE event_id=? AND user_id=? AND relationship_type=?");
+			st.setLong(1, u.getId());
+			st.setLong(2, id);
+			st.setString(3, RelationshipTypes.SHARED);
+			if (st.executeUpdate() != 0) {
+				shared.remove(u);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 }

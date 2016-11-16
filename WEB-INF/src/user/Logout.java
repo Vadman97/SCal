@@ -7,15 +7,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import db.UserData;
-
 public class Logout extends HttpServlet {
 	private static final long serialVersionUID = 5729439952621174381L;
 
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		Object o = req.getSession().getAttribute("user");
-		if (o != null && o instanceof UserData) { 
-			((UserData)o).clear();
+		if (o != null && o instanceof User) { 
+			((User)o).clear();
 		}
 		res.getWriter().close();
 	}

@@ -3,11 +3,9 @@ var currTab = document.getElementById('login');
 
 var submit = document.getElementById('submit');
 
-function loginSwitchTabs() {
+function loginSwitchTabs(loginType) {
     
-    var X=$(this).attr('id');
-    
-    if(X=='signup')
+    if(loginType =='signup')
     {
         $("#signup").addClass('select');
         $("#signupbox").slideDown();

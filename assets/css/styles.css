@@ -113,7 +113,7 @@ button:focus, .button:focus, a.button:focus, [type=submit]:focus, [type=button]:
 
 .friend {
   padding: 10px;
-  background-color: green; }
+  background-color: #656B7E; }
   .friend-img {
     max-width: 50px;
     border-radius: 50%;

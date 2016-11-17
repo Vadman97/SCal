@@ -1,5 +1,5 @@
 var lmodal = document.getElementById('loginModal');
-var currTab = document.getElementByID('login');
+var currTab = document.getElementById('login');
 
 var submit = document.getElementById('submit');
 
@@ -12,7 +12,7 @@ function loginSwitchTabs() {
         $("#signup").addClass('select');
         $("#signupbox").slideDown();
         
-        currTab = document.getElementsByClassName('singup');
+        currTab = document.getElementById('signup');
     }
     else
     {
@@ -21,7 +21,7 @@ function loginSwitchTabs() {
         $("#signupbox").slideUp();
         $("#loginbox").slideDown();
         
-        currTab = document.getElementsByClassName('login');
+        currTab = document.getElementById('login');
     }
 }
 
@@ -31,7 +31,7 @@ function validateUser() {
     var password = document.getElementById("password").value;
     var email = document.getElementById("email").value;
     
-    var loginLogic = currTab.attr('id');
+    var loginLogic = $(currTab).attr('id');
 
     if(loginLogic == 'login') {
         

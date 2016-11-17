@@ -7,5 +7,20 @@
     padding: 20px;
     width: 60%;
     border-radius: 15px;
-
+    &-content {
+        display: flex;
+        flex-flow: row nowrap;
+        &-sidebar {
+            width: 30%;
+            height: 500px;
+            margin: 2.5% 0 2.5% 0;
+            overflow: scroll;
+            background-color: salmon;
+        }
+        &-main {
+            width: 70%;
+            margin: 2.5% 0 2.5% 0;
+            background-color: lightblue;
+        }
+    }
 }

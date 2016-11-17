@@ -217,6 +217,11 @@ uploadBtn.onclick = function() {
     // modal.style.display = "block";
 }
 
+friendsBtn.onclick = function() {
+    $('#modal').load("partials/friendsModal.html", closeModal);
+    $('#modal').toggleClass("modal-active");
+}
+
 // When the user clicks on <span> (x), close the modal
 var closeModal = function() {
     var span = document.getElementsByClassName("close")[0];

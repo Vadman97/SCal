@@ -111,6 +111,20 @@ button:focus, .button:focus, a.button:focus, [type=submit]:focus, [type=button]:
   text-decoration: none;
   cursor: pointer; }
 
+.friend {
+  padding: 10px;
+  background-color: green; }
+  .friend-img {
+    max-width: 50px;
+    border-radius: 50%;
+    display: inline-block;
+    vertical-align: middle; }
+  .friend h4 {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 20px;
+    font-weight: 200; }
+
 /* Modal Content/Box */
 .modal-login {
   background-color: #fefefe;
@@ -233,11 +247,15 @@ a {
       height: 500px;
       margin: 2.5% 0 2.5% 0;
       overflow: scroll;
-      background-color: salmon; }
+      background-color: salmon;
+      border-top-left-radius: 1em;
+      border-bottom-left-radius: 1em; }
     .modal-friends-content-main {
       width: 70%;
       margin: 2.5% 0 2.5% 0;
-      background-color: lightblue; }
+      background-color: lightblue;
+      border-top-right-radius: 1em;
+      border-bottom-right-radius: 1em; }
 
 #calendar {
   padding: 2% 2%;
@@ -315,7 +333,7 @@ a {
     -ms-flex-positive: 1;
         flex-grow: 1;
     text-align: left;
-    padding: 2vh 0 2vh 10%;
+    padding: 1vh 0 1vh 10%;
     letter-spacing: 0.8px;
     cursor: pointer;
     font-size: 16px;

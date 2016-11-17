@@ -1,70 +1,92 @@
-@import
-
-var attempt = 3; // Variable to count number of attempts.
-// Below function Executes on click of login button.
-
 var lmodal = document.getElementById('loginModal');
+var currTab = document.getElementByID('login');
 
-function validateLogin() {
-    var username = document.getElementById("username").value;
-    var password = document.getElementById("password").value;
+var submit = document.getElementById('submit');
 
-    var formData = {username: username,password: password};
-
-    $.ajax({
-        url : "/login",
-        type: "POST",
-        data : formData,
-        success: function(data, textStatus, jqXHR)
-        {
-            //data: data from server
-            if(JSON.parse(data)["success"]) {
-                // Redirecting to other page.
-                // POPULATE Calendar with Data
-                
-                lmodal.style.display = "none";
-                return false;
-            } else {
-                
-            }
-        },
-        error: function(jqXHR, textStatus, errorThrown)
-        {
-            alert("Server Not Connected");
-        }
-    });
+function loginSwitchTabs() {
+    
+    var X=$(this).attr('id');
+    
+    if(X=='signup')
+    {
+        $("#signup").addClass('select');
+        $("#signupbox").slideDown();
+        
+        currTab = document.getElementsByClassName('singup');
+    }
+    else
+    {
+        $("#signup").removeClass('select');
+        $("#login").addClass('select');
+        $("#signupbox").slideUp();
+        $("#loginbox").slideDown();
+        
+        currTab = document.getElementsByClassName('login');
+    }
 }
 
-function validateCreate() {
+function validateUser() {
+    
     var username = document.getElementById("username").value;
     var password = document.getElementById("password").value;
+    var email = document.getElementById("email").value;
+    
+    var loginLogic = currTab.attr('id');
 
-    // Handle POST request here
+    if(loginLogic == 'login') {
+        
+        var formData = {username: username,password: password};
+        
+        $.ajax({
+            url : "/user/login",
+            type: "POST",
+            data : formData,
+            success: function(data, textStatus, jqXHR)
+            {
+                //data: data from server
+                if(JSON.parse(data)["success"]) {
+                    // Redirecting to other page.
+                    // POPULATE Calendar with Data
 
-    var formData = {username: username,password: password};
+                    lmodal.style.display = "none";
+                    return false;
+                } else {
 
-    $.ajax({
-        url : "/create_user",
-        type: "POST",
-        data : formData,
-        success: function(data, textStatus, jqXHR)
-        {
-            //data: data from server
-            if(JSON.parse(data)["success"]) {
-                // Redirecting to other page.
-                // POPULATE Calendar with Data
-
-                lmodal.style.display = "none";
-                return false;
-            } else {
-
-
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown)
+            {
+                alert("Server Not Connected - Login");
             }
-        },
-        error: function(jqXHR, textStatus, errorThrown)
-        {
+        });
+        
+    } else {
+        
+        var formData = {username: username,password: password, email: email  };
+        
+        var formData = {username: username,password: password};
+        
+         $.ajax({
+            url : "/user/create",
+            type: "POST",
+            data : formData,
+            success: function(data, textStatus, jqXHR)
+            {
+                //data: data from server
+                if(JSON.parse(data)["success"]) {
+                    // Redirecting to other page.
+                    // POPULATE Calendar with Data
 
-        }
-    });
+                    lmodal.style.display = "none";
+                    return false;
+                } else {
 
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown)
+            {
+                alert("Server Not Connected - Signup");
+            } 
+        });
+    }
 }

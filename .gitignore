@@ -5,13 +5,10 @@
 bower_components/
 node_modules/
 
-# *.scss files that are eventually compiled into working css
-assets/scss/
-*.scss
-
 # Backend Ignores
 *.class
 /bin/
-*.classpath
+#*.classpath
 #*.project
 */classes
+#*.settings

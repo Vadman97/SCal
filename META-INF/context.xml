@@ -23,5 +23,5 @@
 	          username="cs201"
 	          password="W3b8todIC762"
 	          driverClassName="com.mysql.jdbc.Driver"
-	          url="jdbc:mysql://tutorhub.xyz:3310/cs201_fp?useSSL=false"/>
+	          url="jdbc:mysql://scal.tech:3310/cs201_fp?useSSL=false"/>
 </Context>

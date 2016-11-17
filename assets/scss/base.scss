@@ -1,0 +1,50 @@
+// base.scss
+
+// base colors
+$base-color: #F5F4F1;
+
+$primary-color: #EA2B1F;
+$primary-accent-color: #7C1400;
+
+$secondary-color: #E6C229;
+$secondary-accent-color: #C98D00;
+
+$grey: #656B7E;
+$darkgrey: #2A2D33;
+
+// selector variables
+$buttons: ('button, .button, a.button, [type=submit], [type=button]');
+
+// fonts
+* {
+    font-family: "Helvetica", "Arial", sans-serif;
+}
+
+// fontawesome paths
+$fa-font-path: "../../bower_components/font-awesome/fonts";
+
+
+// page format
+html,
+body {
+    height: 100%;
+    background-color: $base-color;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    height: 100%;
+}
+
+.content {
+    width: 100%;
+}
+
+#{$buttons} {
+    &:focus {
+        outline: 0;
+    }
+}

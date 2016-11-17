@@ -70,6 +70,106 @@ button:focus, .button:focus, a.button:focus, [type=submit]:focus, [type=button]:
   border-radius: 15px;
   box-shadow: 0px 5px 2px #888; }
 
+/* The Modal (background) */
+.modal {
+  display: none;
+  /* Hidden by default */
+  position: fixed;
+  /* Stay in place */
+  z-index: 2;
+  /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%;
+  /* Full width */
+  height: 100%;
+  /* Full height */
+  overflow: auto;
+  /* Enable scroll if needed */
+  background-color: black;
+  /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4);
+  /* Black w/ opacity */
+  transition: 0.3s; }
+  .modal-content {
+    box-shadow: -2px 5px 0px #666; }
+  .modal-active {
+    display: block; }
+
+/* The Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold; }
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer; }
+
+/* Modal Content/Box */
+.modal-login {
+  background-color: #fefefe;
+  margin: 10% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 30%;
+  height: 50%;
+  border-radius: 15px; }
+  .modal-login .login-form {
+    width: 100%;
+    margin: 6vh 0; }
+  .modal-login-content {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-flow: column nowrap;
+        flex-flow: column nowrap;
+    -ms-flex-pack: distribute;
+        justify-content: space-around;
+    -ms-flex-align: center;
+        align-items: center; }
+    .modal-login-content input[type="text"],
+    .modal-login-content input[type="password"] {
+      border-radius: 10px;
+      border: #888 solid 0.1px;
+      margin: 10px 0;
+      padding: 5px 10px;
+      height: 3vh;
+      width: 100%;
+      font-size: 16px;
+      font-weight: 100; }
+      .modal-login-content input[type="text"]:focus,
+      .modal-login-content input[type="password"]:focus {
+        outline: none; }
+    .modal-login-content input[type="button"] {
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+      max-width: 50%; }
+    .modal-login-content h2 {
+      margin-top: 40px;
+      font-size: 32px;
+      font-weight: 300; }
+    .modal-login-content .buttongroup {
+      display: -ms-flexbox;
+      display: flex;
+      -ms-flex-flow: row nowrap;
+          flex-flow: row nowrap;
+      -ms-flex-pack: distribute;
+          justify-content: space-around; }
+    .modal-login-content .login-form {
+      width: 80%; }
+
+.modal-upload {
+  background-color: #fefefe;
+  margin: 10% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 30%;
+  height: 50%;
+  border-radius: 15px; }
+
 #calendar {
   padding: 2% 2%;
   width: 80%; }
@@ -84,6 +184,12 @@ button:focus, .button:focus, a.button:focus, [type=submit]:focus, [type=button]:
   min-width: 92.7px;
   width: 20%;
   height: 100%; }
+
+.sidebar-user {
+  cursor: pointer;
+  transition: 0.5s; }
+  .sidebar-user:hover {
+    background-color: #515867; }
 
 .sidebar-container-logo {
   -ms-flex: 1;
@@ -100,7 +206,8 @@ button:focus, .button:focus, a.button:focus, [type=submit]:focus, [type=button]:
       flex-flow: row nowrap;
   -ms-flex: 1;
       flex: 1;
-  background-color: #656B7E; }
+  background-color: #656B7E;
+  cursor: pointer; }
   .sidebar-container-user-icon {
     margin: 0 20px;
     border-radius: 50%;
@@ -110,18 +217,21 @@ button:focus, .button:focus, a.button:focus, [type=submit]:focus, [type=button]:
     -ms-flex-positive: 1;
         flex-grow: 1;
     display: inline-block;
-    text-decoration: none;
     color: #FEFEFE;
-    font-weight: 300; }
-  .sidebar-container-user a {
+    font-weight: 300;
+    font-size: 16px; }
+  .sidebar-container-user button {
     display: -ms-flexbox;
     display: flex;
     -ms-flex-flow: row nowrap;
         flex-flow: row nowrap;
     -ms-flex-align: center;
         align-items: center;
+    text-decoration: none;
     width: 100%;
-    height: 100%; }
+    height: 100%;
+    background-color: #656B7E;
+    border: none; }
 
 .sidebar-container-function {
   display: -ms-flexbox;
@@ -136,7 +246,7 @@ button:focus, .button:focus, a.button:focus, [type=submit]:focus, [type=button]:
     -ms-flex-positive: 1;
         flex-grow: 1;
     text-align: left;
-    padding: 2vh 0 2vh 20%;
+    padding: 2vh 0 2vh 10%;
     letter-spacing: 0.8px;
     cursor: pointer;
     font-size: 16px;
@@ -158,6 +268,4 @@ button:focus, .button:focus, a.button:focus, [type=submit]:focus, [type=button]:
 
 .sidebar-btn {
   width: 100%;
-  transition: 0.2s; }
-  .sidebar-btn:hover {
-    background-color: #656B7E; }
+  transition: 0.3s; }

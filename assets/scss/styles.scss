@@ -1,0 +1,14 @@
+// master styles.scss
+// -- contains imports of all other files
+
+@import "reset";
+@import "base";
+
+@import "widgets/button";
+@import "widgets/notification";
+@import "widgets/modal";
+
+@import "modules/login";
+@import "modules/upload";
+@import "modules/calendar";
+@import "modules/sidebar";

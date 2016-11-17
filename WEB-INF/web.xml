@@ -3,40 +3,70 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
     version="2.4">
-    
+
     <display-name>USCalendar</display-name>
 
     <servlet>
-        <servlet-name>HelloServlet</servlet-name>
-        <servlet-class>main.Hello</servlet-class>
+        <servlet-name>UserLoginServlet</servlet-name>
+        <servlet-class>user.Login</servlet-class>
     </servlet>
-
+    
     <servlet>
-        <servlet-name>TestServlet</servlet-name>
-        <servlet-class>main.Test</servlet-class>
+        <servlet-name>UserLogoutServlet</servlet-name>
+        <servlet-class>user.Logout</servlet-class>
+    </servlet>
+    
+    <servlet>
+        <servlet-name>UserCreateServlet</servlet-name>
+        <servlet-class>user.Create</servlet-class>
+    </servlet>
+    
+    <servlet>
+        <servlet-name>EventServlet</servlet-name>
+        <servlet-class>calendar.EventServlet</servlet-class>
+    </servlet>
+    
+    <servlet>
+        <servlet-name>CalendarServlet</servlet-name>
+        <servlet-class>calendar.CalendarServlet</servlet-class>
+    </servlet>
+    
+    <servlet>
+        <servlet-name>EventShareServlet</servlet-name>
+        <servlet-class>calendar.EventShareServlet</servlet-class>
     </servlet>
 
-    <!-- <servlet>
-        <servlet-name>ChatServlet</servlet-name>
-        <servlet-class>main.Chat</servlet-class>
-    </servlet> -->
+
+
+
 
     <servlet-mapping>
-        <servlet-name>HelloServlet</servlet-name>
-        <url-pattern>/hello</url-pattern>
+        <servlet-name>UserLoginServlet</servlet-name>
+        <url-pattern>/user/login</url-pattern>
     </servlet-mapping>
-
+    
     <servlet-mapping>
-        <servlet-name>TestServlet</servlet-name>
-        <url-pattern>/test</url-pattern>
+        <servlet-name>UserLogoutServlet</servlet-name>
+        <url-pattern>/user/logout</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>UserCreateServlet</servlet-name>
+        <url-pattern>/user/create</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>EventServlet</servlet-name>
+        <url-pattern>/event</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>CalendarServlet</servlet-name>
+        <url-pattern>/calendar</url-pattern>
     </servlet-mapping>
 
-    <!-- <servlet-mapping>
-        <servlet-name>ChatServlet</servlet-name>
-        <url-pattern>/chat</url-pattern>
-    </servlet-mapping> -->
-    <listener>
-        <listener-class>main.Chat</listener-class>
-    </listener>
-
+	<servlet-mapping>
+        <servlet-name>EventShareServlet</servlet-name>
+        <url-pattern>/share</url-pattern>
+    </servlet-mapping>
 </web-app>

@@ -1,0 +1,59 @@
+// login.scss
+
+/* Modal Content/Box */
+.modal-login {
+    background-color: #fefefe;
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 30%;
+    height: 50%;
+    border-radius: 15px;
+
+    .login-form {
+        width: 100%;
+        margin: 6vh 0;
+    }
+
+    &-content {
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: space-around;
+        align-items: center;
+        input[type="text"],
+        input[type="password"] {
+            border-radius: 10px;
+            border: #888 solid 0.1px;
+            margin: 10px 0;
+            padding: 5px 10px;
+            height: 3vh;
+            width: 100%;
+            font: {
+                size: 16px;
+                weight: 100;
+            }
+            &:focus {
+                outline: none;
+            }
+        }
+        input[type="button"] {
+            flex-grow: 1;
+            max-width: 50%;
+        }
+        h2 {
+            margin-top: 40px;
+            font: {
+                size: 32px;
+                weight: 300;
+            }
+        }
+        .buttongroup {
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: space-around;
+        }
+        .login-form {
+            width: 80%;
+        }
+    }
+}

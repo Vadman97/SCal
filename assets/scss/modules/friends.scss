@@ -1,6 +1,5 @@
 // friends.scss
 
-
 .modal-friends {
     background-color: #fefefe;
     margin: 10% auto;
@@ -16,11 +15,15 @@
             margin: 2.5% 0 2.5% 0;
             overflow: scroll;
             background-color: salmon;
+            border-top-left-radius: 1em;
+            border-bottom-left-radius: 1em;
         }
         &-main {
             width: 70%;
             margin: 2.5% 0 2.5% 0;
             background-color: lightblue;
+            border-top-right-radius: 1em;
+            border-bottom-right-radius: 1em;
         }
     }
 }

@@ -1,3 +1,25 @@
 // friend.scss
 
+.friend {
+
+    padding: 10px;
+    background-color: green;
+
+    &-img {
+        max-width: 50px;
+        border-radius: 50%;
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    h4 {
+        display: inline-block;
+        vertical-align: middle;
+        margin-left: 20px;
+        font: {
+            weight: 200;
+        }
+    }
+}
+
 // friend.scss EOF

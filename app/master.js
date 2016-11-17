@@ -123,10 +123,31 @@ app.controller('calendarCtrl', function($scope, $compile, $timeout, uiCalendarCo
 });
 /* EOF */
 
+@import
+
 var attempt = 3; // Variable to count number of attempts.
 // Below function Executes on click of login button.
 
 var lmodal = document.getElementById('loginModal');
+
+$(document).ready(function() {
+    $(".tab").click(function() {
+        var X=$(this).attr('id');
+
+        if(X=='signup')
+        {
+            $("#signup").addClass('select');
+            $("#signupbox").slideDown();
+        }
+        else
+        {
+            $("#signup").removeClass('select');
+            $("#login").addClass('select');
+            $("#signupbox").slideUp();
+            $("#loginbox").slideDown();
+        }
+    });
+});
 
 function validateLogin() {
     var username = document.getElementById("username").value;
@@ -189,8 +210,28 @@ function validateCreate() {
 
         }
     });
-
 }
+
+//$(document).ready(function() {
+//            $(".tab").click(function() {
+//                var X=$(this).attr('id');
+//                
+//                if(X=='signup')
+//                {
+//                    $("#signup").addClass('select');
+//                    $("#signupbox").slideDown();
+//                }
+//                else
+//                {
+//                    $("#signup").removeClass('select');
+//                    $("#login").addClass('select');
+//                    $("#signupbox").slideUp();
+//                    $("#loginbox").slideDown();
+//                }
+//            });
+//});
+
+
 var modal           = document.getElementById('modal');
 
 var loginBtn        = document.getElementById('loginButton');

@@ -1,12 +1,20 @@
-POST /user/create
-POST /user/login
+//FOR USER MANAGEMENT
+POST /user/create			Data: username=text&password=text&email=text
+POST /user/login			Data: username=text&password=text
 POST /user/logout
 
 //FOR EVENT MANIPULATION
-POST /event {event attributes...}
-PUT /event Data: {event attributes to update..., id: <event id>}
-DELETE /event Data: {id: <event id>}
+POST /event 				Data: {event attributes...}
+PUT /event 					Data: {event attributes to update..., id: <event id>}
+DELETE /event 				Data: {id: <event id>}
 
 //FOR EVENT SHARING MANIPULATION
-POST /event Data: {share: true, target_username: <username>}
-DELETE /event Data: {share: true, target_username: <username>}
+POST /share 				Data: {event_id: <id>, target_username: <username>}
+DELETE /share 				Data: {event_id: <id>, target_username: <username>}
+
+//FOR EVENT LOADING
+GET /calendar 				view=[day, week, month]&day=day or any day of current week or any day of current month}
+							Response: [{id, event attributes, owner:true/false}, {id, event attributes, owner:true/false}, ...]
+							
+							Event attributes: "name", "start_time", "end_time", "location", "description", "color", "notify"
+							Timestamps (start_time/end_time) given by format yyyy-MM-dd HH:mm:ss

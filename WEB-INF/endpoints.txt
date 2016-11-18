@@ -13,8 +13,18 @@ POST /share 				Data: {event_id: <id>, target_username: <username>}
 DELETE /share 				Data: {event_id: <id>, target_username: <username>}
 
 //FOR EVENT LOADING
-GET /calendar 				view=[day, week, month]&day=day or any day of current week or any day of current month}
-							Response: [{id, event attributes, owner:true/false}, {id, event attributes, owner:true/false}, ...]
+GET /calendar 				Data: http-data view=[day, week, month]&day=day or any day of current week or any day of current month}
+							Response: JSON [{id, event attributes, relationship: owned/shared}, {id, event attributes, relationship: owned/shared}, ...]
 							
 							Event attributes: "name", "start_time", "end_time", "location", "description", "color", "notify"
 							Timestamps (start_time/end_time) given by format yyyy-MM-dd HH:mm:ss
+						
+//FOR FRIEND MANAGEMENT	
+GET /friends				Response: JSON {friends: [{username: <username>, status: pending/accepted/declined}]}
+
+//TODO(Vadim)
+POST /friends				Data: JSON {"username": <username>}
+							For adding a new friend, status becomes pending
+PUT /friends				Data: JSON {"username": <username>, "status": accepted/declined}
+							For updating a friendship to accept/decline a friend request
+							

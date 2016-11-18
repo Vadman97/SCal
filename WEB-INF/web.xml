@@ -36,7 +36,10 @@
         <servlet-class>calendar.EventShareServlet</servlet-class>
     </servlet>
 
-
+	<servlet>
+        <servlet-name>FriendsServlet</servlet-name>
+        <servlet-class>user.FriendsServlet</servlet-class>
+    </servlet>
 
 
 
@@ -68,5 +71,10 @@
 	<servlet-mapping>
         <servlet-name>EventShareServlet</servlet-name>
         <url-pattern>/share</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>FriendsServlet</servlet-name>
+        <url-pattern>/friends</url-pattern>
     </servlet-mapping>
 </web-app>

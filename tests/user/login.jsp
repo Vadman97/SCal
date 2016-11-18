@@ -15,6 +15,7 @@
 		Username: <%= user.getUsername() %><BR>
 		Email: <%= user.getEmail() %><BR>
 		Password: <%= user.getPassword() %><BR>	
+		Session: <%= request.getSession().getId() %><BR>	
 	<% } else { 
 		out.println("Invalid Login! <br>");
 		out.println(showForm()); 
@@ -25,6 +26,7 @@
 		Username: <%= user.getUsername() %><BR>
 		Email: <%= user.getEmail() %><BR>
 		Password: <%= user.getPassword() %><BR>	
+		Session: <%= request.getSession().getId() %><BR>	
 		<%
 	} else {
 		out.println(showForm()); 

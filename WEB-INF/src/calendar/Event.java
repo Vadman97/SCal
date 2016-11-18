@@ -12,6 +12,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.mysql.jdbc.Statement;
 
+import main.UserConnect;
 import user.User;
 import util.Util;
 
@@ -320,6 +321,7 @@ public class Event {
 		shared.add(u);
 		Notification n = new Notification(u.getId(), getId(), Notification.DEFAULT_TYPE);
 		n.write();
+		UserConnect.sendJSONtoClient(u, n.toString());
 	}
 	
 	/*

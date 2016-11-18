@@ -1,5 +1,6 @@
 package main;
 
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.Set;
 import javax.servlet.http.HttpSession;
@@ -15,6 +16,9 @@ import java.util.Map;
 import java.io.IOException;
 import java.util.HashMap;
 import main.WebsocketConfiguration;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 import user.User;
 
@@ -22,7 +26,7 @@ import user.User;
 public class UserConnect {
 
     private static Set<UserConnect> allUsers = new CopyOnWriteArraySet<>();
-    private static Map<User, HttpSession> userToSession = new HashMap<>();//username and HttpSession
+    private static Map<User, Session> userToSession = new ConcurrentHashMap<>();//username and Session
     private Session session;
     private HttpSession httpSession;
 
@@ -34,14 +38,8 @@ public class UserConnect {
             this.session = session;
             this.httpSession = (HttpSession) config.getUserProperties().get("httpSession");
             allUsers.add(this);
-            System.out.println(httpSession.getAttribute("user"));
             User curr = (User)httpSession.getAttribute("user");
-            userToSession.put(curr, this.httpSession);
-            if(!userToSession.isEmpty()){
-            	for(Map.Entry<User, HttpSession> userEntry: userToSession.entrySet()){
-                	System.out.println(userEntry.getKey().toString() + "| " + userEntry.getValue().getId());
-                }	
-            }
+            userToSession.put(curr, this.session);
         }
 
     @OnClose
@@ -54,34 +52,14 @@ public class UserConnect {
             System.out.println("Error: " + error.toString());
         }
 
-    @OnMessage
-        public void msgHandle(String message) {
-            System.out.println(message);
-        	for (UserConnect usr: allUsers) {
-                try {
-                    synchronized (usr) {
-                        usr.session.getBasicRemote().sendText(message);
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    //connections.remove(client);
-                }
-            }	
-        }
-    	public void sendJSONtoClient(Session receiverSession, Session senderSession){
+    	public static void sendJSONtoClient(User toReceive, String eventJSON){
     		//TODO send a json to the specific client based on info in a json received
-            if(!userToSession.isEmpty() && receiverSession!=null){
-            	for(Map.Entry<User, HttpSession> userEntry: userToSession.entrySet()){
-            		if(userEntry.getKey().equals(receiverSession.getId())){
-            			try{
-            				receiverSession.getBasicRemote().sendObject("");
-            			}catch(EncodeException ee){
-            				ee.printStackTrace();
-            			}catch(IOException ioe){
-            				ioe.printStackTrace();
-            			}
-            		}
-                }	
+            if(!userToSession.isEmpty()){
+            	try{
+    				userToSession.get(toReceive).getBasicRemote().sendText(eventJSON);
+    			} catch(IOException ioe){
+    				ioe.printStackTrace();
+    			}
             }
     	}
 }

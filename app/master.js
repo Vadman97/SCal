@@ -168,13 +168,13 @@ function validateUser() {
             {
                 //data: data from server
                 if(JSON.parse(data)["success"]) {
-                    // Redirecting to other page.
                     // POPULATE Calendar with Data
-
+                    
                     lmodal.style.display = "none";
                     return false;
                 } else {
-
+                    
+                    alert("Invalid: Username or Password");
                 }
             },
             error: function(jqXHR, textStatus, errorThrown)
@@ -197,13 +197,12 @@ function validateUser() {
             {
                 //data: data from server
                 if(JSON.parse(data)["success"]) {
-                    // Redirecting to other page.
-                    // POPULATE Calendar with Data
-
+                    
                     lmodal.style.display = "none";
                     return false;
                 } else {
-
+                    
+                    alert("Invalid: Username/Email already exists");
                 }
             },
             error: function(jqXHR, textStatus, errorThrown)

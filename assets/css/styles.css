@@ -62,7 +62,7 @@ button:focus, .button:focus, a.button:focus, [type=submit]:focus, [type=button]:
   box-shadow: none;
   text-decoration: none; }
 
-.notif {
+.eventnotif {
   margin: 10px;
   padding: 10px;
   min-height: 20%;
@@ -123,7 +123,7 @@ button:focus, .button:focus, a.button:focus, [type=submit]:focus, [type=button]:
     display: inline-block;
     vertical-align: middle;
     margin-left: 20px;
-    font-weight: 200; }
+    font-weight: 300; }
 
 /* Modal Content/Box */
 .modal-login {
@@ -251,11 +251,56 @@ a {
       border-top-left-radius: 1em;
       border-bottom-left-radius: 1em; }
     .modal-friends-content-main {
+      display: -ms-flexbox;
+      display: flex;
+      -ms-flex-flow: column nowrap;
+          flex-flow: column nowrap;
       width: 70%;
       margin: 2.5% 0 2.5% 0;
       background-color: lightblue;
       border-top-right-radius: 1em;
       border-bottom-right-radius: 1em; }
+      .modal-friends-content-main-tablist {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-flow: row nowrap;
+            flex-flow: row nowrap;
+        -ms-flex-line-pack: stretch;
+            align-content: stretch;
+        width: 100%; }
+        .modal-friends-content-main-tablist li {
+          cursor: pointer;
+          display: -ms-flexbox;
+          display: flex;
+          -ms-flex-positive: 1;
+              flex-grow: 1;
+          text-align: center;
+          padding: 2.5%;
+          background-color: green; }
+          .modal-friends-content-main-tablist li:nth-child(1) {
+            background-color: lightblue;
+            display: block; }
+          .modal-friends-content-main-tablist li:nth-child(3) {
+            border-top-right-radius: 1em; }
+      .modal-friends-content-main-tabcontent {
+        display: none;
+        padding: 2%;
+        max-height: 436px;
+        overflow: scroll; }
+
+.friendnotif {
+  margin: 10px; }
+  .friendnotif-icon {
+    max-width: 50px;
+    border-radius: 50%;
+    display: inline-block;
+    vertical-align: middle; }
+  .friendnotif-msg {
+    display: inline-block;
+    vertical-align: middle;
+    max-width: 400px;
+    max-height: 40px;
+    overflow: scroll; }
 
 #calendar {
   padding: 2% 2%;

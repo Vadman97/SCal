@@ -123,6 +123,34 @@ app.controller('calendarCtrl', function($scope, $compile, $timeout, uiCalendarCo
 });
 /* EOF */
 
+// friends.js
+
+var tabsContent = document.getElementsByClassName("modal-friends-content-main-tabcontent");
+
+tabsContent[0].style.display = "flex";
+tabsContent[0].style.flexFlow = "column nowrap";
+
+function openFriendsTab(event, tabID)
+{
+    var tabsClicked = document.getElementsByClassName("modal-friends-content-main-tablinks");
+    var tabsContent = document.getElementsByClassName("modal-friends-content-main-tabcontent");
+
+    for (var i=0; i<3; i++) { // <3
+        var tabContent = tabsContent[i];
+        var tabClicked = tabsClicked[i];
+        if (tabContent.id != tabID) {
+            tabContent.style.display = "none";
+            tabClicked.style.backgroundColor = "green";
+        } else {
+            tabContent.style.display = "block";
+            tabClicked.style.backgroundColor = "lightblue";
+        }
+    }
+
+}
+
+// friends.js EOF
+
 @import
 
 var attempt = 3; // Variable to count number of attempts.
@@ -220,6 +248,7 @@ uploadBtn.onclick = function() {
 friendsBtn.onclick = function() {
     $('#modal').load("partials/friendsModal.html", closeModal);
     $('#modal').toggleClass("modal-active");
+    $.getScript("app/friendsMenu.js");
 }
 
 // When the user clicks on <span> (x), close the modal

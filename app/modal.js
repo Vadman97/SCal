@@ -25,6 +25,7 @@ uploadBtn.onclick = function() {
 friendsBtn.onclick = function() {
     $('#modal').load("partials/friendsModal.html", closeModal);
     $('#modal').toggleClass("modal-active");
+    $.getScript("app/friendsMenu.js");
 }
 
 // When the user clicks on <span> (x), close the modal

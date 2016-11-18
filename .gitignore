@@ -8,7 +8,7 @@ node_modules/
 # Backend Ignores
 *.class
 /bin/
-#*.classpath
+*.classpath
 #*.project
 */classes
 #*.settings

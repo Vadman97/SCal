@@ -53,7 +53,6 @@ public class UserConnect {
             System.out.println("Error: " + error.toString());
         }
     	public static void sendJSONtoClient(User toReceive, String eventJSON){
-    		//TODO send a json to the specific client based on info in a json received
             if(!userToSession.isEmpty()){
             	try{
     				userToSession.get(toReceive).getBasicRemote().sendText(eventJSON);

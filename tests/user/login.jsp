@@ -1,9 +1,7 @@
 <jsp:useBean id="user" class="user.User" scope="session"/>
 <HTML>
 <HEAD>
-	<script type="application/javascript"><![CDATA[
-        "use strict";
-
+	<script type="application/javascript">
         var UserConnect = {};
 
         UserConnect.socket = null;
@@ -23,7 +21,7 @@
             UserConnect.socket.onclose = function () {};
 
             UserConnect.socket.onmessage = function (message) {
-                console.log(message.data);
+                printer.log(message.data);
             };
         });
 
@@ -35,10 +33,10 @@
             }
         };
         
-        var Console = {};
+        var printer = {};
 
-        Console.log = (function(message) {
-        	console.log(message);
+        printer.log = (function(message) {
+        	//console.log(message);
             var console = document.getElementById('console');
             var p = document.createElement('p');
             p.style.wordWrap = 'break-word';
@@ -47,7 +45,7 @@
         });
 
         UserConnect.initialize();
-    ]]></script>
+    </script>
 </HEAD>
 <BODY>
 <%!
@@ -65,7 +63,7 @@
 		Email: <%= user.getEmail() %><BR>
 		Password: <%= user.getPassword() %><BR>	
 		Session: <%= request.getSession().getId() %><BR>	
-		<div id=console></div>
+		<div id="console"></div>
 	<% } else { 
 		out.println("Invalid Login! <br>");
 		out.println(showForm()); 
@@ -77,7 +75,7 @@
 		Email: <%= user.getEmail() %><BR>
 		Password: <%= user.getPassword() %><BR>	
 		Session: <%= request.getSession().getId() %><BR>
-		<div id=console></div>	
+		<div id="console"></div>	
 		<%
 	} else {
 		out.println(showForm()); 

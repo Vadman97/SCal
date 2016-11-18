@@ -9,9 +9,10 @@ import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;
 import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
+import javax.websocket.EncodeException;
 import javax.websocket.EndpointConfig;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.Map;
+import java.io.IOException;
 import java.util.HashMap;
 import main.WebsocketConfiguration;
 
@@ -22,7 +23,6 @@ public class UserConnect {
 
     private static Set<UserConnect> allUsers = new CopyOnWriteArraySet<>();
     private static Map<User, HttpSession> userToSession = new HashMap<>();//username and HttpSession
-    private static String username;
     private Session session;
     private HttpSession httpSession;
 
@@ -37,6 +37,11 @@ public class UserConnect {
             System.out.println(httpSession.getAttribute("user"));
             User curr = (User)httpSession.getAttribute("user");
             userToSession.put(curr, this.httpSession);
+            if(!userToSession.isEmpty()){
+            	for(Map.Entry<User, HttpSession> userEntry: userToSession.entrySet()){
+                	System.out.println(userEntry.getKey().toString() + "| " + userEntry.getValue().getId());
+                }	
+            }
         }
 
     @OnClose
@@ -49,11 +54,34 @@ public class UserConnect {
             System.out.println("Error: " + error.toString());
         }
 
-    @OnMessage //when someone sends msg in test mode, print all users and sessions
+    @OnMessage
         public void msgHandle(String message) {
             System.out.println(message);
-            for(Map.Entry<User, HttpSession> userEntry: userToSession.entrySet()){
-            	System.out.println(userEntry.getKey().toString() + "| " + userEntry.getValue().getId());
-            }
+        	for (UserConnect usr: allUsers) {
+                try {
+                    synchronized (usr) {
+                        usr.session.getBasicRemote().sendText(message);
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    //connections.remove(client);
+                }
+            }	
         }
+    	public void sendJSONtoClient(Session receiverSession, Session senderSession){
+    		//TODO send a json to the specific client based on info in a json received
+            if(!userToSession.isEmpty() && receiverSession!=null){
+            	for(Map.Entry<User, HttpSession> userEntry: userToSession.entrySet()){
+            		if(userEntry.getKey().equals(receiverSession.getId())){
+            			try{
+            				receiverSession.getBasicRemote().sendObject("");
+            			}catch(EncodeException ee){
+            				ee.printStackTrace();
+            			}catch(IOException ioe){
+            				ioe.printStackTrace();
+            			}
+            		}
+                }	
+            }
+    	}
 }

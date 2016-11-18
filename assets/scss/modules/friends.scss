@@ -1,0 +1,78 @@
+// friends.scss
+
+.modal-friends {
+    background-color: #fefefe;
+    margin: 10% auto;
+    padding: 20px;
+    width: 60%;
+    border-radius: 15px;
+    &-content {
+        display: flex;
+        flex-flow: row nowrap;
+        &-sidebar {
+            width: 30%;
+            height: 500px;
+            margin: 2.5% 0 2.5% 0;
+            overflow: scroll;
+            background-color: salmon;
+            border-top-left-radius: 1em;
+            border-bottom-left-radius: 1em;
+        }
+        &-main {
+            display: flex;
+            flex-flow: column nowrap;
+            width: 70%;
+            margin: 2.5% 0 2.5% 0;
+            // padding: 2%;
+            background-color: lightblue;
+            border-top-right-radius: 1em;
+            border-bottom-right-radius: 1em;
+            &-tablist {
+                display: flex;
+                flex-flow: row nowrap;
+                align-content: stretch;
+                width: 100%;
+                li {
+                    cursor: pointer;
+                    display: flex;
+                    flex-grow: 1;
+                    text-align: center;
+                    padding: 2.5%;
+                    background-color: green;
+                    &:nth-child(1) {
+                        background-color: lightblue;
+                        display: block;
+                    }
+                    &:nth-child(3) {
+                        border-top-right-radius: 1em;
+                    }
+                }
+            }
+            &-tabcontent {
+                display: none;
+                padding: 2%;
+                max-height: 436px;
+                overflow: scroll;
+            }
+        }
+    }
+}
+
+.friendnotif {
+    margin: 10px;
+    &-icon {
+        max-width: 50px;
+        border-radius: 50%;
+        display: inline-block;
+        vertical-align: middle;
+    }
+    &-msg {
+        display: inline-block;
+        vertical-align: middle;
+        max-width: 400px;
+        max-height: 40px;
+        overflow: scroll;;
+    }
+}
+
+// friends.scss EOF

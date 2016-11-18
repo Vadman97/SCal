@@ -13,13 +13,18 @@ var span = document.getElementsByClassName("close")[0];
 loginBtn.onclick = function() {
     $('#modal').load("partials/loginModal.html", closeModal);
     $('#modal').toggleClass("modal-active");
-    // modal.style.display = "block";
 }
 
 uploadBtn.onclick = function() {
     $('#modal').load("partials/uploadModal.html", closeModal);
     $('#modal').toggleClass("modal-active");
     // modal.style.display = "block";
+}
+
+friendsBtn.onclick = function() {
+    $('#modal').load("partials/friendsModal.html", closeModal);
+    $('#modal').toggleClass("modal-active");
+    $.getScript("app/friendsMenu.js");
 }
 
 // When the user clicks on <span> (x), close the modal

@@ -36,10 +36,6 @@
         <servlet-class>calendar.EventShareServlet</servlet-class>
     </servlet>
 
-
-
-
-
     <servlet-mapping>
         <servlet-name>UserLoginServlet</servlet-name>
         <url-pattern>/user/login</url-pattern>

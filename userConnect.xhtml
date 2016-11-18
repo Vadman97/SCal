@@ -17,8 +17,8 @@
 -->
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-    <title>Apache Tomcat WebSocket Examples: Chat</title>
-    <style type="text/css"><![CDATA[
+    <title>Test IF User can connect</title>
+        <style type="text/css"><![CDATA[
         input#chat {
             width: 410px
         }
@@ -45,67 +45,59 @@
     <script type="application/javascript"><![CDATA[
         "use strict";
 
-        var Chat = {};
+        var UserConnect = {};
 
-        Chat.socket = null;
+        UserConnect.socket = null;
 
-        Chat.connect = (function(host) {
+        UserConnect.connect = (function(host) {
             if ('WebSocket' in window) {
-                Chat.socket = new WebSocket(host);
+                UserConnect.socket = new WebSocket(host);
             } else if ('MozWebSocket' in window) {
-                Chat.socket = new MozWebSocket(host);
+                UserConnect.socket = new MozWebSocket(host);
             } else {
                 Console.log('Error: WebSocket is not supported by this browser.');
                 return;
             }
 
-            Chat.socket.onopen = function () {
-                Console.log('Info: WebSocket connection opened.');
+            UserConnect.socket.onopen = function () {
                 document.getElementById('chat').onkeydown = function(event) {
                     if (event.keyCode == 13) {
-                        Chat.sendMessage();
+                        UserConnect.sendMessage();
                     }
                 };
             };
 
-            Chat.socket.onclose = function () {
-                document.getElementById('chat').onkeydown = null;
-                Console.log('Info: WebSocket closed.');
+            UserConnect.socket.onclose = function () {
+
             };
 
-            Chat.socket.onmessage = function (message) {
+            UserConnect.socket.onmessage = function (message) {
                 Console.log(message.data);
             };
         });
 
-        Chat.initialize = function() {
+        UserConnect.initialize = function() {
             if (window.location.protocol == 'http:') {
-                Chat.connect('ws://' + window.location.host + '/chat');
+                UserConnect.connect('ws://' + window.location.host + '/userConnect');
             } else {
-                Chat.connect('wss://' + window.location.host + '/chat');
+                UserConnect.connect('wss://' + window.location.host + '/userConnect');
             }
         };
 
-        var getCookies = function(){
-          var pairs = document.cookie.split(";");
-          var cookies = {};
-          for (var i=0; i<pairs.length; i++){
-            var pair = pairs[i].split("=");
-            cookies[pair[0]] = unescape(pair[1]);
-          }
-          return cookies;
-        }
 
-        Chat.sendMessage = (function() {
-            var value = "; " + document.cookie;
-            var parts = value.split("; " + JSESSIONID + "=");
-            var tmp = getCookies();
-            Console.log(tmp);
+
+        UserConnect.sendMessage = (function() {
+            //var message = "";
+            // var value = "; " + document.cookie;
+            // var parts = value.split("; " + JSESSIONID + "=");
+            // if (parts.length == 2) message =  parts.pop().split(";").shift();
             var message = document.getElementById('chat').value;
             if (message != '') {
-                Chat.socket.send(message);
+                UserConnect.socket.send(message);
                 document.getElementById('chat').value = '';
             }
+            // var message = "asdsad12312321fd";
+            // UserConnect.socket.send(message);
         });
 
         var Console = {};
@@ -122,7 +114,7 @@
             console.scrollTop = console.scrollHeight;
         });
 
-        Chat.initialize();
+        UserConnect.initialize();
 
 
         document.addEventListener("DOMContentLoaded", function() {

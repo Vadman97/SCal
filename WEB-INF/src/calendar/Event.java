@@ -46,7 +46,8 @@ public class Event {
 		setColor(color);
 		setNotify(notify);
 		setRelationship(relationship);
-		loadSharedWith();
+		if (id != 0)
+			loadSharedWith();
 	}
 	
 	public Event(long id) {
@@ -192,7 +193,7 @@ public class Event {
 				}
 			}
 			
-			// write own relationship if noone owns this event
+			// write own relationship if no one owns this event
 			st2 = conn.prepareStatement("SELECT 0 FROM EventRelationships WHERE event_id=? and relationship_type=?");
 			st2.setLong(1, id);
 			st2.setString(2, RelationshipType.OWNED);
@@ -212,7 +213,6 @@ public class Event {
 				if (conn != null)
 					conn.close();
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -318,6 +318,8 @@ public class Event {
 	 */
 	public void addShared(User u) {
 		shared.add(u);
+		Notification n = new Notification(u.getId(), getId(), Notification.DEFAULT_TYPE);
+		n.write();
 	}
 	
 	/*

@@ -27,7 +27,6 @@
         $(function() {
             $("#sidebar").load("partials/sidebar.html");
 
-            $.getScript("app/master.js");
             $.getScript("app/modal.js");
             $.getScript("app/login.js");
         });
@@ -37,7 +36,7 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="assets/css/styles.css"></link>
     </head>
-    <body ng-app="calendar" ng-controller="calendarCtrl">
+    <body ng-app="calendar" ng-controller="calendarCtrl" id="bodyTagID">
         <div class="container">
 
             <!-- Sidebar module --><!-- imported via jQuery load call -->

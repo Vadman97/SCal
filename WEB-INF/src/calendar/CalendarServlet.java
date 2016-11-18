@@ -22,31 +22,38 @@ public class CalendarServlet extends HttpServlet {
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		//load calendar		
 		User u = Util.getSessionUser(req);
-		if (u == null) {
+		if (u == null || !u.isLoggedIn()) {
 			Util.close(res, false);
 			return;
 		}
 		
-		if (req.getParameter("day") == null || req.getParameter("view") == null) {
+		String viewStr = req.getParameter("view"), dayStr = null;
+		
+		if (viewStr != null) {
+			if (!viewStr.equals("all") && req.getParameter("day") == null) {
+				Util.close(res, false);
+				return;
+			} else if (req.getParameter("day") != null)
+				dayStr = req.getParameter("day").toLowerCase();
+		} else {
 			Util.close(res, false);
 			return;
 		}
-		
-		String dayStr = req.getParameter("day").toLowerCase();
-		String viewStr = req.getParameter("view");
 		
 		Calendar c = new Calendar(u);
 
 		JsonObject result = new JsonObject();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		try {
-			Date day = sdf.parse(dayStr);
+			Date day = dayStr != null ? sdf.parse(dayStr) : null;
 			if (viewStr.equals("week"))
 				result = new JsonParser().parse(c.getWeekEvents(req, day)).getAsJsonObject();
 			else if (viewStr.equals("month"))
 				result = new JsonParser().parse(c.getMonthEvents(req, day)).getAsJsonObject();
-			else 
+			else if (viewStr.equals("day"))
 				result = new JsonParser().parse(c.getDayEvents(req, day)).getAsJsonObject();
+			else
+				result = new JsonParser().parse(c.getAll(req)).getAsJsonObject();
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}

@@ -45,6 +45,8 @@ function validateUser() {
                 if(JSON.parse(data)["success"]) {
                     // POPULATE Calendar with Data
                     
+                    getRequest();
+                    
                     lmodal.style.display = "none";
                     return false;
                 } else {
@@ -86,4 +88,39 @@ function validateUser() {
             } 
         });
     }
+}
+
+function getRequest() {
+    
+    $.ajax({
+            url : "/calendar",
+            type: "GET",
+            data : formData,
+            success: function(data)
+            {
+                //data: data from server
+                if(JSON.parse(data)["success"]) {
+                    
+                    var scope = angular.element(document.getElementById("bodyTagID")).scope();
+                    
+                    var userEvent;
+                    
+                    for(userEvent in data) {
+                        scope.events.append(data[userEvent]);
+                    }
+                    
+                    
+                    lmodal.style.display = "none";
+                    return false;
+                } else {
+                    
+                    alert("Get request not returned");
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown)
+            {
+                alert("Server Not Connected - getRequest");
+            },
+            dataType: json
+        });
 }

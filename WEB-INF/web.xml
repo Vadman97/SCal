@@ -40,8 +40,16 @@
         <servlet-name>FriendsServlet</servlet-name>
         <servlet-class>user.FriendsServlet</servlet-class>
     </servlet>
-
-
+    
+    <servlet>
+        <servlet-name>NotificationServlet</servlet-name>
+        <servlet-class>calendar.NotificationServlet</servlet-class>
+    </servlet>
+    
+    <servlet>
+        <servlet-name>ClassEnrollServlet</servlet-name>
+        <servlet-class>usc_classes.ClassEnrollServlet</servlet-class>
+    </servlet>
 
     <servlet-mapping>
         <servlet-name>UserLoginServlet</servlet-name>
@@ -76,5 +84,15 @@
     <servlet-mapping>
         <servlet-name>FriendsServlet</servlet-name>
         <url-pattern>/friends</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>NotificationServlet</servlet-name>
+        <url-pattern>/notifications</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>ClassEnrollServlet</servlet-name>
+        <url-pattern>/classes</url-pattern>
     </servlet-mapping>
 </web-app>

@@ -1,0 +1,39 @@
+// createEvent.scss
+
+.modal-createEvent
+{
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 20px;
+    width: 40%;
+    height: 60%;
+    border-radius: 15px;
+    display: flex;
+    flex-flow: column nowrap;
+
+    h1 {
+        margin: 10px 0;
+    }
+
+    p {
+        font: {
+            size: 14px;
+            weight: 100;
+        }
+    }
+
+    &-titleInput {
+        width: 80%;
+        margin: 2% 0;
+
+        input[type="text"] {
+            width: 20vw;
+            font: {
+                size: 16px;
+            }
+        }
+    }
+
+}
+
+// createEvent.scss EOF

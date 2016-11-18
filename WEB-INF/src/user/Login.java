@@ -15,17 +15,17 @@ public class Login extends HttpServlet {
 		PrintWriter out = res.getWriter();
 		if (req.getParameterMap().containsKey("username") && req.getParameterMap().containsKey("password")) {
 			if (req.getSession().getAttribute("user") != null && ((User)req.getSession().getAttribute("user")).isLoggedIn())
-				out.println("{success: true}");
+				out.println("{\"success\": true}");
 			else {
 				User user = new User();
 				req.getSession().setAttribute("user", user);
-				String json = "{success: ";
+				String json = "{\"success\": ";
 				json += user.login(req.getParameter("username"), req.getParameter("password")); 
 				json += "}";
 				out.println(json);
 			}
 		} else {
-			out.println("{success: false}");
+			out.println("{\"success\": false}");
 		}
 		out.close();
 	}

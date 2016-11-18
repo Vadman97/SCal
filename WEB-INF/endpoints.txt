@@ -13,7 +13,8 @@ POST /share 				Data: {event_id: <id>, target_username: <username>}
 DELETE /share 				Data: {event_id: <id>, target_username: <username>}
 
 //FOR EVENT LOADING
-GET /calendar 				Data: http-data view=[day, week, month]&day=day or any day of current week or any day of current month}
+GET /calendar 				Data: http-data view=all
+							Data: http-data view=[day, week, month]&day=day or any day of current week or any day of current month}
 							Response: JSON [{id, event attributes, relationship: owned/shared}, {id, event attributes, relationship: owned/shared}, ...]
 							
 							Event attributes: "name", "start_time", "end_time", "location", "description", "color", "notify"
@@ -21,10 +22,16 @@ GET /calendar 				Data: http-data view=[day, week, month]&day=day or any day of 
 						
 //FOR FRIEND MANAGEMENT	
 GET /friends				Response: JSON {friends: [{username: <username>, status: pending/accepted/declined}]}
-
-//TODO(Vadim)
 POST /friends				Data: JSON {"username": <username>}
 							For adding a new friend, status becomes pending
 PUT /friends				Data: JSON {"username": <username>, "status": accepted/declined}
 							For updating a friendship to accept/decline a friend request
 							
+//FOR LOADING NOTIFICATIONS //TODO(Vadim)
+GET /notifications			Response: JSON {notifications: [{username: <username>, status: pending/accepted/declined}], success:true/false}
+
+//FOR CLASS ENROLLMENT MANAGEMENT
+POST /classes 				Data: {section_id: <id>}
+							To enroll in a class
+POST /classes 				Data: {section_id: <id>}
+							To unenroll from a class

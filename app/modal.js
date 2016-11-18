@@ -13,7 +13,6 @@ var span = document.getElementsByClassName("close")[0];
 loginBtn.onclick = function() {
     $('#modal').load("partials/loginModal.html", closeModal);
     $('#modal').toggleClass("modal-active");
-    // modal.style.display = "block";
 }
 
 uploadBtn.onclick = function() {

@@ -123,103 +123,94 @@ app.controller('calendarCtrl', function($scope, $compile, $timeout, uiCalendarCo
 });
 /* EOF */
 
-// friends.js
-
-var tabsContent = document.getElementsByClassName("modal-friends-content-main-tabcontent");
-
-tabsContent[0].style.display = "flex";
-tabsContent[0].style.flexFlow = "column nowrap";
-
-function openFriendsTab(event, tabID)
-{
-    var tabsClicked = document.getElementsByClassName("modal-friends-content-main-tablinks");
-    var tabsContent = document.getElementsByClassName("modal-friends-content-main-tabcontent");
-
-    for (var i=0; i<3; i++) { // <3
-        var tabContent = tabsContent[i];
-        var tabClicked = tabsClicked[i];
-        if (tabContent.id != tabID) {
-            tabContent.style.display = "none";
-            tabClicked.style.backgroundColor = "green";
-        } else {
-            tabContent.style.display = "block";
-            tabClicked.style.backgroundColor = "lightblue";
-        }
-    }
-
-}
-
-// friends.js EOF
-
-@import
-
-var attempt = 3; // Variable to count number of attempts.
-// Below function Executes on click of login button.
-
 var lmodal = document.getElementById('loginModal');
+var currTab = document.getElementById('login');
 
-function validateLogin() {
-    var username = document.getElementById("username").value;
-    var password = document.getElementById("password").value;
+var submit = document.getElementById('submit');
 
-    var formData = {username: username,password: password};
-
-    $.ajax({
-        url : "/login",
-        type: "POST",
-        data : formData,
-        success: function(data, textStatus, jqXHR)
-        {
-            //data: data from server
-            if(JSON.parse(data)["success"]) {
-                // Redirecting to other page.
-                // POPULATE Calendar with Data
-                
-                lmodal.style.display = "none";
-                return false;
-            } else {
-                
-            }
-        },
-        error: function(jqXHR, textStatus, errorThrown)
-        {
-            alert("Server Not Connected");
-        }
-    });
+function loginSwitchTabs(loginType) {
+    
+    if(loginType =='signup')
+    {
+        $("#signup").addClass('select');
+        $("#signupbox").slideDown();
+        
+        currTab = document.getElementById('signup');
+    }
+    else
+    {
+        $("#signup").removeClass('select');
+        $("#login").addClass('select');
+        $("#signupbox").slideUp();
+        $("#loginbox").slideDown();
+        
+        currTab = document.getElementById('login');
+    }
 }
 
-function validateCreate() {
+function validateUser() {
+    
     var username = document.getElementById("username").value;
     var password = document.getElementById("password").value;
+    var email = document.getElementById("email").value;
+    
+    var loginLogic = $(currTab).attr('id');
 
-    // Handle POST request here
-
-    var formData = {username: username,password: password};
-
-    $.ajax({
-        url : "/create_user",
-        type: "POST",
-        data : formData,
-        success: function(data, textStatus, jqXHR)
-        {
-            //data: data from server
-            if(JSON.parse(data)["success"]) {
-                // Redirecting to other page.
-                // POPULATE Calendar with Data
-
-                lmodal.style.display = "none";
-                return false;
-            } else {
-
-
+    if(loginLogic == 'login') {
+        
+        var formData = {username: username,password: password};
+        
+        $.ajax({
+            url : "/user/login",
+            type: "POST",
+            data : formData,
+            success: function(data, textStatus, jqXHR)
+            {
+                //data: data from server
+                if(JSON.parse(data)["success"]) {
+                    // POPULATE Calendar with Data
+                    
+                    lmodal.style.display = "none";
+                    return false;
+                } else {
+                    
+                    alert("Invalid: Username or Password");
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown)
+            {
+                alert("Server Not Connected - Login");
             }
-        },
-        error: function(jqXHR, textStatus, errorThrown)
-        {
-
-        }
-    });
-
+        });
+        
+    } else {
+        
+        var formData = {username: username,password: password, email: email  };
+        
+        var formData = {username: username,password: password};
+        
+         $.ajax({
+            url : "/user/create",
+            type: "POST",
+            data : formData,
+            success: function(data, textStatus, jqXHR)
+            {
+                //data: data from server
+                if(JSON.parse(data)["success"]) {
+                    
+                    lmodal.style.display = "none";
+                    return false;
+                } else {
+                    
+                    alert("Invalid: Username/Email already exists");
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown)
+            {
+                alert("Server Not Connected - Signup");
+            } 
+        });
+    }
 }
 var modal           = document.getElementById('modal');
 
@@ -236,7 +227,6 @@ var span = document.getElementsByClassName("close")[0];
 loginBtn.onclick = function() {
     $('#modal').load("partials/loginModal.html", closeModal);
     $('#modal').toggleClass("modal-active");
-    // modal.style.display = "block";
 }
 
 uploadBtn.onclick = function() {

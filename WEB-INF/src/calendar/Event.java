@@ -318,6 +318,8 @@ public class Event {
 	 */
 	public void addShared(User u) {
 		shared.add(u);
+		Notification n = new Notification(u.getId(), getId(), Notification.DEFAULT_TYPE);
+		n.write();
 	}
 	
 	/*

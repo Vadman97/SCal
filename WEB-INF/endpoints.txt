@@ -21,10 +21,10 @@ GET /calendar 				Data: http-data view=[day, week, month]&day=day or any day of 
 						
 //FOR FRIEND MANAGEMENT	
 GET /friends				Response: JSON {friends: [{username: <username>, status: pending/accepted/declined}]}
-
-//TODO(Vadim)
 POST /friends				Data: JSON {"username": <username>}
 							For adding a new friend, status becomes pending
 PUT /friends				Data: JSON {"username": <username>, "status": accepted/declined}
 							For updating a friendship to accept/decline a friend request
 							
+//FOR LOADING NOTIFICATIONS //TODO(Vadim)
+GET /notifications			Response: JSON {notifications: [{username: <username>, status: pending/accepted/declined}], success:true/false}

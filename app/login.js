@@ -1,33 +1,8 @@
-var attempt = 3; // Variable to count number of attempts.
-// Below function Executes on click of login button.
-
 var lmodal = document.getElementById('loginModal');
 var currTab = document.getElementById('login');
 
 var submit = document.getElementById('submit');
 
-    $.ajax({
-        url : "/login",
-        type: "POST",
-        data : formData,
-        success: function(data, textStatus, jqXHR)
-        {
-            //data: data from server
-            if(JSON.parse(data)["success"]) {
-                // Redirecting to other page.
-                // POPULATE Calendar with Data
-
-                lmodal.style.display = "none";
-                return false;
-            } else {
-
-            }
-        },
-        error: function(jqXHR, textStatus, errorThrown)
-        {
-            alert("Server Not Connected");
-        }
-    });
 function loginSwitchTabs(loginType) {
     
     if(loginType =='signup')
@@ -115,7 +90,6 @@ function validateUser() {
     }
 }
 
-}
 function getRequest() {
     
     $.ajax({

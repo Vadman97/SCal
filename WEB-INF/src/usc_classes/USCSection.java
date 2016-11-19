@@ -1,41 +1,36 @@
 package usc_classes;
 
+import java.sql.Time;
+
 public class USCSection {
-	private int id; 
+//	private int id = -1; 
 	private int type; 
-	private int section_id, class_id; 
+	private int section_id; 
+	private long class_id;
 	private String dept, location, name;
-	private Time start, end; 
+	private Time start_time, end_time; 
 	private boolean mon, tue, wed, thur, fri; 
 	private String description;
-	private boolean isFullDay;
+	
+	protected USCSection() {}
 
-	public USCSection(int section_id, int class_id, String dept, String location, String name, Time start, Time end, 
+	public USCSection(int section_id, long class_id, String dept, String location, String name, Time start_time, Time end_time, 
 			boolean mon, boolean tue, boolean wed, boolean thur, boolean fri, 
-			String description, boolean isFullDay) {
+			String description) {
 		this.section_id = section_id;
 		this.class_id = class_id;
 		this.dept = dept; 
 		this.location = location;
 		this.name = name;
-		this.start = start;
-		this.end = end;
+		setStart_time(start_time);
+		setEnd_time(end_time);
 		this.mon = mon;
 		this.tue = tue;
 		this.wed = wed;
 		this.thur = thur;
 		this.fri = fri;
 		this.description = description;
-		this.isFullDay = isFullDay; 
 		type = -1; 
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 
 	public int getSection_id() {
@@ -46,13 +41,7 @@ public class USCSection {
 		this.section_id = section_id;
 	}
 
-	public int getClass_id() {
-		return class_id;
-	}
-
-	public void setClass_id(int class_id) {
-		this.class_id = class_id;
-	}
+	
 
 	public String getDept() {
 		return dept;
@@ -76,22 +65,6 @@ public class USCSection {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public Time getStart() {
-		return start;
-	}
-
-	public void setStart(Time start) {
-		this.start = start;
-	}
-
-	public Time getEnd() {
-		return end;
-	}
-
-	public void setEnd(Time end) {
-		this.end = end;
 	}
 
 	public boolean isMon() {
@@ -142,20 +115,36 @@ public class USCSection {
 		this.description = description;
 	}
 
-	public boolean isFullDay() {
-		return isFullDay;
-	}
-
-	public void setFullDay(boolean isFullDay) {
-		this.isFullDay = isFullDay;
-	}
-
 	public int getType() {
 		return type;
 	}
 
 	public void setType(int type) {
 		this.type = type;
+	}
+
+	public Time getStart_time() {
+		return start_time;
+	}
+
+	public void setStart_time(Time start_time) {
+		this.start_time = start_time;
+	}
+
+	public Time getEnd_time() {
+		return end_time;
+	}
+
+	public void setEnd_time(Time end_time) {
+		this.end_time = end_time;
+	}
+
+	public long getClass_id() {
+		return class_id;
+	}
+
+	public void setClass_id(long class_id) {
+		this.class_id = class_id;
 	}
 	
 	

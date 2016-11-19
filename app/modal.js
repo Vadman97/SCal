@@ -54,3 +54,4 @@ window.onclick = function(event) {
 }
 
 // modal.js EOF
+}

@@ -192,7 +192,7 @@ public class Event {
 				}
 			}
 			
-			// write own relationship if noone owns this event
+			// write own relationship if no one owns this event
 			st2 = conn.prepareStatement("SELECT 0 FROM EventRelationships WHERE event_id=? and relationship_type=?");
 			st2.setLong(1, id);
 			st2.setString(2, RelationshipType.OWNED);
@@ -212,7 +212,6 @@ public class Event {
 				if (conn != null)
 					conn.close();
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

@@ -1,20 +1,24 @@
 package usc_classes;
 
-import java.sql.Timestamp;
+import java.sql.Time;
 
 public class USCSection {
 //	private int id = -1; 
 	private int type; 
 	private int section_id; 
+	private long class_id;
 	private String dept, location, name;
-	private Timestamp start_time, end_time; 
+	private Time start_time, end_time; 
 	private boolean mon, tue, wed, thur, fri; 
 	private String description;
+	
+	protected USCSection() {}
 
-	public USCSection(int section_id, String dept, String location, String name, Timestamp start_time, Timestamp end_time, 
+	public USCSection(int section_id, long class_id, String dept, String location, String name, Time start_time, Time end_time, 
 			boolean mon, boolean tue, boolean wed, boolean thur, boolean fri, 
 			String description) {
 		this.section_id = section_id;
+		this.class_id = class_id;
 		this.dept = dept; 
 		this.location = location;
 		this.name = name;
@@ -119,20 +123,28 @@ public class USCSection {
 		this.type = type;
 	}
 
-	public Timestamp getStart_time() {
+	public Time getStart_time() {
 		return start_time;
 	}
 
-	public void setStart_time(Timestamp start_time) {
+	public void setStart_time(Time start_time) {
 		this.start_time = start_time;
 	}
 
-	public Timestamp getEnd_time() {
+	public Time getEnd_time() {
 		return end_time;
 	}
 
-	public void setEnd_time(Timestamp end_time) {
+	public void setEnd_time(Time end_time) {
 		this.end_time = end_time;
+	}
+
+	public long getClass_id() {
+		return class_id;
+	}
+
+	public void setClass_id(long class_id) {
+		this.class_id = class_id;
 	}
 	
 	

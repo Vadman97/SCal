@@ -1,14 +1,14 @@
 <div class="modal-login modal-content">
-    
+
 <!--    Add this to the login.js-->
     <script type="text/javascript"              src="http://ajax.googleapis.com/
 ajax/libs/jquery/1.5/jquery.min.js"></script>
-    
-    <script type="text/javascript">
+
+    <!-- <script type="text/javascript">
         $(document).ready(function() {
             $(".tab").click(function() {
                 var X=$(this).attr('id');
-                
+
                 if(X=='signup')
                 {
                     $("#signup").addClass('select');
@@ -23,35 +23,37 @@ ajax/libs/jquery/1.5/jquery.min.js"></script>
                 }
             });
         });
-    </script>
-    
+    </script> -->
+
     <span class="close"><i class="fa fa-close fa-md"></i></span>
     <div class="modal-login-content">
-        
+
         <h2>Welcome!</h2>
-        
-        <div id="container">    
+
+        <div id="container">
             <div id="tabbox">
                 <a href="#" id="signup" class="tab signup">Signup</a>
                 <a href="#" id="login" class="tab select">Login</a>
             </div>
-                
+
             <div id="panel">
                 <div id="loginbox">
                     <input type="text" name="username" value="" placeholder="username" id="username">
                     <input type="password" name="Password" value="" placeholder="Password" id="password">
                 </div>
-                    
+
                 <div id="signupbox">
-                    <input type="text" name="email" value="" placeholder="email" id="email">    
+                    <input type="text" name="email" value="" placeholder="email" id="email">
                 </div>
             </div>
-                
+
             <div class="buttongroup">
                 <input type="button" value="Login" id="submit" onclick="validateLogin()"/>
                 <input type="button" value="Register" id="register" onclick="validateCreate()"/>
             </div>
-                
+
         </div>
     </div>
+
+    <script type="text/javascript" src="app/login.js"></script>
 </div>

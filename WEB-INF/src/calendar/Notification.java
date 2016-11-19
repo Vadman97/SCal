@@ -1,14 +1,13 @@
 package calendar;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
 
 import com.google.gson.GsonBuilder;
 import com.mysql.jdbc.Statement;
-
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 
 import user.User;
 import util.Util;
@@ -87,21 +86,39 @@ public class Notification {
 		return false;
 	}
 	
-	public static Vector<Notification> loadAll(User u, boolean completed_only) {
+	private static void clearNotification(Connection con, long id) {
+		try {
+			PreparedStatement st = con.prepareStatement("UPDATE Notifications SET completed=? WHERE id=?");
+			st.setBoolean(1, true);
+			st.setLong(2, id);
+			st.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static Vector<Notification> loadAll(User u, boolean incomplete_only) {
 		if (u != null) {
 			Vector<Notification> result = new Vector<>();
 			
 			try { 
 				Connection con = Util.getConn();
-				String str = completed_only ? LOAD_ALL_SQL + " AND completed=?" : LOAD_ALL_SQL;
+				String str = incomplete_only ? LOAD_ALL_SQL + " AND completed=?" : LOAD_ALL_SQL;
 				PreparedStatement st = con.prepareStatement(str);
 				st.setLong(1, u.getId());
-				if (completed_only) st.setBoolean(2, completed_only);
+				if (incomplete_only) st.setBoolean(2, false);
+				System.out.println(st.toString());
 				
 				ResultSet rs = st.executeQuery();
+				con.setAutoCommit(false);
 				while (rs.next()) {
 					result.add(new Notification(rs.getLong(1), rs.getLong(2), rs.getLong(3), rs.getString(4), rs.getBoolean(5)));
+					clearNotification(con, rs.getLong(1));
 				}
+
+				con.commit();
+				con.setAutoCommit(true);
+				System.out.println(result.size());
 				return result;
 			} catch (SQLException e) {
 				e.printStackTrace();

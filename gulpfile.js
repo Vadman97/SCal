@@ -1,3 +1,5 @@
+// Clifford Lee 2016
+
 var gulp			= require('gulp');
 var sass			= require('gulp-sass');
 var concat			= require('gulp-concat');
@@ -25,10 +27,19 @@ gulp.task('fcSass', function() {
 	.pipe(browserSync.reload({stream: true}));
 });
 
+// 'scripts' task
+// compiles all of my sad little javascripts into one big less sad javascript
+gulp.task('scripts', function() {
+	return gulp.src(['app/*.js', '!app/master.js'])
+	.pipe(concat('master.js'))
+	.pipe(gulp.dest('app/'))
+	.pipe(browserSync.reload({stream: true}));
+});
+
 // 'serve' task
 // -- serves files from root directory
 // -- also watches files/directories for live uploading during development
-gulp.task('serve', ['sass', 'fcSass'], function() {
+gulp.task('serve', ['sass', 'fcSass', 'scripts'], function() {
 	browserSync.init({
 		server: {
 			basedir: "./"
@@ -36,6 +47,7 @@ gulp.task('serve', ['sass', 'fcSass'], function() {
 	});
 	
 	gulp.watch('assets/scss/**/*.scss', ['sass', 'fcSass']);
+	gulp.watch('app/**/*.js', ['scripts']);
 	gulp.watch(['index.html', 'partials/**/*.html']).on('change', browserSync.reload);
 });
 

@@ -1,7 +1,10 @@
 // login.scss
 
+@import url('http://fonts.googleapis.com/css?family=Open+Sans:400,600,700');
+@import url('http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css');
+
 /* Modal Content/Box */
-.login-modal {
+.modal-login {
     background-color: #fefefe;
     margin: 10% auto;
     padding: 20px;
@@ -10,6 +13,11 @@
     height: 50%;
     border-radius: 15px;
 
+    .login-form {
+        width: 100%;
+        margin: 6vh 0;
+    }
+
     &-content {
         display: flex;
         flex-flow: column nowrap;
@@ -17,42 +25,84 @@
         align-items: center;
         input[type="text"],
         input[type="password"] {
-            flex-grow: 1;
-            border-radius: 5px;
-            border-style: solid;
-            border-width: 1px;
+            border-radius: 10px;
+            border: #888 solid 0.1px;
+            margin: 10px 0;
+            padding: 5px 10px;
+            height: 3vh;
             width: 100%;
+            font: {
+                size: 16px;
+                weight: 100;
+            }
             &:focus {
                 outline: none;
             }
         }
+        input[type="button"] {
+            flex-grow: 1;
+            max-width: 50%;
+        }
         h2 {
+            margin-top: 40px;
             font: {
                 size: 32px;
-                weight: 100;
+                weight: 300;
             }
+        }
+        .buttongroup {
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: space-around;
         }
         .login-form {
             width: 80%;
         }
-        .login-submit {
-            display: flex;
-            flex-flow: row nowrap;
-        }
     }
 }
 
-/* The Close Button */
-.close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
+/* Tabbed Panes */
+
+#container {
+    width:350px
+}
+#tabbox {
+    height:40px
+}
+#panel {
+    background-color:#FFF;
+    height:250px;
 }
 
-.close:hover,
-.close:focus {
-    color: black;
+.tab {
+    background: #dedede;display: block;height: 40px;
+    line-height: 40px;text-align: center;
+    width: 80px;float: right;font-weight: bold;
+    -webkit-border-top-left-radius: 4px;
+    -webkit-border-top-right-radius: 4px;
+    -moz-border-radius: 4px 4px 0px 0px;
+}
+a {
+    color: #000;
+    margin: 0;
+    padding: 0;
     text-decoration: none;
-    cursor: pointer;
+}
+
+.signup {
+    margin-left:8px;
+}
+.select {
+    background-color:#FFF;
+}
+
+#loginbox {
+    min-height:150px;
+    padding:10px;
+}
+
+#signupbox {
+    min-height:150px;
+    padding:10px;
+    display:none;
 }

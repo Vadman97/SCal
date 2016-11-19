@@ -2,7 +2,7 @@
 TOMCAT=tomcat8
 
 # UPDATE MASTER BRANCH CODE
-cd /var/lib/$TOMCAT/webapps/ROOT
+cd /var/lib/tomcat8/webapps/ROOT
 git pull; 
 
 # INSTALL FRONTEND DEPENDENCIES

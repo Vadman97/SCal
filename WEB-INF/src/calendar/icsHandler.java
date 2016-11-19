@@ -33,9 +33,9 @@ public class icsHandler {
 		icsDate = icsDate.replace("00Z", "");
 		int YYYY = Integer.parseInt(icsDate.substring(0, 4));
 		int MM = Integer.parseInt(icsDate.substring(4, 6));
+		MM-=1; //month internally is 0 based, but not in ics file
 		int DD = Integer.parseInt(icsDate.substring(6, 8));
 		int HH = Integer.parseInt(icsDate.substring(9, 11));
-		//HH-=8;
 		int mm = Integer.parseInt(icsDate.substring(11, 13));
 		int ss = 0;
 		java.util.Calendar cal = java.util.Calendar.getInstance();

@@ -29,3 +29,9 @@ PUT /friends				Data: JSON {"username": <username>, "status": accepted/declined}
 							
 //FOR LOADING NOTIFICATIONS //TODO(Vadim)
 GET /notifications			Response: JSON {notifications: [{username: <username>, status: pending/accepted/declined}], success:true/false}
+
+//FOR CLASS ENROLLMENT MANAGEMENT
+POST /classes 				Data: {section_id: <id>}
+							To enroll in a class
+POST /classes 				Data: {section_id: <id>}
+							To unenroll from a class

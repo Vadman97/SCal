@@ -4,16 +4,16 @@
 
     <h1>Create an Event</h1>
 
-    <input type="text" name="title" placeholder="Enter a name for your event" class="modal-createEvent-titleInput">
+    <input type="text" id="eventTitle" placeholder="Enter a name for your event" class="modal-createEvent-titleInput">
     <span class="modal-createEvent-timeInput">
         <p>Start</p>
-        <input type="time" name="startTime">
-        <input type="date" name="startDate">
+        <input type="time" id="startTime">
+        <input type="date" id="startDate">
     </span>
     <span class="modal-createEvent-timeInput">
         <p>End</p>
-        <input type="time" name="endTime">
-        <input type="date" name="endDate">
+        <input type="time" id="endTime">
+        <input type="date" id="endDate">
     </span>
     <span>
         <p>Location</p>
@@ -21,7 +21,7 @@
     </span>
     <span>
         <p>Description</p>
-        <input type="" name="name" value="" row="10">
+        <input type="" name="name" value="" row="10" placeholder="Write a description for your event">
     </span>
     <span>
         <p>Invite Friends</p>
@@ -37,7 +37,7 @@
             <!-- load friends here through ajax calls -->
         </datalist>
     </span>
-    <button ng-click="debugThisShit()">Create</button>
+    <button id="submitEvent" onclick="debug()">Create</button>
 
 
     <script type="text/javascript" src="app/createEvent.js"></script>

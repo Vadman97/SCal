@@ -19,7 +19,7 @@ public class EventShareServlet extends HttpServlet {
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		// create
 		User u = Util.getSessionUser(req);
-		if (u == null) {
+		if (u == null || !u.isLoggedIn()) {
 			Util.close(res, false);
 			return;
 		}
@@ -52,7 +52,7 @@ public class EventShareServlet extends HttpServlet {
 	public void doDelete(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		// remove
 		User u = Util.getSessionUser(req);
-		if (u == null) {
+		if (u == null || !u.isLoggedIn()) {
 			Util.close(res, false);
 			return;
 		}

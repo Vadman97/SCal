@@ -54,7 +54,7 @@ public class Util {
 	
 	public static void close(HttpServletResponse res, boolean valid) {
 		try {
-			res.getWriter().println("{success: " + valid + "}");
+			res.getWriter().println("{\"success\": " + valid + "}");
 			res.getWriter().close();
 		} catch (IOException e) {
 			e.printStackTrace();

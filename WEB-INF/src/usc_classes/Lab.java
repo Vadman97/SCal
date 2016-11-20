@@ -33,12 +33,21 @@ public class Lab extends USCSection {
 	public void setLab_id(long lab_id) {
 		this.lab_id = lab_id;
 	}
-
+	
 	public static Vector<Lab> load(long class_id) {
+		return load(class_id, "SELECT * FROM Labs WHERE class_id = ? LIMIT 1");
+	}
+	
+	public static Lab get(long section_id) {
+		Vector<Lab> labs = load(section_id, "SELECT * FROM Labs WHERE lab_id = ?");
+		return labs != null ? labs.get(0) : null;
+	}
+
+	private static Vector<Lab> load(long class_id, String query) {
 		Connection con = null;
 		try {
 			con = Util.getConn();
-			PreparedStatement ps = con.prepareStatement("SELECT * FROM Labs WHERE class_id = ? LIMIT 1");
+			PreparedStatement ps = con.prepareStatement(query);
 			ps.setLong(1, class_id);
 			ResultSet rs = ps.executeQuery();
 			Vector<Lab> labs = new Vector<>();

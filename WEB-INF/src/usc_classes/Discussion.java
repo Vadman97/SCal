@@ -27,10 +27,19 @@ public class Discussion extends USCSection {
 	}
 	
 	public static Vector<Discussion> load(long class_id) {
+		return load(class_id, "SELECT * FROM Discussions WHERE class_id = ?");
+	}
+	
+	public static Discussion get(long section_id) {
+		Vector<Discussion> discs = load(section_id, "SELECT * FROM Discussions WHERE discussion_id = ?");
+		return discs != null ? discs.get(0) : null;
+	}
+	
+	private static Vector<Discussion> load(long class_id, String query) {
 		Connection con = null;
 		try {
 			con = Util.getConn();
-			PreparedStatement ps = con.prepareStatement("SELECT * FROM Discussions WHERE class_id = ?");
+			PreparedStatement ps = con.prepareStatement(query);
 			ps.setLong(1, class_id);
 			ResultSet rs = ps.executeQuery();
 			Vector<Discussion> discussions = new Vector<>();

@@ -18,7 +18,7 @@ public class ClassEnrollServlet extends HttpServlet {
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		// enroll
 		User u = Util.getSessionUser(req);
-		if (u == null) {
+		if (u == null || !u.isLoggedIn()) {
 			Util.close(res, false);
 			return;
 		}
@@ -40,7 +40,7 @@ public class ClassEnrollServlet extends HttpServlet {
 	public void doDelete(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		// unenroll
 		User u = Util.getSessionUser(req);
-		if (u == null) {
+		if (u == null || !u.isLoggedIn()) {
 			Util.close(res, false);
 			return;
 		}

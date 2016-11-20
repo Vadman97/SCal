@@ -1,6 +1,9 @@
+// calendar.js
+
 var app = angular.module('calendar', ['ui.calendar']);
 
 app.controller('calendarCtrl', function($scope, $http, $timeout, uiCalendarConfig) {
+
     var date = new Date();
     var d = date.getDate();
     var m = date.getMonth();
@@ -9,11 +12,11 @@ app.controller('calendarCtrl', function($scope, $http, $timeout, uiCalendarConfi
     /* event source that contains custom events on the scope */
     $scope.events = {
       events: [
-          {title: 'All Day Event',start: new Date(y, m, 1)},
-          {title: 'Long Event',start: new Date(y, m, d - 5),end: new Date(y, m, d - 2)},
-          {id: 999,title: 'Repeating Event',start: new Date(y, m, d - 3, 16, 0),allDay: false},
-          {id: 999,title: 'Repeating Event',start: new Date(y, m, d + 4, 16, 0),allDay: false},
-          {title: 'Birthday Party',start: new Date(y, m, d + 1, 19, 0),end: new Date(y, m, d + 1, 22, 30),allDay: false},
+        //   {title: 'All Day Event',start: new Date(y, m, 1)},
+        //   {title: 'Long Event',start: new Date(y, m, d - 5),end: new Date(y, m, d - 2)},
+        //   {id: 999,title: 'Repeating Event',start: new Date(y, m, d - 3, 16, 0),allDay: false},
+        //   {id: 999,title: 'Repeating Event',start: new Date(y, m, d + 4, 16, 0),allDay: false},
+        //   {title: 'Birthday Party',start: new Date(y, m, d + 1, 19, 0),end: new Date(y, m, d + 1, 22, 30),allDay: false},
       ]
     };
 
@@ -76,4 +79,5 @@ app.controller('calendarCtrl', function($scope, $http, $timeout, uiCalendarConfi
     };
 
 });
-/* EOF */
+
+// calendar.js EOF

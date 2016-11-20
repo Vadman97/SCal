@@ -62,7 +62,7 @@ request.send();
 
 
 
-function debug() {
+function create() {
     var startDateArr = startDate.value.split("-");
     var endDateArr = endDate.value.split("-");
     var startTimeArr = startTime.value.split(":");
@@ -72,9 +72,9 @@ function debug() {
         "title": title.value,
         "start": new Date(startDateArr[0], startDateArr[1]-1, startDateArr[2], startTimeArr[0], startTimeArr[1]),
         "end": new Date(endDateArr[0], endDateArr[1]-1, endDateArr[2], endTimeArr[0], endTimeArr[1]),
-        // "location": loc.value,
-        // "description": description.value,
-        // "friends": [],
+        "location": loc.value,
+        "description": description.value,
+        "friends": [],
         "stick": true
     };
 

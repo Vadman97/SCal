@@ -1,40 +1,41 @@
-var lmodal = document.getElementById('loginModal');
-var currTab = document.getElementById('login');
+// login.js
 
-var submit = document.getElementById('submit');
+var scope       = angular.element($('#bodyTagID')).scope();
+var lmodal      = document.getElementsByClassName('modal-login')[0];
+var currTab     = document.getElementById('login');
+var submit      = document.getElementById('submit');
 
 function loginSwitchTabs(loginType) {
-    
     if(loginType =='signup')
     {
+        $("#login").removeClass('select');
         $("#signup").addClass('select');
-        $("#signupbox").slideDown();
-        
+        $("#email").css("display", "block");
+
         currTab = document.getElementById('signup');
     }
     else
     {
         $("#signup").removeClass('select');
         $("#login").addClass('select');
-        $("#signupbox").slideUp();
-        $("#loginbox").slideDown();
-        
+        $("#email").css("display", "none");
+
         currTab = document.getElementById('login');
     }
 }
 
 function validateUser() {
-    
-    var username = document.getElementById("username").value;
-    var password = document.getElementById("password").value;
-    var email = document.getElementById("email").value;
-    
+
+    var user        = document.getElementById("username").value;
+    var pass        = document.getElementById("password").value;
+    var email       = document.getElementById("email").value;
+
     var loginLogic = $(currTab).attr('id');
 
     if(loginLogic == 'login') {
-        
-        var formData = {username: username,password: password};
-        
+
+        var formData = {username: user,password: pass};
+
         $.ajax({
             url : "/user/login",
             type: "POST",
@@ -44,13 +45,15 @@ function validateUser() {
                 //data: data from server
                 if(JSON.parse(data)["success"]) {
                     // POPULATE Calendar with Data
-                    
+
                     getRequest();
-                    
-                    lmodal.style.display = "none";
-                    return false;
+
+                    $('#modal').toggleClass("modal-active");
+                    $('#modal').html("<div></div>")
+
+                    return true;
                 } else {
-                    
+
                     alert("Invalid: Username or Password");
                 }
             },
@@ -59,13 +62,13 @@ function validateUser() {
                 alert("Server Not Connected - Login");
             }
         });
-        
+
     } else {
-        
+
         var formData = {username: username,password: password, email: email  };
-        
+
         var formData = {username: username,password: password};
-        
+
          $.ajax({
             url : "/user/create",
             type: "POST",
@@ -74,53 +77,53 @@ function validateUser() {
             {
                 //data: data from server
                 if(JSON.parse(data)["success"]) {
-                    
-                    lmodal.style.display = "none";
+
+                    $('#modal').toggleClass("modal-active");
+                    $('#modal').html("<div></div>")
                     return false;
                 } else {
-                    
+
                     alert("Invalid: Username/Email already exists");
                 }
             },
             error: function(jqXHR, textStatus, errorThrown)
             {
                 alert("Server Not Connected - Signup");
-            } 
+            }
         });
     }
 }
 
 function getRequest() {
-    
+
     $.ajax({
-            url : "/calendar",
+            url : "/calendar?view=all",
             type: "GET",
-            data : formData,
             success: function(data)
             {
                 //data: data from server
                 if(JSON.parse(data)["success"]) {
-                    
+
                     var scope = angular.element(document.getElementById("bodyTagID")).scope();
-                    
-                    var userEvent;
-                    
-                    for(userEvent in data) {
-                        scope.events.append(data[userEvent]);
+
+                    for(var userEvent in data) {
+                        scope.addEvent(data[userEvent]);
                     }
-                    
-                    
-                    lmodal.style.display = "none";
+
+                    $('#modal').html("<div></div>")
+                    $('#modal').removeClass("modal-active");
+
                     return false;
                 } else {
-                    
+
                     alert("Get request not returned");
                 }
             },
             error: function(jqXHR, textStatus, errorThrown)
             {
                 alert("Server Not Connected - getRequest");
-            },
-            dataType: json
+            }
         });
 }
+
+// login.js EOF

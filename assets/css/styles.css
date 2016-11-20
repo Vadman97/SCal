@@ -315,7 +315,8 @@ a {
   -ms-flex-flow: column nowrap;
       flex-flow: column nowrap; }
   .modal-createEvent-titleInput {
-    width: 80%; }
+    width: 80%;
+    font-weight: 100; }
 
 #calendar {
   padding: 2% 2%;

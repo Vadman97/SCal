@@ -302,21 +302,6 @@ a {
     max-height: 40px;
     overflow: scroll; }
 
-.modal-createEvent {
-  background-color: #fefefe;
-  margin: 5% auto;
-  padding: 20px;
-  width: 40%;
-  height: 60%;
-  border-radius: 15px;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-flow: column nowrap;
-      flex-flow: column nowrap; }
-  .modal-createEvent-titleInput {
-    width: 80%;
-    font-weight: 100; }
-
 #calendar {
   padding: 2% 2%;
   width: 80%; }

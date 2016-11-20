@@ -1,4 +1,5 @@
 //FOR USER MANAGEMENT
+GET /user/isLoggedIn		Response: {"logged_in": true/false}
 POST /user/create			Data: username=text&password=text&email=text
 POST /user/login			Data: username=text&password=text
 POST /user/logout
@@ -27,11 +28,18 @@ POST /friends				Data: JSON {"username": <username>}
 PUT /friends				Data: JSON {"username": <username>, "status": accepted/declined}
 							For updating a friendship to accept/decline a friend request
 							
-//FOR LOADING NOTIFICATIONS //TODO(Vadim)
-GET /notifications			Response: JSON {notifications: [{username: <username>, status: pending/accepted/declined}], success:true/false}
+//FOR LOADING NOTIFICATIONS
+GET /notifications			Response: JSON {notifications: [{user_id: <user_id>, username: <username>, event_id: <event_id>, notification_type: email/online, completed=false/true}], success:true/false}
+							Note: immediately clears notifications that are unread
 
 //FOR CLASS ENROLLMENT MANAGEMENT
 POST /classes 				Data: {section_id: <id>}
 							To enroll in a class
-POST /classes 				Data: {section_id: <id>}
+DELETE /classes 			Data: {section_id: <id>}
 							To unenroll from a class
+							
+POST /recommendations		Data: {'users': ['username1', 'username2'], 'day': '2016-11-20'}
+							Response: {"suggestions":[{"id":0,"name":"Study Recommendation","start_time":"2016-11-20 09:00:00","end_time":"2016-11-20 12:00:00","location":"TBD","description":"TBD","color":"orange","relationship":"owned","notify":true}],"success":true}⏎  
+							Note: only calculates for a week at a time, around provided day!!!
+							To use the response data, the frontend offers opportunities to "create" these events if
+							the user likes one of the suggested times and auto shares with the users selected

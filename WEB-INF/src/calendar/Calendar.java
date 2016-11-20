@@ -28,7 +28,7 @@ public class Calendar {
 	public View view;
 	public Date viewDate;
 	
-	private ArrayList<Event> events; // used for GSON object serialization
+	public ArrayList<Event> events; // used for GSON object serialization
 	private transient User current_user;
 	public static final String ERROR_JSON = "{\"success\": false}";
 	public static final String EVENT_SELECT_SQL = "SELECT * FROM Events JOIN EventRelationships ON Events.id=EventRelationships.event_id WHERE EventRelationships.user_id=?";

@@ -22,6 +22,11 @@
     </servlet>
     
     <servlet>
+        <servlet-name>IsLoggedInServlet</servlet-name>
+        <servlet-class>user.IsLoggedIn</servlet-class>
+    </servlet>
+    
+    <servlet>
         <servlet-name>EventServlet</servlet-name>
         <servlet-class>calendar.EventServlet</servlet-class>
     </servlet>
@@ -50,6 +55,11 @@
         <servlet-name>ClassEnrollServlet</servlet-name>
         <servlet-class>usc_classes.ClassEnrollServlet</servlet-class>
     </servlet>
+    
+    <servlet>
+        <servlet-name>StudyRecommendationServlet</servlet-name>
+        <servlet-class>calendar.StudyRecommendationServlet</servlet-class>
+    </servlet>
 
     <servlet-mapping>
         <servlet-name>UserLoginServlet</servlet-name>
@@ -64,6 +74,11 @@
     <servlet-mapping>
         <servlet-name>UserCreateServlet</servlet-name>
         <url-pattern>/user/create</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>IsLoggedInServlet</servlet-name>
+        <url-pattern>/user/isLoggedIn</url-pattern>
     </servlet-mapping>
     
     <servlet-mapping>
@@ -94,5 +109,10 @@
     <servlet-mapping>
         <servlet-name>ClassEnrollServlet</servlet-name>
         <url-pattern>/classes</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>StudyRecommendationServlet</servlet-name>
+        <url-pattern>/recommendations</url-pattern>
     </servlet-mapping>
 </web-app>

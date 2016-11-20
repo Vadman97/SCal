@@ -20,37 +20,6 @@ app.controller('calendarCtrl', function($scope, $http, $timeout, uiCalendarConfi
     /* event sources array*/
     $scope.eventSources = [$scope.events];
 
-    /* config object */
-    $scope.uiConfig = {
-      calendar:{
-        height: window.innerHeight*0.9,
-        editable: true,
-        timezone: "local",
-        defaultEventMinutes: 60,
-        header:{
-          left: 'month agendaWeek agendaDay',
-          center: 'title',
-          right: 'today prev,next'
-        },
-        eventClick: $scope.alertOnEventClick,
-        eventDrop: $scope.alertOnDrop,
-        eventResize: $scope.alertOnResize,
-        // debug
-        dayClick: function() {
-            // $scope.events.push({
-            //     title: "Hello world",
-            //     start: new Date(y, m, d + 1, 19, 0),
-            //     end: new Date(y, m, d + 1, 22, 30)
-            // });
-            $scope.addEvent({
-                    title: "Hello world",
-                    start: new Date(y, m, d + 1, 19, 0),
-                    end: new Date(y, m, d + 1, 22, 30)
-            });
-        }
-      }
-    };
-
     /* add custom event*/
     $scope.addEvent = function(event) {
         // $scope.calendar.removeEventSource($scope.events);
@@ -59,14 +28,25 @@ app.controller('calendarCtrl', function($scope, $http, $timeout, uiCalendarConfi
         // console.log(uiCalendarConfig.calendars);
         $scope.renderCalendar;
     };
+
     /* remove event */
     $scope.remove = function(index) {
       $scope.events.splice(index,1);
+      $scope.renderCalendar;
     };
+
+    /* select event */
+    $scope.selectEvent = function()
+    {
+        $('#modal').load("partials/editEventModal.html", closeModal);
+        $('#modal').toggleClass("modal-active");
+    }
+
     /* Change View */
     $scope.changeView = function(view,calendar) {
       uiCalendarConfig.calendars[calendar].fullCalendar('changeView',view);
     };
+
     /* Change View */
     $scope.renderCalendar = function(calendar) {
       $timeout(function() {
@@ -74,6 +54,25 @@ app.controller('calendarCtrl', function($scope, $http, $timeout, uiCalendarConfi
           uiCalendarConfig.calendars[calendar].fullCalendar('render');
         }
       });
+    };
+
+    /* config object */
+    $scope.uiConfig = {
+      calendar:{
+        height: window.innerHeight*0.9,
+        editable: true,
+        displayEventTime: true,
+        timezone: "local",
+        defaultEventMinutes: 60,
+        header:{
+          left: 'month agendaWeek agendaDay',
+          center: 'title',
+          right: 'today prev,next'
+        },
+        eventClick: $scope.selectEvent,
+        eventDrop: $scope.alertOnDrop,
+        eventResize: $scope.alertOnResize
+      }
     };
 
 });

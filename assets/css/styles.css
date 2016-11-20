@@ -186,13 +186,25 @@ button:focus, .button:focus, a.button:focus, [type=submit]:focus, [type=button]:
         font-weight: 100; }
         .modal-login-content-fieldgroup input:focus {
           outline: none; }
-    .modal-login-content .buttongroup {
+    .modal-login-content-buttongroup {
       display: -ms-flexbox;
       display: flex;
       -ms-flex-flow: row nowrap;
-          flex-flow: row nowrap; }
-    .modal-login-content .login-form {
-      width: 80%; }
+          flex-flow: row nowrap;
+      -ms-flex-align: center;
+          align-items: center;
+      -ms-flex-pack: center;
+          justify-content: center; }
+      .modal-login-content-buttongroup input {
+        width: 30%;
+        position: relative;
+        border: 2px solid #207cca;
+        background-color: #fafafa;
+        color: #207cca;
+        border-radius: 8px; }
+      .modal-login-content-buttongroup input:hover {
+        background-color: #207cca;
+        color: #fafafa; }
 
 /* Tabbed Panes */
 .tab {
@@ -422,3 +434,74 @@ button:focus, .button:focus, a.button:focus, [type=submit]:focus, [type=button]:
 .sidebar-btn {
   width: 100%;
   transition: 0.3s; }
+
+/* Modal Content/Box */
+.modal-enroll {
+  background-color: #fefefe;
+  margin: 10% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 30%;
+  height: 50%;
+  border-radius: 15px; }
+  .modal-enroll-content {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-flow: column nowrap;
+        flex-flow: column nowrap;
+    -ms-flex-pack: distribute;
+        justify-content: space-around;
+    -ms-flex-align: center;
+        align-items: center;
+    width: 100%; }
+    .modal-enroll-content input[type="button"] {
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+      max-width: 50%; }
+    .modal-enroll-content h2 {
+      margin-top: 40px;
+      font-size: 32px;
+      font-weight: 300; }
+    .modal-enroll-content-fieldgroup {
+      display: -ms-flexbox;
+      display: flex;
+      -ms-flex-flow: column nowrap;
+          flex-flow: column nowrap;
+      -ms-flex-align: center;
+          align-items: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+      margin-top: 20%;
+      margin-bottom: 5%;
+      transition: 0.3s; }
+      .modal-enroll-content-fieldgroup input {
+        width: 100%;
+        border-radius: 10px;
+        border: #888 solid 0.1px;
+        margin: 10px auto;
+        padding: 20px 10px;
+        height: 3vh;
+        box-sizing: border-box;
+        font-size: 16px;
+        font-weight: 100; }
+        .modal-enroll-content-fieldgroup input:focus {
+          outline: none; }
+    .modal-enroll-content-buttongroup {
+      display: -ms-flexbox;
+      display: flex;
+      -ms-flex-flow: row nowrap;
+          flex-flow: row nowrap;
+      -ms-flex-align: center;
+          align-items: center;
+      -ms-flex-pack: center;
+          justify-content: center; }
+      .modal-enroll-content-buttongroup input {
+        width: 30%;
+        position: relative;
+        border: 2px solid #207cca;
+        background-color: #fafafa;
+        color: #207cca;
+        border-radius: 8px; }
+      .modal-enroll-content-buttongroup input:hover {
+        background-color: #207cca;
+        color: #fafafa; }

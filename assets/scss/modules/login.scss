@@ -1,15 +1,12 @@
 // login.scss
 
-@import url('http://fonts.googleapis.com/css?family=Open+Sans:400,600,700');
-@import url('http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css');
-
 /* Modal Content/Box */
 .modal-login {
     background-color: #fefefe;
     margin: 10% auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 30%;
+    width: 20%;
     height: 50%;
     border-radius: 15px;
 
@@ -23,22 +20,7 @@
         flex-flow: column nowrap;
         justify-content: space-around;
         align-items: center;
-        input[type="text"],
-        input[type="password"] {
-            border-radius: 10px;
-            border: #888 solid 0.1px;
-            margin: 10px 0;
-            padding: 5px 10px;
-            height: 3vh;
-            width: 100%;
-            font: {
-                size: 16px;
-                weight: 100;
-            }
-            &:focus {
-                outline: none;
-            }
-        }
+        width: 100%;
         input[type="button"] {
             flex-grow: 1;
             max-width: 50%;
@@ -50,10 +32,45 @@
                 weight: 300;
             }
         }
+        &-tabgroup {
+            justify-content: center;
+            display: flex;
+            flex-flow: row nowrap;
+            margin: 20px 0;
+        }
+        &-fieldgroup {
+            display: flex;
+            flex-flow: column nowrap;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            #email {
+                display: none;
+            }
+            input {
+                width: 100%;
+                border-radius: 10px;
+                border: #888 solid 0.1px;
+                margin: 10px auto;
+                padding: 20px 10px;
+                height: 3vh;
+                box-sizing : border-box;
+                font: {
+                    size: 16px;
+                    weight: 100;
+                }
+                &:focus {
+                    outline: none;
+                }
+            }
+            transition: 0.3s;
+        }
         .buttongroup {
             display: flex;
             flex-flow: row nowrap;
-            justify-content: space-around;
+            #submit {
+
+            }
         }
         .login-form {
             width: 80%;
@@ -63,46 +80,17 @@
 
 /* Tabbed Panes */
 
-#container {
-    width:350px
-}
-#tabbox {
-    height:40px
-}
-#panel {
-    background-color:#FFF;
-    height:250px;
-}
-
 .tab {
-    background: #dedede;display: block;height: 40px;
-    line-height: 40px;text-align: center;
-    width: 80px;float: right;font-weight: bold;
-    -webkit-border-top-left-radius: 4px;
-    -webkit-border-top-right-radius: 4px;
-    -moz-border-radius: 4px 4px 0px 0px;
-}
-a {
-    color: #000;
-    margin: 0;
-    padding: 0;
-    text-decoration: none;
+    background-color: inherit;
+    color: black;
+    display: block;
+    text-align: center;
+    border-radius: 4px;
+    border: none;
+    padding: 1vh 2vw;
+    font-size: 16px;
 }
 
-.signup {
-    margin-left:8px;
-}
 .select {
-    background-color:#FFF;
-}
-
-#loginbox {
-    min-height:150px;
-    padding:10px;
-}
-
-#signupbox {
-    min-height:150px;
-    padding:10px;
-    display:none;
+    background-color:#EFEFEF;
 }

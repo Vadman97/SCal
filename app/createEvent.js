@@ -29,7 +29,7 @@ var request = new XMLHttpRequest();
 
 request.onreadystatechange = function(res) {
     if (request.readyState === 4) {
-        if (request.status === 200) {
+        if (request.status === 200 && res.target.response.success === true) {
             var jsonOptions = JSON.parse(request.responseText);
 
             jsonOptions.forEach(function(item) {
@@ -41,6 +41,7 @@ request.onreadystatechange = function(res) {
             });
             friendInput.placeholder = "Search through friends";
         } else {
+            console.log(res);
             friendInput.placeholder = "Couldn't load friends :o(";
         }
     }
@@ -48,6 +49,10 @@ request.onreadystatechange = function(res) {
 
 request.open('GET', '/friends', true);
 request.send();
+
+
+/* event creation -> angular scope */
+
 
 
 

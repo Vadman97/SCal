@@ -313,9 +313,17 @@ a {
   display: flex;
   -ms-flex-flow: column nowrap;
       flex-flow: column nowrap; }
+  .modal-createEvent h1 {
+    margin: 10px 0; }
+  .modal-createEvent p {
+    font-size: 14px;
+    font-weight: 100; }
   .modal-createEvent-titleInput {
     width: 80%;
-    font-weight: 100; }
+    margin: 2% 0; }
+    .modal-createEvent-titleInput input[type="text"] {
+      width: 20vw;
+      font-size: 16px; }
 
 #calendar {
   padding: 2% 2%;

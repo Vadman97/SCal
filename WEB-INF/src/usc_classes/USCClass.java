@@ -15,9 +15,10 @@ public class USCClass extends USCSection {
 
 	long class_id;
 	private int class_num; 
-	private Discussion discussion = null; 
 	private Vector<Exam> exams = new Vector<Exam>(); 
-	private Lab lab = null;
+	private Vector<Discussion> discussions = new Vector<>();
+	private Vector<Lab> labs = new Vector<>();
+
 	private String professor;
 
 	private int semester;
@@ -46,16 +47,8 @@ public class USCClass extends USCSection {
 		return class_num;
 	}
 	
-	public Discussion getDiscussion() {
-		return discussion;
-	}
-
 	public Vector<Exam> getExams() {
 		return exams;
-	}
-
-	public Lab getLab() {
-		return lab;
 	}
 
 	public String getProfessor() {
@@ -66,6 +59,14 @@ public class USCClass extends USCSection {
 		return semester;
 	}
 
+	public Vector<Discussion> getDiscussions() {
+		return discussions;
+	}
+
+	public Vector<Lab> getLabs() {
+		return labs;
+	}
+	
 	public void load() {
 		if(getClass_id() != 0) {
 			Connection con = null;
@@ -76,8 +77,6 @@ public class USCClass extends USCSection {
 				ResultSet rs = ps.executeQuery();
 				if (rs.next()) {
 					setInternalData(rs);
-					discussion = Discussion.load(getClass_id());
-					lab = Lab.load(getClass_id());
 					exams = Exam.load(getClass_id());
 				} else {
 					setClass_id(0);

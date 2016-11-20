@@ -18,7 +18,7 @@ public class EventServlet extends HttpServlet {
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		//create		
 		User u = Util.getSessionUser(req);
-		if (u == null) {
+		if (u == null || !u.isLoggedIn()) {
 			Util.close(res, false);
 			return;
 		}
@@ -41,7 +41,7 @@ public class EventServlet extends HttpServlet {
 		}
 		
 		User u = Util.getSessionUser(req);
-		if (u == null) {
+		if (u == null || !u.isLoggedIn()) {
 			Util.close(res, false);
 			return;
 		}
@@ -55,7 +55,7 @@ public class EventServlet extends HttpServlet {
 	public void doPut(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		//update
 		User u = Util.getSessionUser(req);
-		if (u == null) {
+		if (u == null || !u.isLoggedIn()) {
 			Util.close(res, false);
 			return;
 		}

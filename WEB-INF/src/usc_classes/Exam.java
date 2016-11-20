@@ -16,7 +16,7 @@ public class Exam {
 	
 	protected Exam() {}
 	
-	public Exam(int exam_id, int class_id, Timestamp start, Timestamp end) {
+	public Exam(long exam_id, long class_id, Timestamp start, Timestamp end) {
 		this.exam_id = exam_id;
 		this.class_id = class_id;
 		this.start = start;
@@ -51,7 +51,7 @@ public class Exam {
 		Connection con = null;
 		try {
 			con = Util.getConn();
-			PreparedStatement ps = con.prepareStatement("SELECT * FROM Labs WHERE class_id = ?");
+			PreparedStatement ps = con.prepareStatement("SELECT * FROM Exams WHERE class_id = ?");
 			ps.setLong(1, class_id);
 			ResultSet rs = ps.executeQuery();
 			Vector<Exam> exams = new Vector<>();
@@ -61,6 +61,7 @@ public class Exam {
 				ex.setClass_id(rs.getLong(2));
 				ex.setStart(rs.getTimestamp(3));
 				ex.setEnd(rs.getTimestamp(4));
+				exams.add(ex);
 			}
 			if (exams.size() > 0)
 				return exams;

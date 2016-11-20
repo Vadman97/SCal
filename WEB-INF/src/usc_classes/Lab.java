@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
+import java.util.Vector;
 
 import main.Constants;
 import util.Util;
@@ -32,14 +33,24 @@ public class Lab extends USCSection {
 	public void setLab_id(long lab_id) {
 		this.lab_id = lab_id;
 	}
+	
+	public static Vector<Lab> load(long class_id) {
+		return load(class_id, "SELECT * FROM Labs WHERE class_id = ? LIMIT 1");
+	}
+	
+	public static Lab get(long section_id) {
+		Vector<Lab> labs = load(section_id, "SELECT * FROM Labs WHERE lab_id = ?");
+		return labs != null ? labs.get(0) : null;
+	}
 
-	public static Lab load(long class_id) {
+	private static Vector<Lab> load(long class_id, String query) {
 		Connection con = null;
 		try {
 			con = Util.getConn();
-			PreparedStatement ps = con.prepareStatement("SELECT * FROM Labs WHERE class_id = ? LIMIT 1");
+			PreparedStatement ps = con.prepareStatement(query);
 			ps.setLong(1, class_id);
 			ResultSet rs = ps.executeQuery();
+			Vector<Lab> labs = new Vector<>();
 			if (rs.next()) {
 				Lab l = new Lab();
 				l.setLab_id(rs.getLong(1));
@@ -52,8 +63,10 @@ public class Lab extends USCSection {
 				l.setWed(rs.getBoolean(8));
 				l.setThur(rs.getBoolean(9));
 				l.setFri(rs.getBoolean(10));
-				return l;
+				labs.add(l);
 			}
+			if (labs.size() > 0)
+				return labs;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

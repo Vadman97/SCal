@@ -1,31 +1,27 @@
 <div class="modal-login modal-content">
-    
+
 <!--    Add this to the login.js-->
     <span class="close"><i class="fa fa-close fa-md"></i></span>
     <div class="modal-login-content">
-        
+
         <h2>Welcome!</h2>
-        
-        <div id="container">    
-            <div id="tabbox">
-                <a href="#" id="signup" class="tab signup" onclick = "loginSwitchTabs('signup')">Signup</a>
-                <a href="#" id="login" class="tab select" onclick = "loginSwitchTabs('login')">Login</a>
+
+        <div class="modal-login-content-tabgroup">
+            <button id="login" class="tab login select" onclick = "loginSwitchTabs('login')">Login</button>
+            <button id="signup" class="tab signup" onclick = "loginSwitchTabs('signup')">Signup</button>
+        </div>
+
+        <div>
+            <div class="modal-login-content-fieldgroup">
+                <input type="text" placeholder="username" id="username">
+                <input type="password" placeholder="Password" id="password">
+                <input type="text" placeholder="email" id="email">
             </div>
-                
-            <div id="panel">
-                <div id="loginbox">
-                    <input type="text" name="username" value="" placeholder="username" id="username">
-                    <input type="password" name="Password" value="" placeholder="Password" id="password">
-                </div>
-                    
-                <div id="signupbox">
-                    <input type="text" name="email" value="" placeholder="email" id="email">    
-                </div>
-            </div>
-                
-            <div class="buttongroup">
+
+            <div class="modal-login-content-buttongroup">
                 <input type="button" value="Login" id="submit" onclick="validateUser()"/>
-            </div>   
+            </div>
         </div>
     </div>
+    <script type="text/javascript" src="app/login.js"></script>
 </div>

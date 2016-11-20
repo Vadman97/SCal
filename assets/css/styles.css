@@ -1,5 +1,3 @@
-@import url("http://fonts.googleapis.com/css?family=Open+Sans:400,600,700");
-@import url("http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css");
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
   margin: 0;
   padding: 0;
@@ -131,7 +129,7 @@ button:focus, .button:focus, a.button:focus, [type=submit]:focus, [type=button]:
   margin: 10% auto;
   padding: 20px;
   border: 1px solid #888;
-  width: 30%;
+  width: 20%;
   height: 50%;
   border-radius: 15px; }
   .modal-login .login-form {
@@ -145,20 +143,8 @@ button:focus, .button:focus, a.button:focus, [type=submit]:focus, [type=button]:
     -ms-flex-pack: distribute;
         justify-content: space-around;
     -ms-flex-align: center;
-        align-items: center; }
-    .modal-login-content input[type="text"],
-    .modal-login-content input[type="password"] {
-      border-radius: 10px;
-      border: #888 solid 0.1px;
-      margin: 10px 0;
-      padding: 5px 10px;
-      height: 3vh;
-      width: 100%;
-      font-size: 16px;
-      font-weight: 100; }
-      .modal-login-content input[type="text"]:focus,
-      .modal-login-content input[type="password"]:focus {
-        outline: none; }
+        align-items: center;
+    width: 100%; }
     .modal-login-content input[type="button"] {
       -ms-flex-positive: 1;
           flex-grow: 1;
@@ -167,60 +153,60 @@ button:focus, .button:focus, a.button:focus, [type=submit]:focus, [type=button]:
       margin-top: 40px;
       font-size: 32px;
       font-weight: 300; }
-    .modal-login-content .buttongroup {
+    .modal-login-content-tabgroup {
+      -ms-flex-pack: center;
+          justify-content: center;
       display: -ms-flexbox;
       display: flex;
       -ms-flex-flow: row nowrap;
           flex-flow: row nowrap;
-      -ms-flex-pack: distribute;
-          justify-content: space-around; }
+      margin: 20px 0; }
+    .modal-login-content-fieldgroup {
+      display: -ms-flexbox;
+      display: flex;
+      -ms-flex-flow: column nowrap;
+          flex-flow: column nowrap;
+      -ms-flex-align: center;
+          align-items: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+      margin-bottom: 15px;
+      transition: 0.3s; }
+      .modal-login-content-fieldgroup #email {
+        display: none; }
+      .modal-login-content-fieldgroup input {
+        width: 100%;
+        border-radius: 10px;
+        border: #888 solid 0.1px;
+        margin: 10px auto;
+        padding: 20px 10px;
+        height: 3vh;
+        box-sizing: border-box;
+        font-size: 16px;
+        font-weight: 100; }
+        .modal-login-content-fieldgroup input:focus {
+          outline: none; }
+    .modal-login-content .buttongroup {
+      display: -ms-flexbox;
+      display: flex;
+      -ms-flex-flow: row nowrap;
+          flex-flow: row nowrap; }
     .modal-login-content .login-form {
       width: 80%; }
 
 /* Tabbed Panes */
-#container {
-  width: 350px; }
-
-#tabbox {
-  height: 40px; }
-
-#panel {
-  background-color: #FFF;
-  height: 250px; }
-
 .tab {
-  background: #dedede;
+  background-color: inherit;
+  color: black;
   display: block;
-  height: 40px;
-  line-height: 40px;
   text-align: center;
-  width: 80px;
-  float: right;
-  font-weight: bold;
-  -webkit-border-top-left-radius: 4px;
-  -webkit-border-top-right-radius: 4px;
-  -moz-border-radius: 4px 4px 0px 0px; }
-
-a {
-  color: #000;
-  margin: 0;
-  padding: 0;
-  text-decoration: none; }
-
-.signup {
-  margin-left: 8px; }
+  border-radius: 4px;
+  border: none;
+  padding: 1vh 2vw;
+  font-size: 16px; }
 
 .select {
-  background-color: #FFF; }
-
-#loginbox {
-  min-height: 150px;
-  padding: 10px; }
-
-#signupbox {
-  min-height: 150px;
-  padding: 10px;
-  display: none; }
+  background-color: #EFEFEF; }
 
 .modal-upload {
   background-color: #fefefe;
@@ -313,9 +299,29 @@ a {
   display: flex;
   -ms-flex-flow: column nowrap;
       flex-flow: column nowrap; }
+  .modal-createEvent h1 {
+    margin: 10px 0; }
+  .modal-createEvent p {
+    font-size: 14px;
+    font-weight: 100; }
   .modal-createEvent-titleInput {
     width: 80%;
-    font-weight: 100; }
+    margin: 2% 0; }
+    .modal-createEvent-titleInput input[type="text"] {
+      width: 20vw;
+      font-size: 16px; }
+
+.modal-editEvent {
+  background-color: #fefefe;
+  margin: 5% auto;
+  padding: 20px;
+  width: 40%;
+  height: 60%;
+  border-radius: 15px;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-flow: column nowrap;
+      flex-flow: column nowrap; }
 
 #calendar {
   padding: 2% 2%;

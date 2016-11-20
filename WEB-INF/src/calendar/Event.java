@@ -95,7 +95,11 @@ public class Event {
 	}
 	
 	public String toJson() {
-		return new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create().toJson(this);
+		return toJsonObj().toString();
+	}
+	
+	public JsonObject toJsonObj() {
+		return new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create().toJsonTree(this).getAsJsonObject();
 	}
 	
 	private void load() {

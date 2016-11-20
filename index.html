@@ -21,14 +21,13 @@
       <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
       <!-- calendar front end javascript -->
-      <script type="text/javascript" src="app/calendar.js"></script>
+      <script type="text/javascript" src="app/app.js"></script>
 
       <!-- Load all .js files here --><script type="text/javascript">
         $(function() {
             $("#sidebar").load("partials/sidebar.html");
 
             $.getScript("app/modal.js");
-            $.getScript("app/login.js");
         });
 
     </script>
@@ -46,7 +45,7 @@
             <div id="modal" class="modal"></div>
 
             <!-- Calendar module --><!-- This is handled by ui-calendar -->
-            <div id="calendar" ui-calendar="uiConfig.calendar" ng-model="eventSources"></div>
+            <div id="calendar" ui-calendar="uiConfig.calendar" ng-model="eventSources" calendar="appCalendar""></div>
         </div>
     </body>
 </html>

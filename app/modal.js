@@ -33,6 +33,11 @@ friendsBtn.onclick = function() {
     $.getScript("app/friendsMenu.js");
 }
 
+enrollBtn.onclick = function() {
+    $('#modal').load("partials/enrollModal.html", closeModal);
+    $('#modal').toggleClass("modal-active");
+}
+
 // When the user clicks on <span> (x), close the modal
 var closeModal = function() {
     var span = document.getElementsByClassName("close")[0];

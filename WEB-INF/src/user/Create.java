@@ -26,10 +26,10 @@ public class Create extends HttpServlet {
 			if (!success)
 				user.clear();
 			
-			String json = "{success: " + success + "}";
+			String json = "{\"success\": " + success + "}";
 			out.println(json);
 		} else {
-			out.println("{success: false}");
+			out.println("{\"success\": false}");
 		}
 		out.flush();
 		out.close();

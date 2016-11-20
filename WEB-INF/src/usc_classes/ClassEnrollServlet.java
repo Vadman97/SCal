@@ -1,4 +1,4 @@
-package calendar;
+package usc_classes;
 
 import java.io.IOException;
 
@@ -12,61 +12,50 @@ import com.google.gson.JsonObject;
 import user.User;
 import util.Util;
 
-public class EventServlet extends HttpServlet {
+public class ClassEnrollServlet extends HttpServlet {
 	private static final long serialVersionUID = 5229439952621174381L;
 
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		//create		
+		// enroll
 		User u = Util.getSessionUser(req);
 		if (u == null || !u.isLoggedIn()) {
 			Util.close(res, false);
 			return;
 		}
-		
-		Event e = Event.parse(Util.getRequestData(req));
-		if (e == null) {
+
+		JsonObject obj = Util.parseJson(req, res);
+		if (!obj.has("class_id")) {
 			Util.close(res, false);
 			return;
 		}
-		e.write(u);
-		Util.close(res, true);
+
+//		try {
+//			//TODO enroll in a class
+//			Util.close(res, true);
+//		} catch (SQLException e1) {
+//			e1.printStackTrace();
+//		}
 	}
-	
+
 	public void doDelete(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		//remove
-		JsonObject o = Util.parseJson(req, res);
-		if (o == null) {
-			Util.close(res, false);
-			return;
-		}
-		
+		// unenroll
 		User u = Util.getSessionUser(req);
 		if (u == null || !u.isLoggedIn()) {
 			Util.close(res, false);
 			return;
 		}
 		
-		if (o.has("id")) {
-			Event e = new Event(o.get("id").getAsLong());
-			Util.close(res, e.delete());
-		}
-	}
-	
-	public void doPut(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		//update
-		User u = Util.getSessionUser(req);
-		if (u == null || !u.isLoggedIn()) {
+		JsonObject obj = Util.parseJson(req, res);
+		if (!obj.has("class_id")) {
 			Util.close(res, false);
 			return;
 		}
-		
-		Event e = Event.update(Util.getRequestData(req));
-		if (e == null) {
-			Util.close(res, false);
-			return;
-		}
-		
-		e.write(u);
-		Util.close(res, true);
+
+//		try {
+//			//TODO unenroll in a class
+//			Util.close(res, true);
+//		} catch (SQLException e1) {
+//			e1.printStackTrace();
+//		}
 	}
 }

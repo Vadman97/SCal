@@ -22,7 +22,7 @@ public class FriendsServlet extends HttpServlet {
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		//load all friends		
 		User u = Util.getSessionUser(req);
-		if (u == null) {
+		if (u == null || !u.isLoggedIn()) {
 			Util.close(res, false);
 			return;
 		}
@@ -46,7 +46,7 @@ public class FriendsServlet extends HttpServlet {
 		// add new friend
 		
 		User u = Util.getSessionUser(req);
-		if (u == null) {
+		if (u == null || !u.isLoggedIn()) {
 			Util.close(res, false);
 			return;
 		}
@@ -77,7 +77,7 @@ public class FriendsServlet extends HttpServlet {
 		//update friend status
 		
 		User u = Util.getSessionUser(req);
-		if (u == null) {
+		if (u == null || !u.isLoggedIn()) {
 			Util.close(res, false);
 			return;
 		}

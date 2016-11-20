@@ -46,7 +46,8 @@ public class Event {
 		setColor(color);
 		setNotify(notify);
 		setRelationship(relationship);
-		loadSharedWith();
+		if (id != 0)
+			loadSharedWith();
 	}
 	
 	public Event(long id) {

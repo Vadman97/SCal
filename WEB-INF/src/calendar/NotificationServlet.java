@@ -19,7 +19,7 @@ public class NotificationServlet extends HttpServlet {
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		//load notifications		
 		User u = Util.getSessionUser(req);
-		if (u == null) {
+		if (u == null || !u.isLoggedIn()) {
 			Util.close(res, false);
 			return;
 		}

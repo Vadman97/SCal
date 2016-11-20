@@ -1,5 +1,6 @@
 var modal           = document.getElementById('modal');
 
+var createEventBtn  = document.getElementById('createButton');
 var loginBtn        = document.getElementById('loginButton');
 var uploadBtn       = document.getElementById('uploadButton');
 var friendsBtn      = document.getElementById('friendsButton');
@@ -8,6 +9,11 @@ var commonBtn       = document.getElementById('commonButton');
 
 // Get the <span> element that closes the modal
 var span = document.getElementsByClassName("close")[0];
+
+createEventBtn.onclick = function() {
+    $('#modal').load("partials/createEventModal.html", closeModal);
+    $('#modal').toggleClass("modal-active");
+}
 
 // When the user clicks on the button, open the modal
 loginBtn.onclick = function() {

@@ -16,7 +16,7 @@ app.controller('calendarCtrl', function($scope, $http, $timeout, $compile, uiCal
         url: '/user/isLoggedIn'
     }).then(function(res) {
         if (res.success === true) {
-
+            // TODO IF ALREADY LOGGED IN THEN POPULATE MAP AND CHANGE USER PANEL
         }
     }, function(res) {
         console.log("FAILED isLoggedIn");

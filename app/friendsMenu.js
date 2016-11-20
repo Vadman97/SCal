@@ -1,21 +1,25 @@
 // friendsMenu.js
 
 var tabsContent     = document.getElementsByClassName("modal-friends-content-main-tabcontent");
-var friendsSidebar  = document.getElementsByClassName("modal-friends-content-sidebar")[0];
 
 tabsContent[0].style.display = "flex";
 tabsContent[0].style.flexFlow = "column nowrap";
 
+// POPULATE FRIENDS LIST ON MODAL LOAD
 $.get("/friends", function(data) {
     if (JSON.parse(data).success === true) {
         var friends = JSON.parse(data).friends;
+        console.log(data);
+        console.log(friends);
         for (var x in friends) {
             if (friends[x].status === "accepted") {
 
                 var div = document.createElement("div");
                 div.setAttribute("class", "friend");
+                console.log(friends[x].username);
                 div.innerHTML = '<img src="./assets/img/placeholder.jpg" alt="friend :)" class="friend-img"><h4>' + friends[x].username + '</h4>';
-                friendsSidebar.append(div);
+                console.log($('#friends-sidebar'));
+                console.log("appended");
 
             }
         }

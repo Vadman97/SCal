@@ -42,11 +42,12 @@ function validateUser() {
             data : formData,
             success: function(data, textStatus, jqXHR)
             {
-                //data: data from server
-                if(JSON.parse(data)["success"]) {
-                    // POPULATE Calendar with Data
+                $('#sidebarUser').html(formData.username);
 
-                    getRequest();
+                if(JSON.parse(data)["success"]) {
+
+                    loadEvents();
+                    loadFriends();
 
                     $('#modal').toggleClass("modal-active");
                     $('#modal').html("<div></div>")
@@ -66,7 +67,6 @@ function validateUser() {
     } else {
 
         var formData = {username: username,password: password, email: email  };
-
         var formData = {username: username,password: password};
 
          $.ajax({
@@ -94,7 +94,7 @@ function validateUser() {
     }
 }
 
-function getRequest() {
+function loadEvents() {
 
     $.ajax({
             url : "/calendar?view=all",
@@ -104,18 +104,20 @@ function getRequest() {
                 //data: data from server
                 if(JSON.parse(data)["success"]) {
 
-                    var scope = angular.element(document.getElementById("bodyTagID")).scope();
+                    var events = JSON.parse(data)["events"];
 
-                    for(var userEvent in data) {
-                        scope.addEvent(data[userEvent]);
+                    for (var event in events)
+                    {
+                        scope.addEvent(parseServerEvent(events[event]));
                     }
 
                     $('#modal').html("<div></div>")
                     $('#modal').removeClass("modal-active");
 
+                    scope.renderCalendar();
+
                     return false;
                 } else {
-
                     alert("Get request not returned");
                 }
             },
@@ -124,6 +126,26 @@ function getRequest() {
                 alert("Server Not Connected - getRequest");
             }
         });
+}
+
+function loadFriends()
+{
+    console.log("TODO LOADFRIENDS LOGIN.JS");
+}
+
+// helper function to parse data from server format
+function parseServerEvent(event)
+{
+    var result = event;
+    result.title = result.name;
+    result.start = result.start_time;
+    result.end = result.end_time;
+    result.stick = "true";
+    delete result.name;
+    delete result.start_time;
+    delete result.end_time;
+
+    return result;
 }
 
 // login.js EOF

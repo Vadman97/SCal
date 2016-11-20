@@ -67,8 +67,11 @@ function create() {
     var endDateArr = endDate.value.split("-");
     var startTimeArr = startTime.value.split(":");
     var endTimeArr = endTime.value.split(":");
+    var scope = angular.element($('#bodyTagID')).scope();
+
 
     var event = {
+        "id": scope.getEventsLength(),
         "title": title.value,
         "start": new Date(startDateArr[0], startDateArr[1]-1, startDateArr[2], startTimeArr[0], startTimeArr[1]),
         "end": new Date(endDateArr[0], endDateArr[1]-1, endDateArr[2], endTimeArr[0], endTimeArr[1]),
@@ -78,9 +81,19 @@ function create() {
         "stick": true
     };
 
-    var scope = angular.element($('#bodyTagID')).scope();
+    var eventToPost = {
+        "name": title.value,
+        "start_time": startDate.value + " " + startTime.value + ":00",
+        "end_time": endDate.value + " " + endTime.value + ":00",
+        "location": loc.value,
+        "description": description.value,
+        "color": "green",               // EDIT HARDCODE
+        "relationship": "owned",        // EDIT HARDCODE
+        "notify": true                  // EDIT HARDCODE
+    }
 
-    scope.addEvent(event);
+
+    scope.postEvent(eventToPost, scope.addEvent(event));
     scope.renderCalendar();
 
     $('#modal').html("<div></div>")

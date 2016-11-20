@@ -54,6 +54,96 @@ body {
 button:focus, .button:focus, a.button:focus, [type=submit]:focus, [type=button]:focus {
   outline: 0; }
 
+* {
+  font-family: "Helvetica", "Arial", sans-serif; }
+
+html,
+body {
+  height: 100%;
+  background-color: #F5F4F1; }
+
+.container {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: row;
+      flex-direction: row;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+  -ms-flex-align: center;
+      align-items: center;
+  height: 100%; }
+
+.content {
+  width: 100%; }
+
+button:focus, .button:focus, a.button:focus, [type=submit]:focus, [type=button]:focus {
+  outline: 0; }
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  vertical-align: baseline; }
+
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+  display: block; }
+
+body {
+  line-height: 1; }
+
+ol, ul {
+  list-style: none; }
+
+blockquote, q {
+  quotes: none; }
+
+blockquote:before, blockquote:after {
+  content: "";
+  content: none; }
+
+q:before, q:after {
+  content: "";
+  content: none; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+.fc-state-active {
+  box-shadow: none;
+  z-index: 0; }
+
+.fc-state-default {
+  box-shadow: none;
+  background-image: none;
+  text-shadow: none; }
+
+.fc-state-disabled {
+  background-image: none; }
+
+.fc-state-down {
+  box-shadow: none; }
+
+.fc-state-down,
+.fc-state-active {
+  box-shadow: none;
+  background-image: none; }
+
+.fc-toolbar .fc-state-hover,
+.fc-toolbar .ui-state-hover {
+  z-index: 0; }
+
+.fc-toolbar .fc-state-down {
+  z-index: 0; }
+
+.fc-toolbar .fc-state-active,
+.fc-toolbar .ui-state-active {
+  z-index: 0; }
+
+.fc-toolbar button:focus {
+  z-index: 0; }
+
 .btn {
   background-color: #2A2D33;
   border: none;

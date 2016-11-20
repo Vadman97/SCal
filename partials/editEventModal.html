@@ -1,5 +1,26 @@
-<div class="modal-editEvent modal-content">
+<div class="modal-editEvent modal-content" ng-controller="calendarCtrl">
     <span class="close"><i class="fa fa-close fa-md"></i></span>
 
-    get fucking cucked
+    <div class="modal-editEvent-name">
+        <h2 id="editEventTitle"></h2>
+    </div>
+    <div class="modal-editEvent-timeInput">
+        <label for="startTime">Start</label>
+        <input type="time" id="startTime">
+        <input type="date" id="startDate">
+    </div>
+    <div class="modal-editEvent-timeInput">
+        <label for="endTime">End</label>
+        <input type="time" id="endTime">
+        <input type="date" id="endDate">
+    </div>
+    <div class="modal-editEvent-textInput">
+        <label for="location">Location</label>
+        <input type="text" id="location">
+    </div>
+    <div class="modal-editEvent-textInput">
+        <label for="description">Description</label>
+        <input type="text" id="description">
+    </div>
+    <script type="text/javascript" src="app/editEvent.js"></script>
 </div>

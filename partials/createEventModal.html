@@ -1,0 +1,44 @@
+<div class="modal-createEvent modal-content">
+    <script type="text/javascript" src="app/createEvent.js"></script>
+    <span class="close"><i class="fa fa-close fa-md"></i></span>
+
+    <h1>Create an Event</h1>
+
+    <span class="modal-createEvent-titleInput">
+        <label for="eventTitle">Title</label>
+        <input type="text" id="eventTitle" placeholder="Enter a name for your event">
+    </span>
+    <span class="modal-createEvent-timeInput">
+        <label for="startTime">Start</label>
+        <input type="time" id="startTime">
+        <input type="date" id="startDate">
+    </span>
+    <span class="modal-createEvent-timeInput">
+        <label for="endTime">End</label>
+        <input type="time" id="endTime">
+        <input type="date" id="endDate">
+    </span>
+    <span class="modal-createEvent-locationInput">
+        <label for="location">Location</label>
+        <input type="text" id="eventLocation" placeholder="Enter your event's location">
+    </span>
+    <span class="modal-createEvent-descInput">
+        <label for="eventDescription">Description</label>
+        <input id="eventDescription" type="" name="name" value="" row="10" placeholder="Write a description for your event">
+    </span>
+    <span class="modal-createEvent-friendsInput">
+        <label for="modal-createEvent-friends-searchbar">Invite Friends</label>
+        <input
+            id="modal-createEvent-friends-searchbar"
+            type="text"
+            list="modal-createEvent-friends-list"
+            name="name"
+            placeholder="Search through friends"
+            autocomplete="off"
+        >
+        <datalist id="modal-createEvent-friends-list"></datalist>
+    </span>
+
+    <button id="submitEvent" onclick="debug()">Create</button>
+
+</div>

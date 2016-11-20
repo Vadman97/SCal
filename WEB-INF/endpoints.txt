@@ -27,8 +27,9 @@ POST /friends				Data: JSON {"username": <username>}
 PUT /friends				Data: JSON {"username": <username>, "status": accepted/declined}
 							For updating a friendship to accept/decline a friend request
 							
-//FOR LOADING NOTIFICATIONS //TODO(Vadim)
-GET /notifications			Response: JSON {notifications: [{username: <username>, status: pending/accepted/declined}], success:true/false}
+//FOR LOADING NOTIFICATIONS
+GET /notifications			Response: JSON {notifications: [{user_id: <user_id>, username: <username>, event_id: <event_id>, notification_type: email/online, completed=false/true}], success:true/false}
+							Note: immediately clears notifications that are unread
 
 //FOR CLASS ENROLLMENT MANAGEMENT
 POST /classes 				Data: {section_id: <id>}

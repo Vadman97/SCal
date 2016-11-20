@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.Vector;
 
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
 import com.mysql.jdbc.Statement;
 
 import user.User;
@@ -26,6 +27,7 @@ public class Notification {
 	private long event_id;
 	private String notification_type;
 	private boolean completed;
+	private String username;
 	
 	// for creating a notification to write
 	public Notification(long user_id, long event_id, String notification_type) {
@@ -34,7 +36,7 @@ public class Notification {
 		this.notification_type = notification_type;
 	}
 	
-	// for loading notification to write
+	// for loading notifications
 	protected Notification(long id, long user_id, long event_id, String notification_type, boolean completed) {
 		this(user_id, event_id, notification_type);
 		this.id = id;
@@ -62,7 +64,9 @@ public class Notification {
 	}
 	
 	public String toString() {
-		return new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create().toJson(this);
+		JsonObject jobj  = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create().toJsonTree(this).getAsJsonObject();
+		jobj.addProperty("username", username);
+		return jobj.toString();
 	}
 
 	public boolean write() {
@@ -112,7 +116,9 @@ public class Notification {
 				ResultSet rs = st.executeQuery();
 				con.setAutoCommit(false);
 				while (rs.next()) {
-					result.add(new Notification(rs.getLong(1), rs.getLong(2), rs.getLong(3), rs.getString(4), rs.getBoolean(5)));
+					Notification n = new Notification(rs.getLong(1), rs.getLong(2), rs.getLong(3), rs.getString(4), rs.getBoolean(5));
+					n.username = User.getUser(con, n.getUser_id()).getUsername();
+					result.add(n);
 					clearNotification(con, rs.getLong(1));
 				}
 

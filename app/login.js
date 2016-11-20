@@ -93,9 +93,8 @@ function validateUser() {
 function getRequest() {
     
     $.ajax({
-            url : "/calendar",
+            url : "/calendar?view=all",
             type: "GET",
-            data : formData,
             success: function(data)
             {
                 //data: data from server
@@ -105,10 +104,26 @@ function getRequest() {
                     
                     var userEvent;
                     
-                    for(userEvent in data) {
-                        scope.events.append(data[userEvent]);
-                    }
+                    // more data to be added!
                     
+                    for(let obj of data) {
+                        
+                        var Sstr = obj["event attributes"]["start_time"]
+                        
+                        var Sres = str.split("-")
+                        var Syear = res[0]
+                        var Smonth = res[1]
+                        var Sday = res[2]
+                        
+                        var Estr = obj["event attributes"]["end_time"]
+                        
+                        var Eres = str.split("-")
+                        var Eyear = res[0]
+                        var Emonth = res[1]
+                        var Eday = res[2]
+                        
+                        scope.events.append({id: obj["id"], title: obj["event attributes"]["name"], start: new Date(Syear, Smonth, Sday), end: new Date(Eyear, Emonth, Eday)});
+                    }
                     
                     lmodal.style.display = "none";
                     return false;

@@ -1,6 +1,6 @@
 // login.js
 
-var scope       = ngular.element($('#bodyTagID')).scope();
+var scope       = angular.element($('#bodyTagID')).scope();
 var lmodal      = document.getElementsByClassName('modal-login')[0];
 var currTab     = document.getElementById('login');
 var submit      = document.getElementById('submit');

@@ -1,9 +1,26 @@
-// friends.js
+// friendsMenu.js
 
-var tabsContent = document.getElementsByClassName("modal-friends-content-main-tabcontent");
+var tabsContent     = document.getElementsByClassName("modal-friends-content-main-tabcontent");
+var friendsSidebar  = document.getElementsByClassName("modal-friends-content-sidebar")[0];
 
 tabsContent[0].style.display = "flex";
 tabsContent[0].style.flexFlow = "column nowrap";
+
+$.get("/friends", function(data) {
+    if (JSON.parse(data).success === true) {
+        var friends = JSON.parse(data).friends;
+        for (var x in friends) {
+            if (friends[x].status === "accepted") {
+
+                var div = document.createElement("div");
+                div.setAttribute("class", "friend");
+                div.innerHTML = '<img src="./assets/img/placeholder.jpg" alt="friend :)" class="friend-img"><h4>' + friends[x].username + '</h4>';
+                friendsSidebar.append(div);
+
+            }
+        }
+    }
+});
 
 function openFriendsTab(event, tabID)
 {
@@ -24,4 +41,4 @@ function openFriendsTab(event, tabID)
 
 }
 
-// friends.js EOF
+// friendsMenu.js EOF

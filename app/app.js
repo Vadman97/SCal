@@ -9,12 +9,17 @@ app.controller('calendarCtrl', function($scope, $http, $timeout, $compile, uiCal
     var m = date.getMonth();
     var y = date.getFullYear();
 
+    // on page load, check if user is already logged into a prior session
+    // if so, load the logged in user's events
     $http({
         method: 'GET',
         url: '/user/isLoggedIn'
     }).then(function(res) {
-        console.log(res);
+        if (res.success === true) {
+
+        }
     }, function(res) {
+        console.log("FAILED isLoggedIn");
         console.log(res);
     });
 

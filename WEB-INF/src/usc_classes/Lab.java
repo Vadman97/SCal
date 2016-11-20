@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
+import java.util.Vector;
 
 import main.Constants;
 import util.Util;
@@ -33,13 +34,14 @@ public class Lab extends USCSection {
 		this.lab_id = lab_id;
 	}
 
-	public static Lab load(long class_id) {
+	public static Vector<Lab> load(long class_id) {
 		Connection con = null;
 		try {
 			con = Util.getConn();
 			PreparedStatement ps = con.prepareStatement("SELECT * FROM Labs WHERE class_id = ? LIMIT 1");
 			ps.setLong(1, class_id);
 			ResultSet rs = ps.executeQuery();
+			Vector<Lab> labs = new Vector<>();
 			if (rs.next()) {
 				Lab l = new Lab();
 				l.setLab_id(rs.getLong(1));
@@ -52,8 +54,10 @@ public class Lab extends USCSection {
 				l.setWed(rs.getBoolean(8));
 				l.setThur(rs.getBoolean(9));
 				l.setFri(rs.getBoolean(10));
-				return l;
+				labs.add(l);
 			}
+			if (labs.size() > 0)
+				return labs;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

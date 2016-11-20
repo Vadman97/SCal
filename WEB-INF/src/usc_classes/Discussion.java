@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Vector;
 
 import main.Constants;
 import util.Util;
@@ -25,14 +26,15 @@ public class Discussion extends USCSection {
 		this.discussion_id = discussion_id;
 	}
 	
-	public static Discussion load(long class_id) {
+	public static Vector<Discussion> load(long class_id) {
 		Connection con = null;
 		try {
 			con = Util.getConn();
-			PreparedStatement ps = con.prepareStatement("SELECT * FROM Discussions WHERE class_id = ? LIMIT 1");
+			PreparedStatement ps = con.prepareStatement("SELECT * FROM Discussions WHERE class_id = ?");
 			ps.setLong(1, class_id);
 			ResultSet rs = ps.executeQuery();
-			if (rs.next()) {
+			Vector<Discussion> discussions = new Vector<>();
+			while (rs.next()) {
 				Discussion d = new Discussion();
 				d.setDiscussion_id(rs.getLong(1));
 				d.setSection_id(rs.getInt(2));
@@ -44,8 +46,10 @@ public class Discussion extends USCSection {
 				d.setWed(rs.getBoolean(8));
 				d.setThur(rs.getBoolean(9));
 				d.setFri(rs.getBoolean(10));
-				return d;
+				discussions.add(d);
 			}
+			if (discussions.size() > 0)
+				return discussions;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

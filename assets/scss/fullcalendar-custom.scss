@@ -5,9 +5,9 @@
     &-state {
         &-active {
             box-shadow: none;
+            z-index: 0;
         }
         &-default {
-            background-color: $primary-accent-color;
             box-shadow: none;
             background-image: none;
             text-shadow: none;
@@ -25,4 +25,22 @@
 .fc-state-active {
     box-shadow: none;
     background-image: none;
+}
+
+.fc-toolbar .fc-state-hover,
+.fc-toolbar .ui-state-hover {
+	z-index: 0;
+}
+
+.fc-toolbar .fc-state-down {
+	z-index: 0;
+}
+
+.fc-toolbar .fc-state-active,
+.fc-toolbar .ui-state-active {
+	z-index: 0;
+}
+
+.fc-toolbar button:focus {
+	z-index: 0;
 }

@@ -9,9 +9,17 @@ app.controller('calendarCtrl', function($scope, $http, $timeout, $compile, uiCal
     var m = date.getMonth();
     var y = date.getFullYear();
 
+    $http({
+        method: 'GET',
+        url: '/user/isLoggedIn'
+    }).then(function(res) {
+        console.log(res);
+    }, function(res) {
+        console.log(res);
+    });
+
     // scope data
     $scope.user = "Guest";
-    $scope.EventTitle = "EVENT LUL";
 
     /* event source that contains custom events on the scope */
     $scope.events = {

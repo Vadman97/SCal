@@ -101,11 +101,14 @@ function getRequest() {
                 //data: data from server
                 if(JSON.parse(data)["success"]) {
                     
-                    var viewDate = JSON.parse(data)["viewDate"];
-                    var monthView = JSON.parse(data)["view"];
-                    var eventsList = JSON.parse(data)["events"];
+                    var scope = angular.element(document.getElementById("bodyTagID")).scope();
                     
-                    // CLITTORD TO DO - ANGULAR SHIZ
+                    var userEvent;
+                    
+                    for(userEvent in data) {
+                        scope.events.append(data[userEvent]);
+                    }
+                    
                     
                     lmodal.style.display = "none";
                     return false;

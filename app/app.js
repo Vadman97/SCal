@@ -2,35 +2,57 @@
 
 var app = angular.module('calendar', ['ui.calendar']);
 
-app.controller('calendarCtrl', function($scope, $http, $timeout, uiCalendarConfig) {
+app.controller('calendarCtrl', function($scope, $http, $timeout, $compile, uiCalendarConfig) {
 
     var date = new Date();
     var d = date.getDate();
     var m = date.getMonth();
     var y = date.getFullYear();
 
+    // scope data
+    $scope.user = "Guest";
+    $scope.EventTitle = "EVENT LUL";
+
     /* event source that contains custom events on the scope */
     $scope.events = {
-      events: [
-        //   {title: 'All Day Event',start: new Date(y, m, 1)},
-        //   {title: 'Long Event',start: new Date(y, m, d - 5),end: new Date(y, m, d - 2)},
-        //   {id: 999,title: 'Repeating Event',start: new Date(y, m, d - 3, 16, 0),allDay: false},
-        //   {id: 999,title: 'Repeating Event',start: new Date(y, m, d + 4, 16, 0),allDay: false},
-        //   {title: 'Birthday Party',start: new Date(y, m, d + 1, 19, 0),end: new Date(y, m, d + 1, 22, 30),allDay: false},
-      ]
+      events: [{
+          "id": 201,
+          "title": "Meme hard or die trying",
+          "start": new Date(y,m,d+1,10,30),
+          "end": new Date(y,m,d+1,14,30),
+          "location": "Internet!!!",
+          "description": "Fuck up these memes doe",
+          "color": "red",
+          "relationship": "owned",
+          "notify": true
+      }]
     };
 
     /* event sources array*/
     $scope.eventSources = [$scope.events];
 
-    /* add custom event*/
+    /* load event onto front end */
     $scope.addEvent = function(event) {
-        // $scope.calendar.removeEventSource($scope.events);
         $scope.events.events.splice(0, 0, event);
-        // $scope.calendar.addEventSource($scope.events);
-        // console.log(uiCalendarConfig.calendars);
-        $scope.renderCalendar;
     };
+
+    /* create event - post it to server and load onto front end */
+    $scope.postEvent = function(event, cb) {
+        // HTTP POST TO SERVER
+        $http({
+            method: 'POST',
+            url: '/event',
+            data: event
+        }).then(cb, function() {
+            console.log("ERROR");
+        });
+    };
+
+    /* get length of events */
+    $scope.getEventsLength = function()
+    {
+        return $scope.events.events.length;
+    }
 
     /* remove event */
     $scope.remove = function(index) {
@@ -39,8 +61,9 @@ app.controller('calendarCtrl', function($scope, $http, $timeout, uiCalendarConfi
     };
 
     /* select event */
-    $scope.selectEvent = function()
+    $scope.selectEvent = function(event,jsEvent,view)
     {
+        $scope.selectedEvent = event;
         $('#modal').load("partials/editEventModal.html", closeModal);
         $('#modal').toggleClass("modal-active");
     }
@@ -57,6 +80,10 @@ app.controller('calendarCtrl', function($scope, $http, $timeout, uiCalendarConfi
           uiCalendarConfig.calendars[calendar].fullCalendar('render');
         }
       });
+    };
+
+    $scope.alertOnResize = function() {
+        alert("HELLO");
     };
 
     /* config object */

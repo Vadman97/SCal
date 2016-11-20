@@ -1,5 +1,5 @@
 /* createEvent.js */
-
+// test
 var friendSource = [
     "Clifford Lee",
     "Christopher Lee",

@@ -27,6 +27,7 @@ gulp.task('fcSass', function() {
 	.pipe(browserSync.reload({stream: true}));
 });
 
+
 // 'serve' task
 // -- serves files from root directory
 // -- also watches files/directories for live uploading during development

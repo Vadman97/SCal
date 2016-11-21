@@ -62,12 +62,11 @@ app.controller('calendarCtrl', function($scope, $http, $timeout, $compile, uiCal
     	        });
     	 }, function () {
     		 //IN GUEST MODE, LOAD FROM JS SESSION
-    		 console.log("GUEST LOAD EVENT");
     		 if (window.localStorage) {
-	   			 var events = JSON.parse(window.localStorage.getItem(events));
+	   			 var events = JSON.parse(window.localStorage.getItem("events"));
 	   			 if (events != null) {
 	   				 for (var event of events) {
-	   					$scope.addEvent(event);
+	   					$scope.addEvent($scope.parseServerEvent(event));
 	   				 }
 	   				$scope.renderCalendar();
 	   			 }
@@ -88,15 +87,26 @@ app.controller('calendarCtrl', function($scope, $http, $timeout, $compile, uiCal
             });
 	   	 }, function () {
 	   		 //IN GUEST MODE, CACHE TO JS SESSION
-	   		 console.log("GUEST CREATE EVENT");
 	   		 if (window.localStorage) {
-	   			 var events = window.localStorage.getItem(events);
+	   			 var events = JSON.parse(window.localStorage.getItem("events"));
 	   			 if (events == null) events = [];
 	   			 events.push(event);
 	   			 window.localStorage.setItem("events", JSON.stringify(events));
 	   		 }
 	   	 });
     };
+    
+    $scope.pushAllGuestData = function() {
+    	if (window.localStorage) {
+  			 var events = JSON.parse(window.localStorage.getItem("events"));
+  			 if (events != null) {
+  				 for (var event of events) {
+  					 $scope.postEvent(event, function() {});
+  				 }
+  				 window.localStorage.clear();
+  			 }
+  		 }
+    }
 
     /* get length of events */
     $scope.getEventsLength = function()

@@ -57,13 +57,36 @@ app.controller('calendarCtrl', function($scope, $http, $timeout, $compile, uiCal
 
     /* event sources array*/
     $scope.eventSources = [$scope.events];
+    
+    $scope.loggedIn = function(loggedInCB, loggedOutCB) {
+    	$.get("/user/isLoggedIn", function(resp) {
+            if (JSON.parse(resp).success) 
+            	loggedInCB();
+            else
+            	loggedOutCB();
+        });
+    }
 
     /* load event onto front end */
     $scope.addEvent = function(event) {
-        $scope.events.events.splice(0, 0, event);
+    	//IN GUEST MODE, CACHE TO JS SESSION
+    	$scope.loggedIn(function () {$scope.events.events.splice(0, 0, event)}, function () {});
     };
     
-
+    $scope.loadAllEvents = function() {
+    	//IN GUEST MODE, LOAD FROM JS SESSION
+    	WebsocketConnection.initialize();
+        $.get("/calendar?view=all", function(data) {
+            if (JSON.parse(data).success) {
+                var events = JSON.parse(data).events;
+                
+                for (var event in events) {
+                    $scope.addEvent(parseServerEvent(events[event]));
+                }
+                $scope.renderCalendar();
+            }
+        });
+    }
 
     // helper function to parse data from server format
     $scope.parseServerEvent = function(event)

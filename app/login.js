@@ -52,7 +52,7 @@ function validateUser() {
 
                 if(JSON.parse(data)["success"]) {
                 	WebsocketConnection.initialize();
-                	loadAllEvents();
+                	scope.loadAllEvents();
 
                     $('#modal').toggleClass("modal-active");
                     $('#modal').html("<div></div>")
@@ -102,40 +102,6 @@ function validateUser() {
             }
         });
     }
-}
-
-function loadAllEvents() {
-
-    $.ajax({
-            url : "/calendar?view=all",
-            type: "GET",
-            success: function(data)
-            {
-                //data: data from server
-                if(JSON.parse(data)["success"]) {
-
-                    var events = JSON.parse(data)["events"];
-
-                    for (var event in events)
-                    {
-                        scope.addEvent(scope.parseServerEvent(events[event]));
-                    }
-
-                    $('#modal').html("<div></div>")
-                    $('#modal').removeClass("modal-active");
-
-                    scope.renderCalendar();
-
-                    return false;
-                } else {
-                    alert("Get request not returned");
-                }
-            },
-            error: function(jqXHR, textStatus, errorThrown)
-            {
-                alert("Server Not Connected - getRequest");
-            }
-        });
 }
 
 // login.js EOF

@@ -1,0 +1,59 @@
+// logout.scss
+
+/* Modal Content/Box */
+
+
+.modal-logout {
+    background-color: #fefefe;
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 20%;
+    height: 50%;
+    border-radius: 15px;
+    
+     &-content {
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: space-around;
+        align-items: center;
+        width: 100%;
+         
+        input[type="button"] {
+            flex-grow: 1;
+            max-width: 50%;
+        }
+         
+        h2 {
+            margin-top: 40px;
+            margin-bottom: 40px;
+            font: {
+                size: 32px;
+                weight: 300;
+            }
+        }
+         
+        &-buttongroup {
+            display: flex;
+            flex-flow: row nowrap;
+            align-items: center;
+            justify-content: center;
+            
+            input {
+                width: 100%;
+                size: 30px;
+                position:relative;
+                border:2px solid #207cca;
+                background-color:#fafafa;
+                color:#207cca;
+                border-radius: 8px;
+            }
+    
+            input:hover {
+                background-color:#207cca;
+                color:#fafafa;
+            }       
+        }
+    }
+    
+}

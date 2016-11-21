@@ -9,22 +9,26 @@ app.controller('calendarCtrl', function($scope, $http, $timeout, $compile, uiCal
     var m = date.getMonth();
     var y = date.getFullYear();
 
-    // on page load, check if user is already logged into a prior session
-    // if so, load the logged in user's events
-    $http({
-        method: 'GET',
-        url: '/user/isLoggedIn'
-    }).then(function(res) {
-        if (res.success === true) {
-            // TODO IF ALREADY LOGGED IN THEN POPULATE MAP AND CHANGE USER PANEL
-        }
-    }, function(res) {
-        console.log("FAILED isLoggedIn");
-        console.log(res);
-    });
+    // // on page load, check if user is already logged into a prior session
+    // // if so, load the logged in user's events
+    // $(function() {
+    //     $http({
+    //         method: 'GET',
+    //         url: '/user/isLoggedIn'
+    //     }).then(function(res) {
+    //         if (res.success === true) {
+    //             // TODO IF ALREADY LOGGED IN THEN POPULATE MAP AND CHANGE USER PANEL
+    //             // $scope.user = "Guest"; i would switch it out w/ current user here
+    //             console.log("Logged in!");
+    //         } else {
+    //             $scope.user = "Guest";
+    //         }
+    //     }, function(res) {
+    //         console.log("FAILED isLoggedIn");
+    //         console.log(res);
+    //     });
+    // });
 
-    // scope data
-    $scope.user = "Guest";
 
     /* event source that contains custom events on the scope */
     $scope.events = {

@@ -28,6 +28,42 @@
             $("#sidebar").load("partials/sidebar.html");
 
             $.getScript("app/modal.js");
+            $.get("/user/isLoggedIn", function(resp) {
+                var scope = angular.element($('#bodyTagID')).scope();
+                loadEvents(scope,resp);
+            });
+
+            function loadEvents(scope, resp)
+            {
+                if (JSON.parse(resp).success) {
+                    $('#sidebarUser').html(JSON.parse(resp).username);
+                    $.get("/calendar?view=all", function(data) {
+                        if (JSON.parse(data).success) {
+                            var events = JSON.parse(data).events;
+
+                            for (var event in events) {
+                                scope.addEvent(parseServerEvent(events[event]));
+                            }
+
+                            scope.renderCalendar();
+                        }
+                    });
+                }
+            }
+
+            function parseServerEvent(event)
+            {
+                var result = event;
+                result.title = result.name;
+                result.start = result.start_time;
+                result.end = result.end_time;
+                result.stick = "true";
+                delete result.name;
+                delete result.start_time;
+                delete result.end_time;
+
+                return result;
+            }
         });
 
     </script>

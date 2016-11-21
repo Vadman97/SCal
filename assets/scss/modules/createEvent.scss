@@ -6,13 +6,13 @@
     margin: 5% auto;
     padding: 20px;
     width: 40%;
-    height: 60%;
     border-radius: 15px;
     display: flex;
     flex-flow: column nowrap;
 
     h1 {
         margin: 10px 0;
+        font-size: 24px;
     }
 
     p {
@@ -22,10 +22,19 @@
         }
     }
 
+    input:focus {
+        outline: none;
+    }
+
+    label {
+        font-size: 14px;
+    }
+
     &-titleInput {
         width: 80%;
         margin: 2% 0;
-
+        display: flex;
+        flex-flow: column nowrap;
         input[type="text"] {
             width: 20vw;
             font: {
@@ -34,6 +43,65 @@
         }
     }
 
+    &-timeInput {
+        display: flex;
+        flex-flow: column nowrap;
+        width: 80%;
+        margin: 2% 0;
+        input {
+            font: {
+                size: 16px;
+            }
+        }
+    }
+
+    &-locationInput {
+        display: flex;
+        flex-flow: column nowrap;
+        width: 80%;
+        margin: 2% 0;
+        input {
+            font: {
+                size: 16px;
+            }
+        }
+    }
+
+    &-descInput {
+        display: flex;
+        flex-flow: column nowrap;
+        width: 80%;
+        margin: 2% 0;
+        textarea {
+            font: {
+                size: 14px;
+            }
+            height: 60px;
+        }
+    }
+
+    &-colorInput {
+        display: flex;
+        flex-flow: column nowrap;
+        width: 80%;
+        margin: 2% 0;
+        &-select {
+            font-size: 16px;
+            // background-color:
+        }
+    }
+
+    &-friendsInput {
+        display: flex;
+        flex-flow: column nowrap;
+        width: 80%;
+        margin: 2% 0;
+        margin-bottom: 10%;
+    }
+}
+
+span.close {
+    text-align: right;
 }
 
 // createEvent.scss EOF

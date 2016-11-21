@@ -17,21 +17,23 @@ $(function() {
 
     var endDate = end[0].substr(1);
     var endTime = end[1].split(":");
-    endTime[2] = endTime[2].substring(0,2)
-
-    console.log(startTime[0]);
-    console.log(endTime[0]);
+    endTime[2] = endTime[2].substring(0,2);
 
     if (startTime[0]-8 < 0) {
-        startTime[0] += 23;
+        startTime[0] += 15;
     } else {
         startTime[0] -= 8;
+        if (startTime[0] < 10) startTime[0] = "0"+startTime[0];
     }
     if (endTime[0]-8 < 0) {
-        endTime[0] += 23;
+        endTime[0] += 15;
     } else {
         endTime[0] -= 8;
+        if (endTime[0] < 10) endTime[0] = "0"+endTime[0];
     }
+
+    console.log(startTime[0] + ":" + startTime[1] + ":" + startTime[2]);
+    console.log(endTime[0] + ":" + endTime[1] + ":" + endTime[2]);
 
     $('#editStartTime').val(startTime[0] + ":" + startTime[1] + ":" + startTime[2]);
     $('#editEndTime').val(endTime[0] + ":" + endTime[1] + ":" + endTime[2]);

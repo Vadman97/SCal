@@ -13,22 +13,26 @@ var loc             = document.getElementById("eventLocation");
 var description     = document.getElementById("eventDescription");
 
 /* populate friends data list for event creation/sharing */
+$(function() {
+    var none = document.createElement('option');
+    none.value = "None";
+    friendDatalist.append(none);
+});
 
 $.get("/friends", function(data) {
     if (JSON.parse(data).success === true) {
         var friends = JSON.parse(data).friends;
         for (var x in friends) {
             if (friends[x].status === "accepted") {
-
-                var div = document.createElement("div");
                 var option = document.createElement('option');
                 option.value = friends[x].username;
                 friendDatalist.appendChild(option);
-
             }
         }
     }
 });
+
+/* Every time a friend is selected, add it to an array which will eventually be used if sharing event */
 
 /* event creation -> angular scope */
 
@@ -51,7 +55,8 @@ function create() {
         "end": new Date(endDateArr[0], endDateArr[1]-1, endDateArr[2], endTimeArr[0], endTimeArr[1]),
         "location": loc.value,
         "description": description.value,
-        "color": "#FF00FF",
+        "color": color.value,
+        "relationship": "owned"
         "friends": [],
         "stick": true
     };
@@ -62,9 +67,9 @@ function create() {
         "end_time": endDate.value + " " + endTime.value + ":00",
         "location": loc.value,
         "description": description.value,
-        "color": "#FF00FF",               // EDIT HARDCODE
-        "relationship": "owned",        // EDIT HARDCODE
-        "notify": true                  // EDIT HARDCODE
+        "color": color.value,
+        "relationship": "owned",
+        "notify": true
     }
 
 
@@ -79,7 +84,7 @@ function create() {
 /* form validation function */
 function validateForm()
 {
-    if (title.value == "" || startTime.value == "" || endTime.value == "" || startDate.value == "" || endDate.value == "" || color.value == "" || loc.value == "" || description.value == "") {
+    if (title.value == "" || startTime.value == "" || endTime.value == "" || startDate.value == "" || endDate.value == "" || loc.value == "" || description.value == "") {
         return false;
     }
     return true;

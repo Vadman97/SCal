@@ -37,11 +37,12 @@
             {
                 $.get("/calendar?view=all", function(data) {
                     if (JSON.parse(data).success) {
-                        var events = JSON.parse(data).events;
-
-                        for (var event in events) {
-                            scope.addEvent(parseServerEvent(events[event]));
-                        }
+                        console.log(data);
+                        // var events = JSON.parse(data).events;
+                        //
+                        // for (var event in events) {
+                        //     scope.addEvent(parseServerEvent(events[event]));
+                        // }
 
                         scope.renderCalendar();
                     } else {

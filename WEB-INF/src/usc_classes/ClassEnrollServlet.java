@@ -112,7 +112,7 @@ public class ClassEnrollServlet extends HttpServlet {
 			USCClass cl = new USCClass(section_id);
 			cl.load();
 			if (cl.getClass_id() != 0) {
-				unenroll(con, "EnrolledClasses", "class_id", u.getId(), section_id);
+				unenroll(con, "EnrolledClasses", "class_id", u.getId(), cl.getClass_id());
 			} else {
 				int did = isType(con, section_id, "SELECT COUNT(*), discussion_id FROM Discussions WHERE section_id=?");
 				if (did != 0) {

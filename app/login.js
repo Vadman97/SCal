@@ -51,6 +51,7 @@ function validateUser() {
                 $('#sidebarUser').html(user);
 
                 if(JSON.parse(data)["success"]) {
+                	scope.pushAllGuestData();
                 	scope.loadAllEvents();
 
                     $('#modal').toggleClass("modal-active");

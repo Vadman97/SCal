@@ -27,26 +27,13 @@
       <!-- Load all .js files here --><script type="text/javascript">
         $(function() {
             $("#sidebar").load("partials/sidebar.html");
-
+            
             $.getScript("app/modal.js");
 
-            angular.element($('#bodyTagID')).scope().loggedIn(function() {
-            	$('#sidebarUser').html(JSON.parse(resp).username);
-                angular.element($('#bodyTagID')).scope().loadAllEvents();
-            }, function() {});
-
-            function parseServerEvent(event)
-            {
-                var result = event;
-                result.title = result.name;
-                result.start = result.start_time;
-                result.end = result.end_time;
-                result.stick = "true";
-                delete result.name;
-                delete result.start_time;
-                delete result.end_time;
-                return result;
-            }
+            angular.element($('#bodyTagID')).scope().loggedIn(
+            		angular.element($('#bodyTagID')).scope().loadAllEvents, 
+            		angular.element($('#bodyTagID')).scope().loadAllEvents
+            );
         });
 
     </script>

@@ -8,7 +8,7 @@ var startTime       = document.getElementById("startTime");
 var startDate       = document.getElementById("startDate");
 var endTime         = document.getElementById("endTime");
 var endDate         = document.getElementById("endDate");
-var color           = document.getElementById("eventColor");
+var color           = document.getElementById("colorSelect");
 var loc             = document.getElementById("eventLocation");
 var description     = document.getElementById("eventDescription");
 

@@ -9,27 +9,6 @@ app.controller('calendarCtrl', function($scope, $http, $timeout, $compile, uiCal
     var m = date.getMonth();
     var y = date.getFullYear();
 
-    // // on page load, check if user is already logged into a prior session
-    // // if so, load the logged in user's events
-    // $(function() {
-    //     $http({
-    //         method: 'GET',
-    //         url: '/user/isLoggedIn'
-    //     }).then(function(res) {
-    //         if (res.success === true) {
-    //             // TODO IF ALREADY LOGGED IN THEN POPULATE MAP AND CHANGE USER PANEL
-    //             // $scope.user = "Guest"; i would switch it out w/ current user here
-    //             console.log("Logged in!");
-    //         } else {
-    //             $scope.user = "Guest";
-    //         }
-    //     }, function(res) {
-    //         console.log("FAILED isLoggedIn");
-    //         console.log(res);
-    //     });
-    // });
-
-
     /* event source that contains custom events on the scope */
     $scope.events = {
       events: [{
@@ -62,7 +41,7 @@ app.controller('calendarCtrl', function($scope, $http, $timeout, $compile, uiCal
     $scope.addEvent = function(event) {
         $scope.events.events.splice(0, 0, event);
     };
-    
+
 
 
     // helper function to parse data from server format
@@ -76,7 +55,7 @@ app.controller('calendarCtrl', function($scope, $http, $timeout, $compile, uiCal
 	     delete result.name;
 	     delete result.start_time;
 	     delete result.end_time;
-	
+
 	     return result;
 	 }
 
@@ -112,6 +91,12 @@ app.controller('calendarCtrl', function($scope, $http, $timeout, $compile, uiCal
         $('#modal').toggleClass("modal-active");
     }
 
+    /* selects day and opens create modal */
+    $scope.dayClickCreateEvent = function(date, jsEvent, view)
+    {
+        console.log(date);
+    }
+
     /* Change View */
     $scope.changeView = function(view,calendar) {
       uiCalendarConfig.calendars[calendar].fullCalendar('changeView',view);
@@ -124,6 +109,12 @@ app.controller('calendarCtrl', function($scope, $http, $timeout, $compile, uiCal
           uiCalendarConfig.calendars[calendar].fullCalendar('render');
         }
       });
+    };
+
+    /* Clear Calendar */
+    $scope.clearCalendar = function(calendar) {
+        $scope.events.events.splice(0);
+        $scope.renderCalendar;
     };
 
     $scope.alertOnResize = function() {
@@ -143,6 +134,7 @@ app.controller('calendarCtrl', function($scope, $http, $timeout, $compile, uiCal
           center: 'title',
           right: 'today prev,next'
         },
+        dayClick: $scope.dayClickCreateEvent,
         eventClick: $scope.selectEvent,
         eventDrop: $scope.alertOnDrop,
         eventResize: $scope.alertOnResize

@@ -22,6 +22,7 @@
 
       <!-- calendar front end javascript -->
       <script type="text/javascript" src="app/app.js"></script>
+	  <script type="text/javascript" src="app/websocket.js"></script>
 
       <!-- Load all .js files here --><script type="text/javascript">
         $(function() {
@@ -36,6 +37,7 @@
             function loadEvents(scope, resp)
             {
                 if (JSON.parse(resp).success) {
+                	WebsocketConnection.initialize();
                     $('#sidebarUser').html(JSON.parse(resp).username);
                     $.get("/calendar?view=all", function(data) {
                         if (JSON.parse(data).success) {

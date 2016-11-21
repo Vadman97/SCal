@@ -30,15 +30,16 @@ public class Notification {
 	private String username;
 	
 	// for creating a notification to write
-	public Notification(long user_id, long event_id, String notification_type) {
+	public Notification(long user_id, String username, long event_id, String notification_type) {
 		this.user_id = user_id;
+		this.username = username;
 		this.event_id = event_id;
 		this.notification_type = notification_type;
 	}
 	
 	// for loading notifications
 	protected Notification(long id, long user_id, long event_id, String notification_type, boolean completed) {
-		this(user_id, event_id, notification_type);
+		this(user_id, null, event_id, notification_type);
 		this.id = id;
 		this.completed = completed;
 	}

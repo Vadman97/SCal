@@ -1,9 +1,9 @@
-package main;
+package websockets;
 
-import javax.websocket.*;
-import javax.servlet.*;
-import javax.websocket.server.*;
-import javax.servlet.http.*;
+import javax.servlet.http.HttpSession;
+import javax.websocket.HandshakeResponse;
+import javax.websocket.server.HandshakeRequest;
+import javax.websocket.server.ServerEndpointConfig;
 
 public class WebsocketConfiguration extends ServerEndpointConfig.Configurator {
 

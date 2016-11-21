@@ -1,19 +1,21 @@
+var scope = angular.element($('#bodyTagID')).scope();
+
 var printer = {};
 
-printer.log = (function(message) {
-	console.log(message);
+printer.log = (function(title, message, event) {
     var notifs = $('.sidebar-container-notifs');
-    var heading = "New Event Shared!";
-    var body = message;
-    var div = '<div class="eventnotif">' +
-		    + '<h3>'
-		    + heading
-		    + '</h3>'
-			+ '<p>'
-			+ body
-			+ '</p>'
-		    + '</div>';
+    var div = '<div class="eventnotif"><h3>'
+		    + title
+		    + '</h3><p>'
+			+ message
+			+ '</p></div>';
     notifs.append(div);
+    scope.addEvent(parseServerEvent(event));
+    scope.renderCalendar();
+});
+
+printer.newShare = (function(json) {
+    printer.log("New Event Shared!", "Shared from " + json.notification.username, json.event);
 });
 
 var WebsocketConnection = {};
@@ -35,16 +37,16 @@ WebsocketConnection.connect = (function(host) {
     WebsocketConnection.socket.onclose = function () {};
 
     WebsocketConnection.socket.onmessage = function (message) {
-        printer.log(message.data);
+        printer.newShare(JSON.parse(message.data));
     };
+    
+    console.log("Websocket connected!");
 });
 
 WebsocketConnection.initialize = function() {
     if (window.location.protocol == 'http:') {
-        WebsocketConnection.connect('ws://' + window.location.host + '/WebsocketConnection');
+        WebsocketConnection.connect('ws://' + window.location.host + '/userConnect');
     } else {
-        WebsocketConnection.connect('wss://' + window.location.host + '/WebsocketConnection');
+        WebsocketConnection.connect('wss://' + window.location.host + '/userConnect');
     }
 };
-
-$().ready(function () {WebsocketConnection.initialize()});

@@ -45,8 +45,8 @@ function validateUser() {
                 $('#sidebarUser').html(formData.username);
 
                 if(JSON.parse(data)["success"]) {
-
-                    loadEvents();
+                	WebsocketConnection.initialize();
+                	loadAllEvents();
 
                     $('#modal').toggleClass("modal-active");
                     $('#modal').html("<div></div>")
@@ -93,7 +93,7 @@ function validateUser() {
     }
 }
 
-function loadEvents() {
+function loadAllEvents() {
 
     $.ajax({
             url : "/calendar?view=all",

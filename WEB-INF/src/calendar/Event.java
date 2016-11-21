@@ -7,14 +7,15 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.Vector;
 
+import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.mysql.jdbc.Statement;
 
-import main.UserConnect;
 import user.User;
 import util.Util;
+import websockets.UserConnect;
 
 public class Event {
 	public final class RelationshipType {
@@ -324,9 +325,14 @@ public class Event {
 	public void addShared(User u) {
 		//TODO(Vadim): check the notify boolean to find out if we notify or not
 		shared.add(u);
-		Notification n = new Notification(u.getId(), getId(), Notification.DEFAULT_TYPE);
+		Notification n = new Notification(u.getId(), u.getUsername(), getId(), Notification.DEFAULT_TYPE);
 		n.write();
-		UserConnect.sendJSONtoClient(u, n.toString());
+		Event e = new Event(n.getEvent_id());
+		e.load();
+		JsonObject result = new JsonObject();
+		result.add("notification", new Gson().toJsonTree(n).getAsJsonObject());
+		result.add("event", new Gson().toJsonTree(e).getAsJsonObject());
+		UserConnect.sendJSONtoClient(u, result.toString());
 	}
 	
 	/*

@@ -26,6 +26,10 @@ public class USCClass extends USCSection {
 	public USCClass(long class_id) {
 		setClass_id(class_id);
 	}
+	
+	public USCClass(int section_id) {
+		setSection_id(section_id);
+	}
 
 	protected USCClass(int section_id, int class_id, String dept, String location, String name, 
 			Time start_time, Time end_time, 
@@ -72,8 +76,14 @@ public class USCClass extends USCSection {
 			Connection con = null;
 			try {
 				con = Util.getConn();
-				PreparedStatement ps = con.prepareStatement("SELECT * FROM USCClasses WHERE class_id=?");
-				ps.setLong(1, getClass_id());
+				PreparedStatement ps;
+				if (getClass_id() == 0) {
+					ps = con.prepareStatement("SELECT * FROM USCClasses WHERE section_id=?");
+					ps.setInt(1, getSection_id());
+				} else {
+					ps = con.prepareStatement("SELECT * FROM USCClasses WHERE class_id=?");
+					ps.setLong(1, getClass_id());
+				}
 				ResultSet rs = ps.executeQuery();
 				if (rs.next()) {
 					setInternalData(rs);

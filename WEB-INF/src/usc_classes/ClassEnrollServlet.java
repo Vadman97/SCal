@@ -48,7 +48,8 @@ public class ClassEnrollServlet extends HttpServlet {
 					enroll(con, "EnrolledDiscussions", "discussion_id", u.getId(), did);
 				} else {
 					int lid = isType(con, section_id, "SELECT COUNT(*), lab_id FROM Labs WHERE section_id=?");
-					enroll(con, "EnrolledLabs", "lab_id", u.getId(), lid);
+					if (lid != 0)
+						enroll(con, "EnrolledLabs", "lab_id", u.getId(), lid);
 				}
 			}
 			Util.close(res, true);
@@ -117,7 +118,8 @@ public class ClassEnrollServlet extends HttpServlet {
 					unenroll(con, "EnrolledDiscussions", "discussion_id", u.getId(), did);
 				} else {
 					int lid = isType(con, section_id, "SELECT COUNT(*), lab_id FROM Labs WHERE section_id=?");
-					unenroll(con, "EnrolledLabs", "lab_id", u.getId(), lid);
+					if (lid != 0)
+						unenroll(con, "EnrolledLabs", "lab_id", u.getId(), lid);
 				}
 			}
 			Util.close(res, true);

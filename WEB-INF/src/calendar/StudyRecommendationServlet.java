@@ -23,6 +23,7 @@ public class StudyRecommendationServlet extends HttpServlet {
 	private class RecommendationJson {
 		public Vector<String> users;
 		public Timestamp day;
+		public boolean smart = false;
 		public transient Vector<User> user_objs;
 		
 		public void loadUsers() {
@@ -52,10 +53,14 @@ public class StudyRecommendationServlet extends HttpServlet {
 			return;
 		}
 		
-		RecommendationJson r = parse(Util.getRequestData(req));
-		Vector<Event> events = StudyRecommendations.findCommonTime(r.user_objs, u, r.day, req);
-		
 		JsonObject result = new JsonObject();
+		RecommendationJson r = parse(Util.getRequestData(req));
+		Object events = null;
+		if (r.smart)
+			events = StudyRecommendations.getRecommendations(u, r.day);
+		else
+			events = StudyRecommendations.findCommonTime(r.user_objs, u, r.day);
+
 		result.add("suggestions", new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create().toJsonTree(events));
 		result.addProperty("success", true);
 		res.getWriter().print(result.toString());

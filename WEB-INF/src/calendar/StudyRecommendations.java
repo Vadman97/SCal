@@ -9,19 +9,21 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Vector;
 
-import javax.servlet.http.HttpServletRequest;
-
 import jeigen.DenseMatrix;
+import usc_classes.USCClass;
 import user.User;
 import util.Util;
 
 public class StudyRecommendations {
+	//TODO(Vadim): better heuristic for finding people
 	public static final String QUERY = 
 			"SELECT Friendships.student_one, Friendships.student_two, USCClasses.class_id "
 			+ "FROM Friendships JOIN EnrolledClasses, USCClasses "
-			+ "WHERE (Friendships.student_one=? AND EnrolledClasses.user_id=Friendships.student_two AND EnrolledClasses.class_id=?) "
+			+ "WHERE ((Friendships.student_one=? AND EnrolledClasses.user_id=Friendships.student_two AND EnrolledClasses.class_id=?) "
 			+ "OR (Friendships.student_two=? AND EnrolledClasses.user_id=Friendships.student_one AND EnrolledClasses.class_id=?)) "
 			+ "AND USCClasses.class_id = EnrolledClasses.class_id";
 
@@ -30,12 +32,15 @@ public class StudyRecommendations {
 	public static final int TIME_QUANTS = (END_HOUR - START_HOUR) * 4;
 	public static final String REC_COLOR = "orange";
 	
-	public static Event getRecommendations(User currentUser) {
+	// recommendations for users from your classes for week of focusDay
+	public static Map<String, Object> getRecommendations(User currentUser, Timestamp focusDay) {
 		try {
 			Connection con = Util.getConn();
 			PreparedStatement st = con.prepareStatement("SELECT class_id FROM EnrolledClasses WHERE user_id=?");
 			st.setLong(1, currentUser.getId());
 			ResultSet rs = st.executeQuery();
+			Map<String, Object> out = new HashMap<>();
+			Map<String, Vector<Event>> result = new HashMap<>();
 			while (rs.next()) {
 				long class_id = rs.getLong(1);
 				PreparedStatement st2 = con.prepareStatement(QUERY);
@@ -44,15 +49,22 @@ public class StudyRecommendations {
 				st2.setLong(3, currentUser.getId());
 				st2.setLong(4, class_id);
 				ResultSet rs2 = st2.executeQuery();
+				Vector<User> users = new Vector<>();
 				while (rs2.next()) {
 					long studentOne = rs2.getLong(1), studentTwo = rs2.getLong(2);
 					if (studentOne == currentUser.getId()) {
-						
+						users.add(User.getUser(con, studentTwo));
 					} else {
-						
+						users.add(User.getUser(con, studentOne));
 					}
 				}
+				USCClass uscclass = new USCClass(class_id);
+				uscclass.load();
+				result.put(uscclass.getName(), findCommonTime(users, currentUser, focusDay));
+				out.put("events", result);
+				out.put("users", users);
 			}
+			return out;
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -70,7 +82,7 @@ public class StudyRecommendations {
 		return cal;
 	}
 	
-	public static Vector<Event> findCommonTime(Vector<User> users, User currentUser, Timestamp focusDay, HttpServletRequest req) {
+	public static Vector<Event> findCommonTime(Vector<User> users, User currentUser, Timestamp focusDay) {
 		Vector<Event> result = new Vector<>();
 		java.util.Calendar cal = resetCal(java.util.Calendar.getInstance(), focusDay, java.util.Calendar.SUNDAY);
 		//Week at a time around focusDay
@@ -79,7 +91,7 @@ public class StudyRecommendations {
 			for (int i = 0; i < users.size(); i++) {
 				Calendar calendar = new Calendar(users.get(i));
 				cal = resetCal(cal, focusDay, d);
-				calendar.getDayEvents(req, cal.getTime());
+				calendar.getDayEvents(currentUser, cal.getTime());
 				ArrayList<Event> events = calendar.events;
 				for (Event e: events) {
 					cal.setTime(e.getStartTimestamp());

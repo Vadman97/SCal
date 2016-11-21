@@ -322,6 +322,7 @@ public class Event {
 	 * Call Event.write(...) after to save
 	 */
 	public void addShared(User u) {
+		//TODO(Vadim): check the notify boolean to find out if we notify or not
 		shared.add(u);
 		Notification n = new Notification(u.getId(), getId(), Notification.DEFAULT_TYPE);
 		n.write();

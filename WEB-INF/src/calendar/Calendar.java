@@ -8,8 +8,6 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 
-import javax.servlet.http.HttpServletRequest;
-
 import com.google.gson.GsonBuilder;
 
 import usc_classes.Discussion;
@@ -40,7 +38,7 @@ public class Calendar {
 		events = new ArrayList<Event>();
 	}
 
-	public String getEvents(HttpServletRequest req, Date start, View v) {
+	public String getEvents(User user, Date start, View v) {
 		Connection conn = null;
 		try {
 			conn = Util.getConn();
@@ -101,7 +99,7 @@ public class Calendar {
 				events.add(new Event(rs.getLong(1), rs.getString(2), rs.getTimestamp(3), rs.getTimestamp(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getBoolean(8), rs.getString(11)));
 			}
 			
-			loadEnrolledEvents(conn, startTs, endTs, Util.getSessionUser(req));
+			loadEnrolledEvents(conn, startTs, endTs, user);
 			
 			return toString();
 		} catch (SQLException e) {
@@ -244,20 +242,20 @@ public class Calendar {
 		}
 	}
 	
-	public String getAll(HttpServletRequest req) {
-		return getEvents(req, null, null);
+	public String getAll(User u) {
+		return getEvents(u, null, null);
 	}
 	
-	public String getDayEvents(HttpServletRequest req, Date d) {
-		return getEvents(req, d, View.DAY);
+	public String getDayEvents(User u, Date d) {
+		return getEvents(u, d, View.DAY);
 	}
 
-	public String getWeekEvents(HttpServletRequest req, Date d) {
-		return getEvents(req, d, View.WEEK);
+	public String getWeekEvents(User u, Date d) {
+		return getEvents(u, d, View.WEEK);
 	}
 
-	public String getMonthEvents(HttpServletRequest req, Date d) {
-		return getEvents(req, d, View.MONTH);
+	public String getMonthEvents(User u, Date d) {
+		return getEvents(u, d, View.MONTH);
 	}
 	
 	public String toString() {

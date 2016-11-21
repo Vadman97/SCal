@@ -8,6 +8,9 @@ $(function() {
     var start   = JSON.stringify(event.start).split("T");
     var end     = JSON.stringify(event.end).split("T");
 
+    console.log(start);
+    console.log(end);
+
     var startDate = start[0].substr(1);
     var startTime = start[1].split(":");
     startTime[2] = startTime[2].substring(0,2)

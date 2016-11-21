@@ -5,43 +5,37 @@ $(function() {
     var event = scope.selectedEvent;
     $('#editEventTitle').text(event.title);
 
-    var start   = JSON.stringify(event.start).split("T");
-    var end     = JSON.stringify(event.end).split("T");
 
-    console.log(start);
-    console.log(end);
-
-    var startDate = start[0].substr(1);
+    var start   = JSON.stringify(event.start._i).split(" ");
+    var startDate = start[0].split("-");
     var startTime = start[1].split(":");
-    startTime[2] = startTime[2].substring(0,2)
 
-    var endDate = end[0].substr(1);
+    var end     = JSON.stringify(event.end._i).split(" ");
+    var endDate = end[0].split("-");
     var endTime = end[1].split(":");
-    endTime[2] = endTime[2].substring(0,2);
 
-    if (startTime[0]-8 < 0) {
-        startTime[0] = parseInt(startTime[0],10) + 16;
-    } else {
-        startTime[0] -= 8;
-        if (startTime[0] < 10) startTime[0] = "0"+startTime[0];
-    }
-    if (endTime[0]-8 < 0) {
-        endTime[0] = parseInt(endTime[0],10) + 16;
-    } else {
-        endTime[0] -= 8;
-        if (endTime[0] < 10) endTime[0] = "0"+endTime[0];
-    }
-
-    console.log(startTime[0] + ":" + startTime[1] + ":" + startTime[2]);
-    console.log(endTime[0] + ":" + endTime[1] + ":" + endTime[2]);
-
-    $('#editStartTime').val(startTime[0] + ":" + startTime[1] + ":" + startTime[2]);
-    $('#editEndTime').val(endTime[0] + ":" + endTime[1] + ":" + endTime[2]);
-    $('#editStartDate').val(startDate);
-    $('#editEndDate').val(endDate);
+    $('#editStartTime').val(startTime[0] + ":" + startTime[1] + ":" + startTime[2].substr(0,2));
+    $('#editEndTime').val(endTime[0] + ":" + endTime[1] + ":" + endTime[2].substr(0,2));
+    $('#editStartDate').val(startDate[0].substr(1) + "-" + startDate[1] + "-" + startDate[2]);
+    $('#editEndDate').val(endDate[0].substr(1) + "-" + endDate[1] + "-" + startDate[2]);
     $('#editLocation').val(event.location);
     $('#editDescription').val(event.description);
-
 });
+
+/* updates event on the server with ajax PUT request*/
+function updateEvent()
+{
+
+}
+
+/* deletes event from the server with ajax DELETE request*/
+function deleteEvent()
+{
+
+}
+
+
+
+
 
 // editEvent.js EOF

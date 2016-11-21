@@ -41,7 +41,7 @@ public class EventShareServlet extends HttpServlet {
 				Util.close(res, false);
 				return;
 			}
-			e.addShared(shareTarget);
+			e.addShared(shareTarget, u);
 			e.write(u);
 			Util.close(res, true);
 		} catch (SQLException e1) {

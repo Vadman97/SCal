@@ -52,6 +52,23 @@ app.controller('calendarCtrl', function($scope, $http, $timeout, $compile, uiCal
     $scope.addEvent = function(event) {
         $scope.events.events.splice(0, 0, event);
     };
+    
+
+
+    // helper function to parse data from server format
+    $scope.parseServerEvent = function(event)
+	 {
+	     var result = event;
+	     result.title = result.name;
+	     result.start = result.start_time;
+	     result.end = result.end_time;
+	     result.stick = "true";
+	     delete result.name;
+	     delete result.start_time;
+	     delete result.end_time;
+	
+	     return result;
+	 }
 
     /* create event - post it to server and load onto front end */
     $scope.postEvent = function(event, cb) {

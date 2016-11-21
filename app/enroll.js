@@ -10,37 +10,11 @@ function addClasses() {
 
     $.post("/classes", formData, function(data, status) {
         if (JSON.parse(data).success) {
-            $.get("/calendar&view=all", function(data) {
-                
-            });
-            scope.renderCalendar();
+            loadAllEvents();
         } else {
             console.log("/classes POST error");
         }
     });
-
-    // $.ajax({
-    //         url : "/classes",
-    //         type: "POST",
-    //         data : formData,
-    //         success: function(data, textStatus, jqXHR)
-    //         {
-    //             //data: data from server
-    //             if(JSON.parse(data)["success"]) {
-    //                 // Add class to calendar
-    //                 $.get("/calendar&view=all", function(res) {
-    //                     console.log(res);
-    //                 });
-    //                 return true;
-    //             } else {
-    //                 alert("Invalid section ID");
-    //             }
-    //         },
-    //         error: function(jqXHR, textStatus, errorThrown)
-    //         {
-    //             alert("Server Not Connected - Add");
-    //         }
-    //     });
 }
 
 function deleteClasses() {
@@ -75,4 +49,25 @@ function deleteClasses() {
         });
     }
 
+}
+
+function loadAllEvents() {
+    $.get("/calendar?view=all", function(data) {
+        if (JSON.parse(data).success) {
+            var events = JSON.parse(data).events;
+
+            for (var event in events) {
+                scope.addEvent(scope.parseServerEvent(events[event]));
+
+                $('#modal').html("<div></div>");
+                $('#modal').removeClass("modal-active");
+
+                scope.renderCalendar();
+
+                return true;
+            }
+        } else {
+            console.log("GET Request failed");
+        }
+    });
 }

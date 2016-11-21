@@ -87,7 +87,7 @@ function validateUser() {
                 console.log(data);
                 //data: data from server
                 if(JSON.parse(data)["success"]) {
-                    $('#sidebarUser').html(formData.username);
+                    $('#sidebarUser').html(user);
 
                     $('#modal').toggleClass("modal-active");
                     $('#modal').html("<div></div>")

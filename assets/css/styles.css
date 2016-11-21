@@ -395,23 +395,79 @@ table {
   margin: 5% auto;
   padding: 20px;
   width: 40%;
-  height: 60%;
   border-radius: 15px;
   display: -ms-flexbox;
   display: flex;
   -ms-flex-flow: column nowrap;
       flex-flow: column nowrap; }
   .modal-createEvent h1 {
-    margin: 10px 0; }
+    margin: 10px 0;
+    font-size: 24px; }
   .modal-createEvent p {
     font-size: 14px;
     font-weight: 100; }
+  .modal-createEvent input:focus {
+    outline: none; }
+  .modal-createEvent label {
+    font-size: 14px; }
   .modal-createEvent-titleInput {
     width: 80%;
-    margin: 2% 0; }
+    margin: 2% 0;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-flow: column nowrap;
+        flex-flow: column nowrap; }
     .modal-createEvent-titleInput input[type="text"] {
       width: 20vw;
       font-size: 16px; }
+  .modal-createEvent-timeInput {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-flow: column nowrap;
+        flex-flow: column nowrap;
+    width: 80%;
+    margin: 2% 0; }
+    .modal-createEvent-timeInput input {
+      font-size: 16px; }
+  .modal-createEvent-locationInput {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-flow: column nowrap;
+        flex-flow: column nowrap;
+    width: 80%;
+    margin: 2% 0; }
+    .modal-createEvent-locationInput input {
+      font-size: 16px; }
+  .modal-createEvent-descInput {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-flow: column nowrap;
+        flex-flow: column nowrap;
+    width: 80%;
+    margin: 2% 0; }
+    .modal-createEvent-descInput textarea {
+      font-size: 14px;
+      height: 60px; }
+  .modal-createEvent-colorInput {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-flow: column nowrap;
+        flex-flow: column nowrap;
+    width: 80%;
+    margin: 2% 0; }
+    .modal-createEvent-colorInput-select {
+      font-size: 16px; }
+  .modal-createEvent-friendsInput {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-flow: column nowrap;
+        flex-flow: column nowrap;
+    width: 80%;
+    margin: 2% 0;
+    margin-bottom: 10%; }
+
+span.close {
+  text-align: right; }
 
 .modal-editEvent {
   background-color: #fefefe;

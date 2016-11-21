@@ -7,6 +7,8 @@ var friendsBtn      = document.getElementById('friendsButton');
 var enrollBtn       = document.getElementById('enrollButton');
 var commonBtn       = document.getElementById('commonButton');
 
+var scope = angular.element($('#bodyTagID')).scope();
+
 // Get the <span> element that closes the modal
 var span = document.getElementsByClassName("close")[0];
 
@@ -17,8 +19,13 @@ createEventBtn.onclick = function() {
 
 // When the user clicks on the button, open the modal
 loginBtn.onclick = function() {
-    $('#modal').load("partials/loginModal.html", closeModal);
-    $('#modal').toggleClass("modal-active");
+    if(scope.isLoggedIn(function() {return true; }, function() {return false;})) {
+        $('#modal').load("partials/loginModal.html", closeModal);
+        $('#modal').toggleClass("modal-active");
+    } else  {
+        $('#modal').load("partials/logoutModal.html", closeModal);
+        $('#modal').toggleClass("modal-active");
+    }
 }
 
 uploadBtn.onclick = function() {

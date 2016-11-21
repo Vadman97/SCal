@@ -8,6 +8,9 @@ app.controller('calendarCtrl', function($scope, $http, $timeout, $compile, uiCal
     var d = date.getDate();
     var m = date.getMonth();
     var y = date.getFullYear();
+    
+    $scope.isLoggedIn = false;
+    
 
     /* event source that contains custom events on the scope */
     $scope.events = {

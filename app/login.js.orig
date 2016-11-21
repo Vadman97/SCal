@@ -51,8 +51,7 @@ function validateUser() {
                 $('#sidebarUser').html(user);
 
                 if(JSON.parse(data)["success"]) {
-                	WebsocketConnection.initialize();
-                	loadAllEvents();
+                	scope.loadAllEvents();
 
                     $('#modal').toggleClass("modal-active");
                     $('#modal').html("<div></div>")
@@ -88,6 +87,7 @@ function validateUser() {
                 //data: data from server
                 if(JSON.parse(data)["success"]) {
                     $('#sidebarUser').html(user);
+                     scope.isLoggedIn = true;
 
                     $('#modal').toggleClass("modal-active");
                     $('#modal').html("<div></div>")
@@ -104,6 +104,8 @@ function validateUser() {
     }
 }
 
+<<<<<<< Updated upstream
+=======
 function loadAllEvents() {
 
     $.ajax({
@@ -141,4 +143,5 @@ function loadAllEvents() {
         });
 }
 
+>>>>>>> Stashed changes
 // login.js EOF

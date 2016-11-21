@@ -651,3 +651,52 @@ span.close {
       .modal-enroll-content-buttongroup input:hover {
         background-color: #207cca;
         color: #fafafa; }
+
+/* Modal Content/Box */
+.modal-logout {
+  background-color: #fefefe;
+  margin: 10% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 20%;
+  height: 50%;
+  border-radius: 15px; }
+  .modal-logout-content {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-flow: column nowrap;
+        flex-flow: column nowrap;
+    -ms-flex-pack: distribute;
+        justify-content: space-around;
+    -ms-flex-align: center;
+        align-items: center;
+    width: 100%; }
+    .modal-logout-content input[type="button"] {
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+      max-width: 50%; }
+    .modal-logout-content h2 {
+      margin-top: 40px;
+      margin-bottom: 40px;
+      font-size: 32px;
+      font-weight: 300; }
+    .modal-logout-content-buttongroup {
+      display: -ms-flexbox;
+      display: flex;
+      -ms-flex-flow: row nowrap;
+          flex-flow: row nowrap;
+      -ms-flex-align: center;
+          align-items: center;
+      -ms-flex-pack: center;
+          justify-content: center; }
+      .modal-logout-content-buttongroup input {
+        width: 100%;
+        size: 30px;
+        position: relative;
+        border: 2px solid #207cca;
+        background-color: #fafafa;
+        color: #207cca;
+        border-radius: 8px; }
+      .modal-logout-content-buttongroup input:hover {
+        background-color: #207cca;
+        color: #fafafa; }

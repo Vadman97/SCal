@@ -118,7 +118,7 @@ function loadAllEvents() {
 
                     for (var event in events)
                     {
-                        scope.addEvent(parseServerEvent(events[event]));
+                        scope.addEvent(scope.parseServerEvent(events[event]));
                     }
 
                     $('#modal').html("<div></div>")
@@ -136,21 +136,6 @@ function loadAllEvents() {
                 alert("Server Not Connected - getRequest");
             }
         });
-}
-
-// helper function to parse data from server format
-function parseServerEvent(event)
-{
-    var result = event;
-    result.title = result.name;
-    result.start = result.start_time;
-    result.end = result.end_time;
-    result.stick = "true";
-    delete result.name;
-    delete result.start_time;
-    delete result.end_time;
-
-    return result;
 }
 
 // login.js EOF

@@ -48,7 +48,7 @@ function validateUser() {
             data : formData,
             success: function(data, textStatus, jqXHR)
             {
-                $('#sidebarUser').html(formData.username);
+                $('#sidebarUser').html(user);
 
                 if(JSON.parse(data)["success"]) {
                 	WebsocketConnection.initialize();

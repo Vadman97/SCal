@@ -29,7 +29,7 @@ function validateUser() {
 
     var user        = document.getElementById("username").value;
     var pass        = document.getElementById("password").value;
-    var em       = document.getElementById("email").value;
+    var em          = document.getElementById("email").value;
 
     var loginLogic = $(currTab).attr('id');
 

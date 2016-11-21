@@ -30,7 +30,7 @@ public class StudyRecommendations {
 	public static final int START_HOUR = 9;
 	public static final int END_HOUR = 22;
 	public static final int TIME_QUANTS = (END_HOUR - START_HOUR) * 4;
-	public static final String REC_COLOR = "orange";
+	public static final String REC_COLOR = "$ffa500";
 	
 	// recommendations for users from your classes for week of focusDay
 	public static Map<String, Object> getRecommendations(User currentUser, Timestamp focusDay) {

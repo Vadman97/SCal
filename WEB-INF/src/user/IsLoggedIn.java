@@ -17,7 +17,7 @@ public class IsLoggedIn extends HttpServlet {
 		if (u == null || !u.isLoggedIn())
 			Util.close(res, false);
 		else {
-			res.getWriter().println("{\"success\": true, \"username\": " + u.getUsername() + "}");
+			res.getWriter().println("{\"success\": true, \"username\": \"" + u.getUsername() + "\"}");
 			res.getWriter().close();
 		}
 	}

@@ -58,14 +58,15 @@ function loadAllEvents() {
             scope.clearCalendar();
             for (var event in events) {
                 scope.addEvent(scope.parseServerEvent(events[event]));
-                $('#modal').html("<div></div>");
-                $('#modal').removeClass("modal-active");
-                scope.renderCalendar();
-
-                return true;
             }
+            $('#modal').html("<div></div>");
+            $('#modal').removeClass("modal-active");
+            scope.renderCalendar();
+
+            return true;
         } else {
             console.log("GET Request failed");
+            return false;
         }
     });
 }

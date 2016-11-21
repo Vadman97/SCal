@@ -11,32 +11,12 @@ app.controller('calendarCtrl', function($scope, $http, $timeout, $compile, uiCal
 
     /* event source that contains custom events on the scope */
     $scope.events = {
-      events: [{
-          "id": 201,
-          "title": "Meme hard or die trying",
-          "start": new Date(y,m,d+1,10,30),
-          "end": new Date(y,m,d+1,14,30),
-          "location": "Internet!!!",
-          "description": "Fuck up these memes doe",
-          "color": "red",
-          "relationship": "owned",
-          "notify": true
-      }, {
-          "id": 202,
-          "title": "We\'re all sinners all of us",
-          "start": new Date(y,m,d+4,06,30),
-          "end": new Date(y,m,d+4,07,30),
-          "location": "Internet!!!",
-          "description": "Fuck up these memes doe",
-          "color": "red",
-          "relationship": "owned",
-          "notify": true
-      }]
+      events: []
     };
 
     /* event sources array*/
     $scope.eventSources = [$scope.events];
-    
+
     $scope.loggedIn = function(loggedInCB, loggedOutCB) {
     	$.get("/user/isLoggedIn", function(resp) {
             if (JSON.parse(resp).success) {
@@ -66,14 +46,14 @@ app.controller('calendarCtrl', function($scope, $http, $timeout, $compile, uiCal
 
 	     return result;
 	 }
-    
+
      $scope.loadAllEvents = function() {
     	 $scope.loggedIn(function () {
     		 WebsocketConnection.initialize();
     	        $.get("/calendar?view=all", function(data) {
     	            if (JSON.parse(data).success) {
     	                var events = JSON.parse(data).events;
-    	                
+
     	                for (var event in events) {
     	                    $scope.addEvent($scope.parseServerEvent(events[event]));
     	                }
@@ -105,7 +85,7 @@ app.controller('calendarCtrl', function($scope, $http, $timeout, $compile, uiCal
                 data: event
             }).then(cb, function() {
                 console.log("ERROR");
-            }); 
+            });
 	   	 }, function () {
 	   		 //IN GUEST MODE, CACHE TO JS SESSION
 	   		 console.log("GUEST CREATE EVENT");

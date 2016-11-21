@@ -28,6 +28,7 @@
             $("#sidebar").load("partials/sidebar.html");
 
             $.getScript("app/modal.js");
+            
             $.get("/user/isLoggedIn", function(resp) {
                 var scope = angular.element($('#bodyTagID')).scope();
                 loadEvents(scope,resp);

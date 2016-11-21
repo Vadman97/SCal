@@ -11,6 +11,7 @@ function loginSwitchTabs(loginType) {
         $("#login").removeClass('select');
         $("#signup").addClass('select');
         $("#email").css("display", "block");
+        $("#submit").val("Sign Up");
 
         currTab = document.getElementById('signup');
     }
@@ -28,13 +29,18 @@ function validateUser() {
 
     var user        = document.getElementById("username").value;
     var pass        = document.getElementById("password").value;
-    var email       = document.getElementById("email").value;
+    var em       = document.getElementById("email").value;
 
     var loginLogic = $(currTab).attr('id');
 
     if(loginLogic == 'login') {
 
-        var formData = {username: user,password: pass};
+        if (user == "" || pass == "") {
+            alert("Missing Login Fields!");
+            return false;
+        }
+
+        var formData = "username="+user+"&password="+pass;
 
         $.ajax({
             url : "/user/login",
@@ -65,23 +71,28 @@ function validateUser() {
 
     } else {
 
-        var formData = {username: username,password: password, email: email  };
-        var formData = {username: username,password: password};
+        if (user == "" || pass == "" || (em == "" || !em.includes('@'))) {
+            alert("Missing Sign Up Fields!");
+            return false;
+        }
 
+        var formData = "username="+user+"&password="+pass+"&email="+em;
+        console.log(formData);
          $.ajax({
             url : "/user/create",
             type: "POST",
             data : formData,
             success: function(data, textStatus, jqXHR)
             {
+                console.log(data);
                 //data: data from server
                 if(JSON.parse(data)["success"]) {
+                    $('#sidebarUser').html(formData.username);
 
                     $('#modal').toggleClass("modal-active");
                     $('#modal').html("<div></div>")
                     return false;
                 } else {
-
                     alert("Invalid: Username/Email already exists");
                 }
             },

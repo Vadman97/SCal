@@ -5,18 +5,9 @@ function logoutUser() {
     $.ajax({
             url : "/user/logout",
             type: "POST",
-            success: function(textStatus, jqXHR)
+            success: function(data, jqXHR)
             {
-                $('#sidebarUser').html(user);
-
-                if(JSON.parse(data)["success"]) {
-                    
-                     alert("Successfully logged out user");
-                    
-                } else {
-
-                    alert("Error - could logout user");
-                }
+                window.location.reload();
             },
             error: function(jqXHR, textStatus, errorThrown)
             {

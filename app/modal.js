@@ -1,11 +1,11 @@
-var modal           = document.getElementById('modal');
+var modal = document.getElementById('modal');
 
-var createEventBtn  = document.getElementById('createButton');
-var loginBtn        = document.getElementById('loginButton');
-var uploadBtn       = document.getElementById('uploadButton');
-var friendsBtn      = document.getElementById('friendsButton');
-var enrollBtn       = document.getElementById('enrollButton');
-var commonBtn       = document.getElementById('commonButton');
+var createEventBtn = document.getElementById('createButton');
+var loginBtn = document.getElementById('loginButton');
+var uploadBtn = document.getElementById('uploadButton');
+var friendsBtn = document.getElementById('friendsButton');
+var enrollBtn = document.getElementById('enrollButton');
+var commonBtn = document.getElementById('commonButton');
 
 var scope = angular.element($('#bodyTagID')).scope();
 
@@ -13,51 +13,51 @@ var scope = angular.element($('#bodyTagID')).scope();
 var span = document.getElementsByClassName("close")[0];
 
 createEventBtn.onclick = function() {
-    $('#modal').load("partials/createEventModal.html", closeModal);
-    $('#modal').toggleClass("modal-active");
+	$('#modal').load("partials/createEventModal.html", closeModal);
+	$('#modal').toggleClass("modal-active");
 }
 
 // When the user clicks on the button, open the modal
 loginBtn.onclick = function() {
-    if(scope.isLoggedIn(function() {return true; }, function() {return false;})) {
-        $('#modal').load("partials/loginModal.html", closeModal);
-        $('#modal').toggleClass("modal-active");
-    } else  {
-        $('#modal').load("partials/logoutModal.html", closeModal);
-        $('#modal').toggleClass("modal-active");
-    }
+	scope.loggedIn(function() {
+		$('#modal').load("partials/logoutModal.html", closeModal);
+		$('#modal').toggleClass("modal-active");
+	}, function() {
+		$('#modal').load("partials/loginModal.html", closeModal);
+		$('#modal').toggleClass("modal-active");
+	});
 }
 
 uploadBtn.onclick = function() {
-    $('#modal').load("partials/uploadModal.html", closeModal);
-    $('#modal').toggleClass("modal-active");
-    // modal.style.display = "block";
+	$('#modal').load("partials/uploadModal.html", closeModal);
+	$('#modal').toggleClass("modal-active");
+	// modal.style.display = "block";
 }
 
 friendsBtn.onclick = function() {
-    $('#modal').load("partials/friendsModal.html", closeModal);
-    $('#modal').toggleClass("modal-active");
+	$('#modal').load("partials/friendsModal.html", closeModal);
+	$('#modal').toggleClass("modal-active");
 }
 
 enrollBtn.onclick = function() {
-    $('#modal').load("partials/enrollModal.html", closeModal);
-    $('#modal').toggleClass("modal-active");
+	$('#modal').load("partials/enrollModal.html", closeModal);
+	$('#modal').toggleClass("modal-active");
 }
 
 // When the user clicks on <span> (x), close the modal
 var closeModal = function() {
-    var span = document.getElementsByClassName("close")[0];
-    span.onclick = function() {
-        $('#modal').toggleClass("modal-active");
-        $('#modal').html("<div></div>")
-    }
+	var span = document.getElementsByClassName("close")[0];
+	span.onclick = function() {
+		$('#modal').toggleClass("modal-active");
+		$('#modal').html("<div></div>")
+	}
 
-    // When the user clicks anywhere outside of the modal, close it
+	// When the user clicks anywhere outside of the modal, close it
 }
 
 window.onclick = function(event) {
-    if (event.target == modal) {
-        $('#modal').html("<div></div>")
-        $('#modal').toggleClass("modal-active");
-    }
+	if (event.target == modal) {
+		$('#modal').html("<div></div>")
+		$('#modal').toggleClass("modal-active");
+	}
 }

@@ -27,9 +27,10 @@
       <!-- Load all .js files here --><script type="text/javascript">
         $(function() {
             $("#sidebar").load("partials/sidebar.html");
+            
+            $.getScript("app/modal.js");
 
             angular.element($('#bodyTagID')).scope().loggedIn(function() {
-            	$('#sidebarUser').html(JSON.parse(resp).username);
                 angular.element($('#bodyTagID')).scope().loadAllEvents();
             }, function() {});
 

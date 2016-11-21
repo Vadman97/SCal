@@ -39,6 +39,7 @@ app.controller('calendarCtrl', function($scope, $http, $timeout, $compile, uiCal
     
     $scope.loggedIn = function(loggedInCB, loggedOutCB) {
     	$.get("/user/isLoggedIn", function(resp) {
+        	$('#sidebarUser').html(JSON.parse(resp).username);
             if (JSON.parse(resp).success) 
             	loggedInCB();
             else
@@ -48,24 +49,8 @@ app.controller('calendarCtrl', function($scope, $http, $timeout, $compile, uiCal
 
     /* load event onto front end */
     $scope.addEvent = function(event) {
-    	//IN GUEST MODE, CACHE TO JS SESSION
-    	$scope.loggedIn(function () {$scope.events.events.splice(0, 0, event)}, function () {});
+    	$scope.events.events.splice(0, 0, event)
     };
-
-    $scope.loadAllEvents = function() {
-    	//IN GUEST MODE, LOAD FROM JS SESSION
-    	WebsocketConnection.initialize();
-        $.get("/calendar?view=all", function(data) {
-            if (JSON.parse(data).success) {
-                var events = JSON.parse(data).events;
-                
-                for (var event in events) {
-                    $scope.addEvent(parseServerEvent(events[event]));
-                }
-                $scope.renderCalendar();
-            }
-        });
-    }
 
     // helper function to parse data from server format
     $scope.parseServerEvent = function(event)
@@ -81,17 +66,56 @@ app.controller('calendarCtrl', function($scope, $http, $timeout, $compile, uiCal
 
 	     return result;
 	 }
+    
+     $scope.loadAllEvents = function() {
+    	 $scope.loggedIn(function () {
+    		 WebsocketConnection.initialize();
+    	        $.get("/calendar?view=all", function(data) {
+    	            if (JSON.parse(data).success) {
+    	                var events = JSON.parse(data).events;
+    	                
+    	                for (var event in events) {
+    	                    $scope.addEvent($scope.parseServerEvent(events[event]));
+    	                }
+    	                $scope.renderCalendar();
+    	            }
+    	        });
+    	 }, function () {
+    		 //IN GUEST MODE, LOAD FROM JS SESSION
+    		 console.log("GUEST LOAD EVENT");
+    		 if (window.localStorage) {
+	   			 var events = window.localStorage.getItem(events);
+	   			 if (events != null) {
+	   				 for (var event of events) {
+	   					$scope.addEvent(event);
+	   				 }
+	   				$scope.renderCalendar();
+	   			 }
+	   		 }
+    	 });
+    }
 
     /* create event - post it to server and load onto front end */
     $scope.postEvent = function(event, cb) {
-        // HTTP POST TO SERVER
-        $http({
-            method: 'POST',
-            url: '/event',
-            data: event
-        }).then(cb, function() {
-            console.log("ERROR");
-        });
+    	$scope.loggedIn(function () {
+    		// HTTP POST TO SERVER
+            $http({
+                method: 'POST',
+                url: '/event',
+                data: event
+            }).then(cb, function() {
+                console.log("ERROR");
+            }); 
+	   	 }, function () {
+	   		 //IN GUEST MODE, CACHE TO JS SESSION
+	   		 console.log("GUEST CREATE EVENT");
+	   		 if (window.localStorage) {
+	   			 var events = window.localStorage.getItem(events);
+	   			 if (events == null) events = [];
+	   			 events.push(event);
+	   			 window.localStorage.setItem("events", events);
+	   		 }
+	   	 });
     };
 
     /* get length of events */

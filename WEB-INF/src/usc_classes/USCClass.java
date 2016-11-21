@@ -13,7 +13,7 @@ import util.Util;
 
 public class USCClass extends USCSection {
 
-	long class_id;
+	long class_id = 0;
 	private int class_num; 
 	private Vector<Exam> exams = new Vector<Exam>(); 
 	private Vector<Discussion> discussions = new Vector<>();
@@ -72,35 +72,31 @@ public class USCClass extends USCSection {
 	}
 	
 	public void load() {
-		if(getClass_id() != 0) {
-			Connection con = null;
+		Connection con = null;
+		try {
+			con = Util.getConn();
+			PreparedStatement ps;
+			if (getClass_id() == 0) {
+				ps = con.prepareStatement("SELECT * FROM USCClasses WHERE section_id=?");
+				ps.setInt(1, getSection_id());
+			} else {
+				ps = con.prepareStatement("SELECT * FROM USCClasses WHERE class_id=?");
+				ps.setLong(1, getClass_id());
+			}
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				setInternalData(rs);
+				exams = Exam.load(getClass_id());
+			} else {
+				setClass_id(0);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
 			try {
-				con = Util.getConn();
-				PreparedStatement ps;
-				if (getClass_id() == 0) {
-					ps = con.prepareStatement("SELECT * FROM USCClasses WHERE section_id=?");
-					ps.setInt(1, getSection_id());
-				} else {
-					ps = con.prepareStatement("SELECT * FROM USCClasses WHERE class_id=?");
-					ps.setLong(1, getClass_id());
-				}
-				ResultSet rs = ps.executeQuery();
-				if (rs.next()) {
-					setInternalData(rs);
-					exams = Exam.load(getClass_id());
-				} else {
-					setClass_id(0);
-				}
+				if(con != null) con.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
-			} finally {
-				try {
-					if(con != null) con.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				} finally {
-					
-				}
 			}
 		}
 	}
@@ -115,6 +111,7 @@ public class USCClass extends USCSection {
 
 	private void setInternalData(ResultSet rs) {
 		try {
+			setClass_id(rs.getLong(1));
 			setSection_id(rs.getInt(2));
 			setDept(rs.getString(3));
 			setClass_num(rs.getInt(4));

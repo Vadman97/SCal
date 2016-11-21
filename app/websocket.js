@@ -3,7 +3,12 @@ var WebsocketConnection = {};
 WebsocketConnection.socket = null;
 
 WebsocketConnection.connect = (function(host) {
-    if ('WebSocket' in window) {
+	if (WebsocketConnection.socket) {
+		WebsocketConnection.socket.close();
+		WebsocketConnection.socket = null;
+	}
+
+	if ('WebSocket' in window) {
         WebsocketConnection.socket = new WebSocket(host);
     } else if ('MozWebSocket' in window) {
         WebsocketConnection.socket = new MozWebSocket(host);

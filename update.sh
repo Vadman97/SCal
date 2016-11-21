@@ -15,5 +15,7 @@ cp lib/* /usr/share/$TOMCAT/lib
 
 # COMPILE JAVA
 cd WEB-INF; 
+rm -rf classes;
+mkdir classes;
 shopt -s globstar;
 javac -cp /usr/share/$TOMCAT/lib/\*:/usr/share/java/mysql.jar -d classes src/**/*.java;

@@ -233,7 +233,9 @@ public class Calendar {
 					c.set(java.util.Calendar.HOUR_OF_DAY, hourEnd);
 					c.set(java.util.Calendar.MINUTE, minuteEnd);
 					eventEnd = new Timestamp(c.getTime().getTime());
-					events.add(new Event(0, cl.getName(), eventStart, eventEnd, cl.getLocation(), cl.getDescription(), CLASS_COLOR, true, "owned"));
+					String name = parentClass.getDept() + parentClass.getClass_num() + " Section";
+					String description = parentClass.getName() + " Section";
+					events.add(new Event(0, name, eventStart, eventEnd, parentClass.getLocation(), description, CLASS_COLOR, true, "owned"));
 				}
 			}
 			if (eventStart.after(end_ts))

@@ -42,6 +42,16 @@ app.controller('calendarCtrl', function($scope, $http, $timeout, $compile, uiCal
           "color": "red",
           "relationship": "owned",
           "notify": true
+      }, {
+          "id": 202,
+          "title": "We\'re all sinners all of us",
+          "start": new Date(y,m,d+4,06,30),
+          "end": new Date(y,m,d+4,07,30),
+          "location": "Internet!!!",
+          "description": "Fuck up these memes doe",
+          "color": "red",
+          "relationship": "owned",
+          "notify": true
       }]
     };
 

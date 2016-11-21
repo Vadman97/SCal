@@ -19,12 +19,26 @@ $(function() {
     var endTime = end[1].split(":");
     endTime[2] = endTime[2].substring(0,2)
 
-    $('#startTime').val((startTime[0]-8) + ":" + startTime[1] + ":" + startTime[2]);
-    $('#endTime').val((endTime[0]-8) + ":" + endTime[1] + ":" + endTime[2]);
-    $('#startDate').val(startDate);
-    $('#endDate').val(endDate);
-    $('#location').val(event.location);
-    $('#description').val(event.description);
+    console.log(startTime[0]);
+    console.log(endTime[0]);
+
+    if (startTime[0]-8 < 0) {
+        startTime[0] += 23;
+    } else {
+        startTime[0] -= 8;
+    }
+    if (endTime[0]-8 < 0) {
+        endTime[0] += 23;
+    } else {
+        endTime[0] -= 8;
+    }
+
+    $('#editStartTime').val(startTime[0] + ":" + startTime[1] + ":" + startTime[2]);
+    $('#editEndTime').val(endTime[0] + ":" + endTime[1] + ":" + endTime[2]);
+    $('#editStartDate').val(startDate);
+    $('#editEndDate').val(endDate);
+    $('#editLocation').val(event.location);
+    $('#editDescription').val(event.description);
 
 });
 

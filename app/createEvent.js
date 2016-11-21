@@ -56,7 +56,7 @@ function create() {
         "location": loc.value,
         "description": description.value,
         "color": color.value,
-        "relationship": "owned"
+        "relationship": "owned",
         "friends": [],
         "stick": true
     };

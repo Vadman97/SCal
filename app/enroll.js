@@ -55,13 +55,11 @@ function loadAllEvents() {
     $.get("/calendar?view=all", function(data) {
         if (JSON.parse(data).success) {
             var events = JSON.parse(data).events;
-
+            scope.clearCalendar();
             for (var event in events) {
                 scope.addEvent(scope.parseServerEvent(events[event]));
-
                 $('#modal').html("<div></div>");
                 $('#modal').removeClass("modal-active");
-
                 scope.renderCalendar();
 
                 return true;

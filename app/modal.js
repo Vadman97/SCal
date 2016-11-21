@@ -30,7 +30,6 @@ uploadBtn.onclick = function() {
 friendsBtn.onclick = function() {
     $('#modal').load("partials/friendsModal.html", closeModal);
     $('#modal').toggleClass("modal-active");
-    $.getScript("app/friendsMenu.js");
 }
 
 enrollBtn.onclick = function() {

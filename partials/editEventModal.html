@@ -1,10 +1,10 @@
 <div class="modal-editEvent modal-content" ng-controller="calendarCtrl">
-    <span class="close"><i class="fa fa-close fa-md"></i></span>
+    <div class="close"><i class="fa fa-close fa-md"></i></div>
 
-    <div class="modal-editEvent-name">
-        <h2 id="editEventTitle"></h2>
+    <div class="modal-editEvent-titleInput">
+        <label for="editEventTitle">Title</label>
+        <input type="text" id="editEventTitle" placeholder="Enter a name for your event">
     </div>
-    <h1 id="editEventID"></h1>
     <div class="modal-editEvent-timeInput">
         <label for="editStartTime">Start</label>
         <input type="time" id="editStartTime">
@@ -15,14 +15,41 @@
         <input type="time" id="editEndTime">
         <input type="date" id="editEndDate">
     </div>
-    <div class="modal-editEvent-textInput">
-        <label for="location">Location</label>
-        <input type="text" id="editLocation">
+    <div class="modal-editEvent-locationInput">
+        <label for="editLocation">Location</label>
+        <input type="text" id="editLocation" placeholder="Enter your event's location">
     </div>
-    <div class="modal-editEvent-textInput">
-        <label for="description">Description</label>
-        <input type="text" id="editDescription">
+    <div class="modal-editEvent-descInput">
+        <label for="editDescription">Description</label>
+        <textarea id="editDescription" type="" name="name" value="" row="10" placeholder="Write a description for your event"></textarea>
     </div>
-    <button type="button" id="updateEventButton"></button>
+    <div class="modal-editEvent-colorInput">
+        <label for="colorSelect">Color</label>
+        <select class="modal-editEvent-colorInput-select" id="colorSelect">
+            <option value="#F44336">RED</option>
+            <option value="#FF9800">ORANGE</option>
+            <option value="#FFEB3B">YELLOW</option>
+            <option value="#4CAF50">GREEN</option>
+            <option value="#2196F3">BLUE</option>
+            <option value="#3F51B5">INDIGO</option>
+            <option value="#673AB7">VIOLET</option>
+        </select>
+    </div>
+    <div class="modal-editEvent-friendsInput">
+        <label for="modal-editEvent-friends-searchbar">Invite Friends</label>
+        <input
+            id="modal-editEvent-friends-searchbar"
+            type="text"
+            list="modal-editEvent-friends-list"
+            name="name"
+            placeholder="Search through friends"
+            autocomplete="off"
+        >
+        <datalist id="modal-editEvent-friends-list"></datalist>
+    </div>
+
+    <button id="updateEventButton" value="Create">Create</button>
+
+
     <script type="text/javascript" src="app/editEvent.js"></script>
 </div>

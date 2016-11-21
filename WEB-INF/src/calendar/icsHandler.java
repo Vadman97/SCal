@@ -27,8 +27,9 @@ public class icsHandler {
 		HH-=8;
 		int mm = Integer.parseInt(icsDate.substring(11, 13));
 		int ss = 0;
-		YYYY -= 1900;
-		Timestamp toReturn = new Timestamp(YYYY, MM, DD, HH, mm, ss, 0);
+		java.util.Calendar cal = java.util.Calendar.getInstance();
+		cal.set(YYYY, MM, DD, HH, mm, ss);
+		Timestamp toReturn = new Timestamp(cal.getTime().getTime());
 		return toReturn;
 		
 	}
@@ -54,7 +55,7 @@ public class icsHandler {
 			String name = "";
 			String location = "";
 			for(Property p: cc.getProperties()){
-				if(p.toString().contains(p.UID)){
+				if(p.toString().contains(Property.UID)){
 					String tmp = p.toString();
 					tmp = tmp.substring(4, tmp.length()-2);
 					id = Long.parseLong(tmp);
@@ -69,17 +70,17 @@ public class icsHandler {
 			        tmp = tmp.substring(6, tmp.length());
 					endDate = ICSToTimestamp(tmp);
 				}
-				if(p.toString().contains(p.DESCRIPTION)){
+				if(p.toString().contains(Property.DESCRIPTION)){
 					String tmp = p.toString();
 					tmp = tmp.substring(12, tmp.length());
 					description = tmp;
 				}
-				if(p.toString().contains(p.SUMMARY)){
+				if(p.toString().contains(Property.SUMMARY)){
 					String tmp = p.toString();
 					tmp = tmp.substring(8, tmp.length());
 					name = tmp;
 				}
-				if(p.toString().contains(p.LOCATION)){
+				if(p.toString().contains(Property.LOCATION)){
 					String tmp = p.toString();
 					tmp = tmp.substring(9, tmp.length());
 					location = tmp;

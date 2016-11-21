@@ -30,25 +30,25 @@
             $.getScript("app/modal.js");
             $.get("/user/isLoggedIn", function(resp) {
                 var scope = angular.element($('#bodyTagID')).scope();
-                loadEvents(scope);
+                loadEvents(scope,resp);
             });
 
-            function loadEvents(scope)
+            function loadEvents(scope, resp)
             {
-                $.get("/calendar?view=all", function(data) {
-                    if (JSON.parse(data).success) {
-                        console.log(data);
-                        // var events = JSON.parse(data).events;
-                        //
-                        // for (var event in events) {
-                        //     scope.addEvent(parseServerEvent(events[event]));
-                        // }
+                if (JSON.parse(resp).success) {
+                    $('#sidebarUser').html(JSON.parse(resp).username);
+                    $.get("/calendar?view=all", function(data) {
+                        if (JSON.parse(data).success) {
+                            var events = JSON.parse(data).events;
 
-                        scope.renderCalendar();
-                    } else {
-                        console.log("No response on GET request");
-                    }
-                });
+                            for (var event in events) {
+                                scope.addEvent(parseServerEvent(events[event]));
+                            }
+
+                            scope.renderCalendar();
+                        }
+                    });
+                }
             }
 
             function parseServerEvent(event)

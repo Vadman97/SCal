@@ -8,11 +8,15 @@ function addClasses() {
     var addClass = parseInt(document.getElementById("sectionID").value, 10);
     var formData = JSON.stringify({section_id: addClass});
 
-    console.log(formData);
-
     $.post("/classes", formData, function(data, status) {
-        console.log(data);
-        console.log(status);
+        if (JSON.parse(data).success) {
+            $.get("/calendar&view=all", function(data) {
+                
+            });
+            scope.renderCalendar();
+        } else {
+            console.log("/classes POST error");
+        }
     });
 
     // $.ajax({

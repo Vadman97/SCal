@@ -47,7 +47,6 @@ function validateUser() {
                 if(JSON.parse(data)["success"]) {
 
                     loadEvents();
-                    loadFriends();
 
                     $('#modal').toggleClass("modal-active");
                     $('#modal').html("<div></div>")
@@ -126,11 +125,6 @@ function loadEvents() {
                 alert("Server Not Connected - getRequest");
             }
         });
-}
-
-function loadFriends()
-{
-    console.log("TODO LOADFRIENDS LOGIN.JS");
 }
 
 // helper function to parse data from server format

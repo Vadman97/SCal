@@ -20,13 +20,13 @@ $(function() {
     endTime[2] = endTime[2].substring(0,2);
 
     if (startTime[0]-8 < 0) {
-        startTime[0] += 15;
+        startTime[0] = parseInt(startTime[0],10) + 16;
     } else {
         startTime[0] -= 8;
         if (startTime[0] < 10) startTime[0] = "0"+startTime[0];
     }
     if (endTime[0]-8 < 0) {
-        endTime[0] += 15;
+        endTime[0] = parseInt(endTime[0],10) + 16;
     } else {
         endTime[0] -= 8;
         if (endTime[0] < 10) endTime[0] = "0"+endTime[0];

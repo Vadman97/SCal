@@ -19,27 +19,20 @@ function addClasses() {
 
 function deleteClasses() {
 
-    var deleteClass = document.getElementById("sectionID").value;
-
-    var formData = {section_id: deleteClass};
+    var deleteClass = parseInt(document.getElementById("sectionID").value, 10);
+    var formData = JSON.stringify({section_id: deleteClass});
 
     var r = confirm("Are you sure you want to remove this class?");
 
-    if(r == true) {
+    if(r) {
         $.ajax({
             url : "/classes",
             type: "DELETE",
             data : formData,
-            success: function(data, textStatus, jqXHR)
+            success: function(res)
             {
-                //data: data from server
-                if(JSON.parse(data)["success"]) {
-                    // Add class to calendar
-
-                    return true;
-                } else {
-
-                    alert("You are not enrolled in this class");
+                if (JSON.parse(res).success) {
+                    loadAllEvents();
                 }
             },
             error: function(jqXHR, textStatus, errorThrown)
@@ -62,7 +55,6 @@ function loadAllEvents() {
             $('#modal').html("<div></div>");
             $('#modal').removeClass("modal-active");
             scope.renderCalendar();
-
             return true;
         } else {
             console.log("GET Request failed");

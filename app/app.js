@@ -50,16 +50,16 @@ app.controller('calendarCtrl', function($scope, $http, $timeout, $compile, uiCal
      $scope.loadAllEvents = function() {
     	 $scope.loggedIn(function () {
     		 WebsocketConnection.initialize();
-    	        $.get("/calendar?view=all", function(data) {
-    	            if (JSON.parse(data).success) {
-    	                var events = JSON.parse(data).events;
+            $.get("/calendar?view=all", function(data) {
+                if (JSON.parse(data).success) {
+                    var events = JSON.parse(data).events;
 
-    	                for (var event in events) {
-    	                    $scope.addEvent($scope.parseServerEvent(events[event]));
-    	                }
-    	                $scope.renderCalendar();
-    	            }
-    	        });
+                    for (var event in events) {
+                        $scope.addEvent($scope.parseServerEvent(events[event]));
+                    }
+                    $scope.renderCalendar();
+                }
+            });
     	 }, function () {
     		 //IN GUEST MODE, LOAD FROM JS SESSION
     		 console.log("GUEST LOAD EVENT");

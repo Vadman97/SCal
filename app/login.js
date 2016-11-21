@@ -51,7 +51,6 @@ function validateUser() {
                 $('#sidebarUser').html(user);
 
                 if(JSON.parse(data)["success"]) {
-                	WebsocketConnection.initialize();
                 	scope.loadAllEvents();
 
                     $('#modal').toggleClass("modal-active");

@@ -47,13 +47,13 @@ public class CalendarServlet extends HttpServlet {
 		try {
 			Date day = dayStr != null ? sdf.parse(dayStr) : null;
 			if (viewStr.equals("week"))
-				result = new JsonParser().parse(c.getWeekEvents(req, day)).getAsJsonObject();
+				result = new JsonParser().parse(c.getWeekEvents(u, day)).getAsJsonObject();
 			else if (viewStr.equals("month"))
-				result = new JsonParser().parse(c.getMonthEvents(req, day)).getAsJsonObject();
+				result = new JsonParser().parse(c.getMonthEvents(u, day)).getAsJsonObject();
 			else if (viewStr.equals("day"))
-				result = new JsonParser().parse(c.getDayEvents(req, day)).getAsJsonObject();
+				result = new JsonParser().parse(c.getDayEvents(u, day)).getAsJsonObject();
 			else
-				result = new JsonParser().parse(c.getAll(req)).getAsJsonObject();
+				result = new JsonParser().parse(c.getAll(u)).getAsJsonObject();
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}

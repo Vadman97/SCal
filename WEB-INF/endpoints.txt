@@ -38,7 +38,7 @@ POST /classes 				Data: {section_id: <id>}
 DELETE /classes 			Data: {section_id: <id>}
 							To unenroll from a class
 							
-POST /recommendations		Data: {'users': ['username1', 'username2'], 'day': '2016-11-20'}
+POST /recommendations		Data: {'users': ['username1', 'username2'], 'day': '2016-11-20', 'smart': true/false}
 							Response: {"suggestions":[{"id":0,"name":"Study Recommendation","start_time":"2016-11-20 09:00:00","end_time":"2016-11-20 12:00:00","location":"TBD","description":"TBD","color":"orange","relationship":"owned","notify":true}],"success":true}⏎  
 							Note: only calculates for a week at a time, around provided day!!!
 							To use the response data, the frontend offers opportunities to "create" these events if

@@ -104,4 +104,15 @@ span.close {
     text-align: right;
 }
 
+#submitEvent {
+    width: 10vw;
+    padding: 5px 10px;
+    border: none;
+    margin: 0 auto;
+    font: {
+        size: 18px;
+        weight: 100;
+    }
+}
+
 // createEvent.scss EOF

@@ -469,6 +469,14 @@ table {
 span.close {
   text-align: right; }
 
+#submitEvent {
+  width: 10vw;
+  padding: 5px 10px;
+  border: none;
+  margin: 0 auto;
+  font-size: 18px;
+  font-weight: 100; }
+
 .modal-editEvent {
   background-color: #fefefe;
   margin: 5% auto;
@@ -522,6 +530,7 @@ span.close {
   .sidebar-container-user-icon {
     margin: 0 20px;
     border-radius: 50%;
+    height: auto;
     max-height: 50px;
     vertical-align: middle; }
   .sidebar-container-user h2 {

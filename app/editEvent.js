@@ -39,7 +39,7 @@ function updateEvent()
         url: '/event',
         type: 'PUT',
         data: JSON.stringify({
-            name: $('#editEventTitle').val,
+            title: $('#editEventTitle').val,
             start_time: startDate.value + " " + startTime.value + ":00",
             end_time: endDate.value + " " + endTime.value + ":00",
             location: loc.value,
@@ -51,6 +51,7 @@ function updateEvent()
         }),
     }).done(function() {
         console.log('Event edited');
+        scope.renderCalendar();
     });
 }
 

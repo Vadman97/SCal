@@ -34,8 +34,9 @@ public class StudyRecommendations {
 	
 	// recommendations for users from your classes for week of focusDay
 	public static Map<String, Object> getRecommendations(User currentUser, Timestamp focusDay) {
+		Connection con = null;
 		try {
-			Connection con = Util.getConn();
+			con = Util.getConn();
 			PreparedStatement st = con.prepareStatement("SELECT class_id FROM EnrolledClasses WHERE user_id=?");
 			st.setLong(1, currentUser.getId());
 			ResultSet rs = st.executeQuery();
@@ -68,6 +69,13 @@ public class StudyRecommendations {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				if (con != null)
+					con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return null;
 	}

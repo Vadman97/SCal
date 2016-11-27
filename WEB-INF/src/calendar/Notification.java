@@ -71,8 +71,9 @@ public class Notification {
 	}
 
 	public boolean write() {
+		Connection con = null;
 		try { 
-			Connection con = Util.getConn();
+			con = Util.getConn();
 			PreparedStatement st = con.prepareStatement("INSERT INTO Notification (user_id, event_id, notification_type, completed) VALUES (?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
 			st.setLong(1, user_id);
 			st.setLong(2, event_id);
@@ -87,6 +88,13 @@ public class Notification {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				if (con != null)
+					con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return false;
 	}
@@ -106,8 +114,9 @@ public class Notification {
 		if (u != null) {
 			Vector<Notification> result = new Vector<>();
 			
+			Connection con = null;
 			try { 
-				Connection con = Util.getConn();
+				con = Util.getConn();
 				String str = incomplete_only ? LOAD_ALL_SQL + " AND completed=?" : LOAD_ALL_SQL;
 				PreparedStatement st = con.prepareStatement(str);
 				st.setLong(1, u.getId());
@@ -129,6 +138,13 @@ public class Notification {
 				return result;
 			} catch (SQLException e) {
 				e.printStackTrace();
+			} finally {
+				try {
+					if (con != null)
+						con.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
 			}
 		}
 		return null;

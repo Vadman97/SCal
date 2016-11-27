@@ -59,8 +59,9 @@ public class FriendsServlet extends HttpServlet {
 			return;
 		}
 		
+		Connection con = null;
 		try {
-			Connection con = Util.getConn();
+			con = Util.getConn();
 			User friend = User.getUser(con, obj.get("username").getAsString());
 			if (friend == null) {
 				Util.close(res, false);
@@ -70,6 +71,13 @@ public class FriendsServlet extends HttpServlet {
 			Util.close(res, true);
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				if (con != null)
+					con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 	
@@ -90,8 +98,9 @@ public class FriendsServlet extends HttpServlet {
 			return;
 		}
 		
+		Connection con = null;
 		try {
-			Connection con = Util.getConn();
+			con = Util.getConn();
 			User friend = User.getUser(con, obj.get("username").getAsString());
 			if (friend == null) {
 				Util.close(res, false);
@@ -109,6 +118,13 @@ public class FriendsServlet extends HttpServlet {
 			Util.close(res, true);
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				if (con != null)
+					con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 }

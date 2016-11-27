@@ -244,8 +244,9 @@ public class Event {
 	}
 	
 	private void loadSharedWith() {
+		Connection conn = null;
 		try {
-			Connection conn = Util.getConn();
+			conn = Util.getConn();
 			PreparedStatement st = conn.prepareStatement("SELECT * FROM EventRelationships WHERE event_id=? AND relationship_type=?");
 			st.setLong(1, id);
 			st.setString(2, RelationshipType.SHARED);
@@ -255,6 +256,13 @@ public class Event {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				if (conn != null)
+					conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 	
@@ -342,8 +350,9 @@ public class Event {
 	 * Automatically saves the change to db
 	 */
 	public void removeShare(User u) {
+		Connection conn = null;
 		try {
-			Connection conn = Util.getConn();
+			conn = Util.getConn();
 			PreparedStatement st = conn.prepareStatement("DELETE FROM EventRelationships WHERE user_id=? AND event_id=? AND relationship_type=?");
 			st.setLong(1, u.getId());
 			st.setLong(2, id);
@@ -353,6 +362,13 @@ public class Event {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				if (conn != null)
+					conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 

@@ -1,7 +1,10 @@
 package websockets;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArraySet;
@@ -14,20 +17,30 @@ import javax.websocket.OnOpen;
 import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
 
+import com.google.gson.JsonObject;
+
+import calendar.Calendar;
+import calendar.Event;
 import user.User;
 
 @ServerEndpoint(value = "/userConnect", configurator = WebsocketConfiguration.class)
-public class UserConnect {
+public class UserConnect implements Runnable{
 
 	private static Set<UserConnect> allUsers = new CopyOnWriteArraySet<>();
 	private static Map<User, Session> userToSession = new ConcurrentHashMap<>();
 	private Session session;
 	private HttpSession httpSession;
+	private Thread thread;
 
 	public UserConnect() {}
 
 	@OnOpen
 	public void open(Session session, EndpointConfig config) {
+		if (thread == null) {
+			thread = new Thread(this);
+			thread.start();
+		}
+		
 		this.session = session;
 		this.httpSession = (HttpSession) config.getUserProperties().get("httpSession");
 		allUsers.add(this);
@@ -68,6 +81,38 @@ public class UserConnect {
 			}
 		} catch (IOException ioe) {
 			ioe.printStackTrace();
+		}
+	}
+
+	@Override
+	public void run() {
+		while (true) {
+			for (Entry<User, Session> e: userToSession.entrySet()) {
+				Calendar c = new Calendar(e.getKey());
+				c.getAll(e.getKey());
+				ArrayList<Event> events = c.events;
+				java.util.Calendar cal = java.util.Calendar.getInstance();
+				cal.setTimeInMillis(System.currentTimeMillis());
+				Date now = cal.getTime();
+				for (Event ev: events) {
+					cal.setTime(ev.getStartTimestamp());
+					if (now.after(cal.getTime())) {
+						cal.setTime(ev.getEndTimestamp());
+						if (now.before(cal.getTime())) {
+							JsonObject event = ev.toJsonObj();
+							event.addProperty("eventAlert", true);
+							try {
+								e.getValue().getBasicRemote().sendText(event.toString());
+							} catch (IOException e1) {
+								e1.printStackTrace();
+							}
+						}
+					}
+				}
+			}
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e1) {}
 		}
 	}
 }

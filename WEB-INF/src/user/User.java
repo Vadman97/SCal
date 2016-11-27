@@ -178,8 +178,9 @@ public class User {
 	}
 	
 	public void loadFriends() {
+		Connection conn = null;
 		try {
-			Connection conn = Util.getConn();
+			conn = Util.getConn();
 			PreparedStatement st = conn.prepareStatement("SELECT student_two, approved FROM Friendships WHERE student_one=?");
 			st.setLong(1, getId());
 			ResultSet rs = st.executeQuery();
@@ -195,6 +196,13 @@ public class User {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				if (conn != null)
+					conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 

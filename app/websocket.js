@@ -2,6 +2,8 @@ var WebsocketConnection = {};
 	
 WebsocketConnection.socket = null;
 
+WebsocketConnection.alerted = new Set();
+
 WebsocketConnection.connect = (function(host) {
 	if (WebsocketConnection.socket) {
 		WebsocketConnection.socket.close();
@@ -24,14 +26,16 @@ WebsocketConnection.connect = (function(host) {
     WebsocketConnection.socket.onmessage = function (message) {
     	jsobj = JSON.parse(message.data);
     	if ("eventAlert" in jsobj) {
-    		console.log(jsobj);
-    		var notifs = $('.sidebar-container-notifs');
-    	    var div = '<div class="eventnotif"><h3>'
-    			    + "Event Alert"
-    			    + '</h3><p>'
-    				+ jsobj.name + " is coming up soon at " + jsobj.start_time
-    				+ '</p></div>';
-    	    notifs.append(div);
+    		if (!(WebsocketConnection.alerted.has(jsobj.id))) {
+	    		var notifs = $('.sidebar-container-notifs');
+	    	    var div = '<div class="eventnotif"><h3>'
+	    			    + "Event Alert"
+	    			    + '</h3><p>'
+	    				+ jsobj.name + " is coming up soon at " + jsobj.start_time
+	    				+ '</p></div>';
+	    	    notifs.append(div);
+	    	    WebsocketConnection.alerted.add(jsobj.id);
+    		}
     	} else 
     		WebsocketConnection.printer.newShare();
     };

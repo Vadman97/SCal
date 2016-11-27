@@ -1,54 +1,56 @@
 <div class="modal-editEvent modal-content" ng-controller="calendarCtrl">
     <div class="close"><i class="fa fa-close fa-md"></i></div>
 
-    <div class="modal-editEvent-titleInput">
-        <label for="editEventTitle">Title</label>
-        <input type="text" id="editEventTitle" placeholder="Enter a name for your event">
-    </div>
-    <div class="modal-editEvent-timeInput">
-        <label for="editStartTime">Start</label>
-        <input type="time" id="editStartTime">
-        <input type="date" id="editStartDate">
-    </div>
-    <div class="modal-editEvent-timeInput">
-        <label for="editEndTime">End</label>
-        <input type="time" id="editEndTime">
-        <input type="date" id="editEndDate">
-    </div>
-    <div class="modal-editEvent-locationInput">
-        <label for="editLocation">Location</label>
-        <input type="text" id="editLocation" placeholder="Enter your event's location">
-    </div>
-    <div class="modal-editEvent-descInput">
-        <label for="editDescription">Description</label>
-        <textarea id="editDescription" type="" name="name" value="" row="10" placeholder="Write a description for your event"></textarea>
-    </div>
-    <div class="modal-editEvent-colorInput">
-        <label for="colorSelect">Color</label>
-        <select class="modal-editEvent-colorInput-select" id="colorSelect">
-            <option value="#F44336">RED</option>
-            <option value="#FF9800">ORANGE</option>
-            <option value="#FFEB3B">YELLOW</option>
-            <option value="#4CAF50">GREEN</option>
-            <option value="#2196F3">BLUE</option>
-            <option value="#3F51B5">INDIGO</option>
-            <option value="#673AB7">VIOLET</option>
-        </select>
-    </div>
-    <div class="modal-editEvent-friendsInput">
-        <label for="modal-editEvent-friends-searchbar">Invite Friends</label>
-        <input
-            id="modal-editEvent-friends-searchbar"
-            type="text"
-            list="modal-editEvent-friends-list"
-            name="name"
-            placeholder="Search through friends"
-            autocomplete="off"
-        >
-        <datalist id="modal-editEvent-friends-list"></datalist>
+    <div class="modal-editEvent-editform">
+        <div class="modal-editEvent-editform-titleInput">
+            <label for="editEventTitle">Title</label>
+            <input type="text" id="editEventTitle" placeholder="Enter a name for your event">
+        </div>
+        <div class="modal-editEvent-editform-timeInput">
+            <label for="editStartTime">Start</label>
+            <input type="time" id="editStartTime">
+            <input type="date" id="editStartDate">
+        </div>
+        <div class="modal-editEvent-editform-timeInput">
+            <label for="editEndTime">End</label>
+            <input type="time" id="editEndTime">
+            <input type="date" id="editEndDate">
+        </div>
+        <div class="modal-editEvent-editform-locationInput">
+            <label for="editLocation">Location</label>
+            <input type="text" id="editLocation" placeholder="Enter your event's location">
+        </div>
+        <div class="modal-editEvent-editform-descInput">
+            <label for="editDescription">Description</label>
+            <textarea id="editDescription" type="" name="name" value="" row="10" placeholder="Write a description for your event"></textarea>
+        </div>
+        <div class="modal-editEvent-editform-colorInput">
+            <label for="colorSelect">Color</label>
+            <select class="modal-editEvent-colorInput-select" id="editColorSelect">
+                <option value="#F44336">RED</option>
+                <option value="#FF9800">ORANGE</option>
+                <option value="#FFEB3B">YELLOW</option>
+                <option value="#4CAF50">GREEN</option>
+                <option value="#2196F3">BLUE</option>
+                <option value="#3F51B5">INDIGO</option>
+                <option value="#673AB7">VIOLET</option>
+            </select>
+        </div>
+        <div class="modal-editEvent-editform-friendsInput">
+            <label for="modal-editEvent-friends-searchbar">Invite Friends</label>
+            <input
+                id="modal-editEvent-friends-searchbar"
+                type="text"
+                list="modal-editEvent-friends-list"
+                name="name"
+                placeholder="Search through friends"
+                autocomplete="off"
+            >
+            <datalist id="modal-editEvent-friends-list"></datalist>
+        </div>
     </div>
 
-    <div class="buttongroup">
+    <div class="modal-editEvent-editform-buttongroup">
         <button id="updateEventButton" onclick="updateEvent()">Update</button>
         <button id="deleteEventButton" onclick="deleteEvent()">Delete</button>
     </div>

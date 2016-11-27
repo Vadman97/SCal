@@ -49,6 +49,7 @@ function create() {
 
     console.log("create() todo hardcoded sections");
 
+    // todo
     var event = {
         "title": title.value,
         "start": new Date(startDateArr[0], startDateArr[1]-1, startDateArr[2], startTimeArr[0], startTimeArr[1]),

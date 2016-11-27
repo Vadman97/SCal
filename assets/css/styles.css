@@ -478,7 +478,7 @@ span.close {
   font-weight: 100; }
 
 .modal-editEvent {
-  background-color: #fefefe;
+  background-color: #FEFEFE;
   margin: 5% auto;
   padding: 20px;
   width: 40%;
@@ -488,6 +488,31 @@ span.close {
   display: flex;
   -ms-flex-flow: column nowrap;
       flex-flow: column nowrap; }
+  .modal-editEvent-editform {
+    width: 80%;
+    background-color: salmon;
+    margin: 0 auto; }
+    .modal-editEvent-editform-titleInput {
+      width: 80%;
+      margin: 2% 0;
+      display: -ms-flexbox;
+      display: flex;
+      -ms-flex-flow: column nowrap;
+          flex-flow: column nowrap; }
+      .modal-editEvent-editform-titleInput input[type="text"] {
+        width: 20vw;
+        font-size: 16px; }
+    .modal-editEvent-editform-timeInput {
+      display: -ms-flexbox;
+      display: flex;
+      -ms-flex-flow: column nowrap;
+          flex-flow: column nowrap;
+      width: 80%;
+      margin: 2% 0; }
+      .modal-editEvent-editform-timeInput input {
+        font-size: 16px; }
+    .modal-editEvent-editform-buttongroup {
+      margin: 0 auto; }
 
 #calendar {
   padding: 2% 2%;
@@ -583,8 +608,7 @@ span.close {
       flex-flow: column nowrap;
   -ms-flex: 5.5;
       flex: 5.5;
-  background-color: #656B7E;
-  overflow: scroll; }
+  background-color: #656B7E; }
 
 .sidebar-btn {
   width: 100%;

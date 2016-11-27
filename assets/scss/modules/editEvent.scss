@@ -1,7 +1,7 @@
 // editEvent.scss
 
 .modal-editEvent {
-    background-color: #fefefe;
+    background-color: #FEFEFE;
     margin: 5% auto;
     padding: 20px;
     width: 40%;
@@ -9,6 +9,39 @@
     border-radius: 15px;
     display: flex;
     flex-flow: column nowrap;
+
+    &-editform {
+        width: 80%;
+        background-color: salmon;
+        margin: 0 auto;
+        &-titleInput {
+            width: 80%;
+            margin: 2% 0;
+            display: flex;
+            flex-flow: column nowrap;
+            input[type="text"] {
+                width: 20vw;
+                font: {
+                    size: 16px;
+                }
+            }
+        }
+        &-timeInput {
+            display: flex;
+            flex-flow: column nowrap;
+            width: 80%;
+            margin: 2% 0;
+            input {
+                font: {
+                    size: 16px;
+                }
+            }
+        }
+
+        &-buttongroup {
+            margin: 0 auto;
+        }
+    }
 }
 
 // editEvent.scss EOF

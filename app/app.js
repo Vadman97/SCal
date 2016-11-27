@@ -8,13 +8,13 @@ app.controller('calendarCtrl', function($scope, $http, $timeout, $compile, uiCal
     var d = date.getDate();
     var m = date.getMonth();
     var y = date.getFullYear();
-    
+
     $scope.isLoggedIn = false;
-    
+
 
     /* event source that contains custom events on the scope */
     $scope.events = {
-      events: []
+      events: [{title: 'Birthday Party',start: new Date(y, m, d + 1, 19, 0),end: new Date(y, m, d + 1, 22, 30),allDay: false}]
     };
 
     /* event sources array*/
@@ -98,7 +98,7 @@ app.controller('calendarCtrl', function($scope, $http, $timeout, $compile, uiCal
 	   		 }
 	   	 });
     };
-    
+
     $scope.pushAllGuestData = function() {
     	if (window.localStorage) {
   			 var events = JSON.parse(window.localStorage.getItem("events"));

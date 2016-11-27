@@ -51,6 +51,8 @@ function updateEvent()
         }),
     }).done(function() {
         console.log('Event edited');
+        scope.events.events.splice(0);
+        scope.loadAllEvents();
         scope.renderCalendar();
     });
 }

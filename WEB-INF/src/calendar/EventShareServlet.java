@@ -1,6 +1,7 @@
 package calendar;
 
 import java.io.IOException;
+import java.sql.Connection;
 import java.sql.SQLException;
 
 import javax.servlet.ServletException;
@@ -30,8 +31,10 @@ public class EventShareServlet extends HttpServlet {
 			return;
 		}
 
+		Connection conn = null;
 		try {
-			User shareTarget = User.getUser(Util.getConn(), obj.get("target_username").getAsString());
+			conn = Util.getConn();
+			User shareTarget = User.getUser(conn, obj.get("target_username").getAsString());
 			if (shareTarget == null) {
 				Util.close(res, false);
 				return;
@@ -46,6 +49,13 @@ public class EventShareServlet extends HttpServlet {
 			Util.close(res, true);
 		} catch (SQLException e1) {
 			e1.printStackTrace();
+		} finally {
+			try {
+				if (conn != null)
+					conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -63,8 +73,10 @@ public class EventShareServlet extends HttpServlet {
 			return;
 		}
 
+		Connection con = null;
 		try {
-			User shareTarget = User.getUser(Util.getConn(), obj.get("target_username").getAsString());
+			con = Util.getConn();
+			User shareTarget = User.getUser(con, obj.get("target_username").getAsString());
 			if (shareTarget == null) {
 				Util.close(res, false);
 				return;
@@ -78,6 +90,13 @@ public class EventShareServlet extends HttpServlet {
 			Util.close(res, true);
 		} catch (SQLException e1) {
 			e1.printStackTrace();
+		} finally {
+			try {
+				if (con != null)
+					con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 }

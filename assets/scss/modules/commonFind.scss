@@ -1,0 +1,85 @@
+// common.scss
+
+/* Modal Content/Box */
+.modal-commonFind {
+    background-color: #fefefe;
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 40%;
+    height: 70%;
+    border-radius: 15px;
+    
+    &-content {
+        
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: space-around;
+        align-items: center;
+        width: 100%;
+        
+        input[type="button"] {
+            flex-grow: 1;
+            max-width: 50%;
+        }
+        
+        h2 {
+            margin-top: 40px;
+            font: {
+                size: 32px;
+                weight: 300;
+            }
+        }
+        
+        &-fieldgroup {
+            display: flex;
+            flex-flow: column nowrap;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20%;
+            margin-bottom: 5%;
+            
+            input {
+                width: 100%;
+                border-radius: 10px;
+                border: #888 solid 0.1px;
+                margin: 10px auto;
+                padding: 20px 10px;
+                height: 3vh;
+                box-sizing : border-box;
+                font: {
+                    size: 16px;
+                    weight: 100;
+                }
+                &:focus {
+                    outline: none;
+                }
+            }
+            transition: 0.3s;
+        }
+        
+        &-buttongroup {
+            display: flex;
+            flex-flow: row nowrap;
+            align-items: center;
+            justify-content: center;
+            margin-top: 5%;
+            
+            input {
+                width: 30%;
+                position:relative;
+                border:2px solid #207cca;
+                background-color:#fafafa;
+                color:#207cca;
+                border-radius: 8px;
+            }
+    
+            input:hover {
+                background-color:#207cca;
+                color:#fafafa;
+            }       
+        }  
+    }
+}
+
+    

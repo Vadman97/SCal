@@ -686,6 +686,78 @@ span.close {
         color: #fafafa; }
 
 /* Modal Content/Box */
+.modal-commonFind {
+  background-color: #fefefe;
+  margin: 10% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 40%;
+  height: 70%;
+  border-radius: 15px; }
+  .modal-commonFind-content {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-flow: column nowrap;
+        flex-flow: column nowrap;
+    -ms-flex-pack: distribute;
+        justify-content: space-around;
+    -ms-flex-align: center;
+        align-items: center;
+    width: 100%; }
+    .modal-commonFind-content input[type="button"] {
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+      max-width: 50%; }
+    .modal-commonFind-content h2 {
+      margin-top: 40px;
+      font-size: 32px;
+      font-weight: 300; }
+    .modal-commonFind-content-fieldgroup {
+      display: -ms-flexbox;
+      display: flex;
+      -ms-flex-flow: column nowrap;
+          flex-flow: column nowrap;
+      -ms-flex-align: center;
+          align-items: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+      margin-top: 20%;
+      margin-bottom: 5%;
+      transition: 0.3s; }
+      .modal-commonFind-content-fieldgroup input {
+        width: 100%;
+        border-radius: 10px;
+        border: #888 solid 0.1px;
+        margin: 10px auto;
+        padding: 20px 10px;
+        height: 3vh;
+        box-sizing: border-box;
+        font-size: 16px;
+        font-weight: 100; }
+        .modal-commonFind-content-fieldgroup input:focus {
+          outline: none; }
+    .modal-commonFind-content-buttongroup {
+      display: -ms-flexbox;
+      display: flex;
+      -ms-flex-flow: row nowrap;
+          flex-flow: row nowrap;
+      -ms-flex-align: center;
+          align-items: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+      margin-top: 5%; }
+      .modal-commonFind-content-buttongroup input {
+        width: 30%;
+        position: relative;
+        border: 2px solid #207cca;
+        background-color: #fafafa;
+        color: #207cca;
+        border-radius: 8px; }
+      .modal-commonFind-content-buttongroup input:hover {
+        background-color: #207cca;
+        color: #fafafa; }
+
+/* Modal Content/Box */
 .modal-logout {
   background-color: #fefefe;
   margin: 10% auto;

@@ -18,7 +18,7 @@ import util.Util;
 import websockets.UserConnect;
 
 public class Event {
-	public final class RelationshipType {
+	public static final class RelationshipType {
 		public final static String OWNED = "owned";
 		public final static String SHARED = "shared";
 	}
@@ -58,9 +58,11 @@ public class Event {
 	}
 
 	public static Event parse(String json) {
+		System.out.println(json);
 		Event e = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create().fromJson(json, Event.class);
 		if (e != null) {
 			e.shared = new Vector<User>(); 
+			e.id = 0;
 			e.loadSharedWith();
 		}
 		return e;
@@ -191,6 +193,7 @@ public class Event {
 			st2.setString(6, color);
 			st2.setBoolean(7, notify);
 			st2.executeUpdate();
+			System.out.println(st2);
 			conn.commit();
 			if (insert) {
 				ResultSet keys = st2.getGeneratedKeys();
@@ -241,8 +244,9 @@ public class Event {
 	}
 	
 	private void loadSharedWith() {
+		Connection conn = null;
 		try {
-			Connection conn = Util.getConn();
+			conn = Util.getConn();
 			PreparedStatement st = conn.prepareStatement("SELECT * FROM EventRelationships WHERE event_id=? AND relationship_type=?");
 			st.setLong(1, id);
 			st.setString(2, RelationshipType.SHARED);
@@ -252,6 +256,13 @@ public class Event {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				if (conn != null)
+					conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 	
@@ -339,8 +350,9 @@ public class Event {
 	 * Automatically saves the change to db
 	 */
 	public void removeShare(User u) {
+		Connection conn = null;
 		try {
-			Connection conn = Util.getConn();
+			conn = Util.getConn();
 			PreparedStatement st = conn.prepareStatement("DELETE FROM EventRelationships WHERE user_id=? AND event_id=? AND relationship_type=?");
 			st.setLong(1, u.getId());
 			st.setLong(2, id);
@@ -350,6 +362,13 @@ public class Event {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				if (conn != null)
+					conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 

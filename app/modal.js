@@ -44,6 +44,11 @@ enrollBtn.onclick = function() {
 	$('#modal').toggleClass("modal-active");
 }
 
+commonBtn.onclick = function() {
+	$('#modal').load("partials/commonModal.html", closeModal);
+	$('#modal').toggleClass("modal-active");
+}
+
 // When the user clicks on <span> (x), close the modal
 var closeModal = function() {
 	var span = document.getElementsByClassName("close")[0];

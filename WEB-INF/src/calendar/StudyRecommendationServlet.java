@@ -27,14 +27,22 @@ public class StudyRecommendationServlet extends HttpServlet {
 		public transient Vector<User> user_objs;
 		
 		public void loadUsers() {
+			Connection con = null;
 			try {
-				Connection con = Util.getConn();
+				con = Util.getConn();
 				user_objs = new Vector<>();
 				for (String s: users) {
 					user_objs.add(User.getUser(con, s));
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
+			} finally {
+				try {
+					if (con != null)
+						con.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
 			}
 		}
 	}

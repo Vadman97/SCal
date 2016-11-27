@@ -22,7 +22,18 @@ WebsocketConnection.connect = (function(host) {
     WebsocketConnection.socket.onclose = function () {};
 
     WebsocketConnection.socket.onmessage = function (message) {
-    	WebsocketConnection.printer.newShare(JSON.parse(message.data));
+    	jsobj = JSON.parse(message.data);
+    	if ("eventAlert" in jsobj) {
+    		console.log(jsobj);
+    		var notifs = $('.sidebar-container-notifs');
+    	    var div = '<div class="eventnotif"><h3>'
+    			    + "Event Alert"
+    			    + '</h3><p>'
+    				+ jsobj.name + " is coming up soon at " + jsobj.start_time
+    				+ '</p></div>';
+    	    notifs.append(div);
+    	} else 
+    		WebsocketConnection.printer.newShare();
     };
     
     console.log("Websocket connected!");

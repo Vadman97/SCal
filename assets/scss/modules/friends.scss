@@ -13,7 +13,7 @@
             width: 30%;
             height: 500px;
             margin: 2.5% 0 2.5% 0;
-            overflow: scroll;
+            overflow-y: auto;
             background-color: $grey;
             border-top-left-radius: 1em;
             border-bottom-left-radius: 1em;
@@ -22,6 +22,7 @@
             display: flex;
             flex-flow: column nowrap;
             width: 70%;
+            max-height: 500px;
             margin: 2.5% 0 2.5% 0;
             // padding: 2%;
             background-color: lightblue;
@@ -38,6 +39,7 @@
                     flex-grow: 1;
                     text-align: center;
                     padding: 2.5%;
+                    max-width: 33%;
                     background-color: green;
                     &:nth-child(1) {
                         background-color: lightblue;
@@ -50,9 +52,8 @@
             }
             &-tabcontent {
                 display: none;
-                padding: 2%;
-                max-height: 436px;
-                overflow: scroll;
+                margin: 0 0 0 2%;
+                overflow-y: auto;
             }
         }
     }
@@ -70,8 +71,8 @@
         display: inline-block;
         vertical-align: middle;
         max-width: 400px;
-        max-height: 40px;
-        overflow: scroll;;
+        // max-height: 40px;
+        overflow: auto;
     }
 }
 

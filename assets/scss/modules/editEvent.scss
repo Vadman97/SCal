@@ -12,7 +12,6 @@
 
     &-editform {
         width: 80%;
-        background-color: salmon;
         margin: 0 auto;
         &-titleInput {
             width: 80%;
@@ -61,6 +60,25 @@
                 }
                 height: 60px;
             }
+        }
+
+        &-colorInput {
+            display: flex;
+            flex-flow: column nowrap;
+            width: 80%;
+            margin: 2% 0;
+            &-select {
+                font-size: 16px;
+                // background-color:
+            }
+        }
+
+        &-friendsInput {
+            display: flex;
+            flex-flow: column nowrap;
+            width: 80%;
+            margin: 2% 0;
+            margin-bottom: 10%;
         }
 
         &-buttongroup {

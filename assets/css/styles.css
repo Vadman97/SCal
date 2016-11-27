@@ -334,7 +334,7 @@ table {
       width: 30%;
       height: 500px;
       margin: 2.5% 0 2.5% 0;
-      overflow: scroll;
+      overflow-y: auto;
       background-color: #656B7E;
       border-top-left-radius: 1em;
       border-bottom-left-radius: 1em; }
@@ -344,6 +344,7 @@ table {
       -ms-flex-flow: column nowrap;
           flex-flow: column nowrap;
       width: 70%;
+      max-height: 500px;
       margin: 2.5% 0 2.5% 0;
       background-color: lightblue;
       border-top-right-radius: 1em;
@@ -364,6 +365,7 @@ table {
               flex-grow: 1;
           text-align: center;
           padding: 2.5%;
+          max-width: 33%;
           background-color: green; }
           .modal-friends-content-main-tablist li:nth-child(1) {
             background-color: lightblue;
@@ -372,9 +374,8 @@ table {
             border-top-right-radius: 1em; }
       .modal-friends-content-main-tabcontent {
         display: none;
-        padding: 2%;
-        max-height: 436px;
-        overflow: scroll; }
+        margin: 0 0 0 2%;
+        overflow-y: auto; }
 
 .friendnotif {
   margin: 10px; }
@@ -387,8 +388,7 @@ table {
     display: inline-block;
     vertical-align: middle;
     max-width: 400px;
-    max-height: 40px;
-    overflow: scroll; }
+    overflow: auto; }
 
 .modal-createEvent {
   background-color: #fefefe;
@@ -490,7 +490,6 @@ span.close {
       flex-flow: column nowrap; }
   .modal-editEvent-editform {
     width: 80%;
-    background-color: salmon;
     margin: 0 auto; }
     .modal-editEvent-editform-titleInput {
       width: 80%;
@@ -530,6 +529,23 @@ span.close {
       .modal-editEvent-editform-descInput textarea {
         font-size: 14px;
         height: 60px; }
+    .modal-editEvent-editform-colorInput {
+      display: -ms-flexbox;
+      display: flex;
+      -ms-flex-flow: column nowrap;
+          flex-flow: column nowrap;
+      width: 80%;
+      margin: 2% 0; }
+      .modal-editEvent-editform-colorInput-select {
+        font-size: 16px; }
+    .modal-editEvent-editform-friendsInput {
+      display: -ms-flexbox;
+      display: flex;
+      -ms-flex-flow: column nowrap;
+          flex-flow: column nowrap;
+      width: 80%;
+      margin: 2% 0;
+      margin-bottom: 10%; }
     .modal-editEvent-editform-buttongroup {
       margin: 0 auto; }
 

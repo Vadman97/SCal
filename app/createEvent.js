@@ -46,10 +46,7 @@ function create() {
     var startTimeArr = startTime.value.split(":");
     var endTimeArr = endTime.value.split(":");
     var scope = angular.element($('#bodyTagID')).scope();
-
-    console.log("create() todo hardcoded sections");
-
-    // todo
+    
     var event = {
         "title": title.value,
         "start": new Date(startDateArr[0], startDateArr[1]-1, startDateArr[2], startTimeArr[0], startTimeArr[1]),

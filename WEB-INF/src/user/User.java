@@ -120,10 +120,13 @@ public class User {
 		return password;
 	}
 	
-	private ResultSet getUser(Connection con, String username, String raw_password) throws SQLException {
+	private ResultSet getUser(Connection con, String username, String password, boolean hashed) throws SQLException {
 		PreparedStatement s = con.prepareStatement("SELECT * FROM Users WHERE username=? AND password=?");
 		s.setString(1, username);
-		s.setString(2, hashPassword(raw_password));
+		if (!hashed)
+			s.setString(2, hashPassword(password));
+		else
+			s.setString(2, password);
 		return s.executeQuery();
 	}
 
@@ -139,8 +142,12 @@ public class User {
 	public boolean isLoggedIn() {
 		return (username != null);
 	}
-
+	
 	public boolean login(String username, String password) {
+		return login(username, password, false);
+	}
+
+	public boolean login(String username, String password, boolean hashed) {
 		if (username == null || password == null)
 			return false;
 		if (username.length() == 0 || password.length() == 0)
@@ -148,17 +155,21 @@ public class User {
 		Connection con = null;
 		try {
 			con = Util.getConn();
-			ResultSet rs = getUser(con, username, password);
+			ResultSet rs = getUser(con, username, password, hashed);
 			if (rs.next()) {
-				// assert only one such user
-				if (rs.isFirst() && rs.isLast()) {
-					setId(rs.getLong(1));
-					setUsername(username);
-					setPassword(password);
-					setEmail(rs.getString(4));
-					loadFriends();
-					return true;
+				setId(rs.getLong(1));
+				setUsername(username);
+				setPassword(password);
+				setEmail(rs.getString(4));
+				loadFriends();
+				try {
+					if (con != null)
+						con.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
 				}
+				System.out.println("User loaded");
+				return true;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -251,7 +262,13 @@ public class User {
 					writeFriendship(con, f);
 				
 				// after we write the user, re-login so we can initialize our new ID
-				return login(username, password);
+				try {
+					if (con != null)
+						con.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+				return login(username, password, true);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

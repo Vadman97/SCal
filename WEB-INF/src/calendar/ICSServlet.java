@@ -30,6 +30,7 @@ public class ICSServlet extends HttpServlet {
 			return;
 		}
 
+		//TODO combine parts together? but tbh ics file should never be more than one part
 		Part filePart = null;
 		for (Part part : req.getParts()) {
 			filePart = part;

@@ -10,18 +10,12 @@ tabsContent[0].style.flexFlow = "column nowrap";
 $.get("/friends", function(data) {
     if (JSON.parse(data).success === true) {
         var friends = JSON.parse(data).friends;
-        console.log(friends.length);
         for (var x=0; x < friends.length; x++) {
             if (friends[x].status == "accepted") {
                 var div = document.createElement("div");
-                console.log("x: " + x);
-                console.log(friends);
                 div.setAttribute("class", "friend");
-                console.log(friends[x].username);
                 div.innerHTML = '<img src="./assets/img/placeholder.jpg" alt="friend :)" class="friend-img"><h4>' + friends[x].username + '</h4>';
-                console.log(friendsSidebar);
                 friendsSidebar.appendChild(div);
-                console.log("appended");
             }
         }
     }

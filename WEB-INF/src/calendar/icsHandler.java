@@ -59,17 +59,17 @@ public class icsHandler {
 		//grabs all events from the ics file
 		ComponentList<CalendarComponent> cl = cal.getComponents();
 		for(CalendarComponent cc : cl){
-			Timestamp startDate = null;
-			Timestamp endDate = null;
-			Long id = null;
+			Timestamp startDate = new Timestamp(0);
+			Timestamp endDate = new Timestamp(0);
+			long id = 0;
 			String description = "";
 			String name = "";
 			String location = "";
 			for(Property p: cc.getProperties()){
-				if(p.toString().contains(p.UID)){
-					String tmp = "0";
-					id = Long.parseLong(tmp);
-				}
+//				if(p.toString().contains(p.UID)){
+//					String tmp = "0";
+//					id = Long.parseLong(tmp);
+//				}
 				if(p.toString().contains("DTSTART")){
 					String tmp = p.toString();
 			        tmp = tmp.substring(8, tmp.length());
@@ -80,29 +80,24 @@ public class icsHandler {
 			        tmp = tmp.substring(6, tmp.length());
 					endDate = ICSToTimestamp(tmp);
 				}
-				if(p.toString().contains(p.DESCRIPTION)){
+				if(p.toString().contains(Property.DESCRIPTION)){
 					String tmp = p.toString();
 					tmp = tmp.substring(12, tmp.length());
 					description = tmp;
 				}
-				if(p.toString().contains(p.SUMMARY)){
+				if(p.toString().contains(Property.SUMMARY)){
 					String tmp = p.toString();
 					tmp = tmp.substring(8, tmp.length());
 					name = tmp;
 				}
-				if(p.toString().contains(p.LOCATION)){
+				if(p.toString().contains(Property.LOCATION)){
 					String tmp = p.toString();
 					tmp = tmp.substring(9, tmp.length());
 					location = tmp;
 				}
 			}
-			System.out.println(id);
-			System.out.println(name);
-			System.out.println(startDate);
-			System.out.println(endDate);
-			System.out.println(location);
-			System.out.println(description);
 			Event e = new Event(id, name, startDate, endDate, location, description, "#ff0000", false, "owned");
+			System.out.println(e);
 			eventsExtractedFromICS.add(e);
 		}
 		return eventsExtractedFromICS;

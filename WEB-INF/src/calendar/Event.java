@@ -96,6 +96,10 @@ public class Event {
 		return e;
 	}
 	
+	public String toString() {
+		return toJson();
+	}
+	
 	public String toJson() {
 		return toJsonObj().toString();
 	}

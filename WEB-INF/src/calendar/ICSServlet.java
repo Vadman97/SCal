@@ -64,7 +64,7 @@ public class ICSServlet extends HttpServlet {
 																	// char
 		res.setHeader("Content-Transfer-Encoding", "binary");
 		res.setHeader("Content-Disposition", "attachment; filename=\"cal.ics\"");
-		res.getWriter().print(ics);
+		res.getWriter().write(ics);
 		res.getWriter().close();
 	}
 }

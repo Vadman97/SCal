@@ -98,6 +98,7 @@ public class UserConnect implements Runnable{
 				Date now = cal.getTime();
 				for (Event ev: events) {
 					cal.setTime(ev.getStartTimestamp());
+					cal.add(java.util.Calendar.MINUTE, -30);
 					if (now.after(cal.getTime())) {
 						cal.setTime(ev.getEndTimestamp());
 						if (now.before(cal.getTime())) {

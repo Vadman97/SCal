@@ -1,31 +1,26 @@
 package calendar;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.io.OutputStreamWriter;
+import java.io.Reader;
 import java.net.SocketException;
+import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.Vector;
-import java.sql.Timestamp;
+
 import net.fortuna.ical4j.data.CalendarBuilder;
 import net.fortuna.ical4j.data.ParserException;
 import net.fortuna.ical4j.model.Calendar;
-import net.fortuna.ical4j.model.component.CalendarComponent;
-import net.fortuna.ical4j.model.component.VEvent;
-import net.fortuna.ical4j.model.component.VTimeZone;
 import net.fortuna.ical4j.model.ComponentList;
 import net.fortuna.ical4j.model.DateTime;
 import net.fortuna.ical4j.model.Property;
 import net.fortuna.ical4j.model.TimeZone;
 import net.fortuna.ical4j.model.TimeZoneRegistry;
 import net.fortuna.ical4j.model.TimeZoneRegistryFactory;
+import net.fortuna.ical4j.model.component.CalendarComponent;
+import net.fortuna.ical4j.model.component.VEvent;
+import net.fortuna.ical4j.model.component.VTimeZone;
 import net.fortuna.ical4j.model.property.CalScale;
 import net.fortuna.ical4j.model.property.ProdId;
 import net.fortuna.ical4j.model.property.Uid;
@@ -50,7 +45,7 @@ public class icsHandler {
 		
 	}
 	
-	public static Set<Event>importICS(FileInputStream fis){
+	public static Set<Event>importICS(Reader fis){
 		Set<Event> eventsExtractedFromICS = new HashSet<>();
 		Calendar cal = null;
 		CalendarBuilder cb = new CalendarBuilder();
@@ -101,7 +96,13 @@ public class icsHandler {
 					location = tmp;
 				}
 			}
-			Event e = new Event(id, name, startDate, endDate, location, description, "red", false, "owned");
+			System.out.println(id);
+			System.out.println(name);
+			System.out.println(startDate);
+			System.out.println(endDate);
+			System.out.println(location);
+			System.out.println(description);
+			Event e = new Event(id, name, startDate, endDate, location, description, "#ff0000", false, "owned");
 			eventsExtractedFromICS.add(e);
 		}
 		return eventsExtractedFromICS;
@@ -153,7 +154,7 @@ public class icsHandler {
 		return startTimeCal.get(java.util.Calendar.MINUTE);
 	}
 	
-	public static void exportICS(Vector<Event> listOfEvents){
+	public static String exportICS(ArrayList<Event> listOfEvents){
 		
 		Calendar cal = new Calendar();
 		cal.getProperties().add(new ProdId("-//SCal Team//SCal 1.0//EN"));
@@ -204,25 +205,27 @@ public class icsHandler {
 			cal.getComponents().add(event);
 			
 		}
+		
+		return cal.toString();
 				
-		File out = new File("output.ics");
-		FileOutputStream fos = null;
-		try {
-			fos = new FileOutputStream(out);
-		} catch (FileNotFoundException e1) {
-			e1.printStackTrace();
-		}
-		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos));
-		try {
-			bw.write(cal.toString());
-		} catch (IOException e1) {
-			System.out.println("Error writing to file: "+ e1.getMessage());
-		}
-		try {
-			bw.close();
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
+//		File out = new File("output.ics");
+//		FileOutputStream fos = null;
+//		try {
+//			fos = new FileOutputStream(out);
+//		} catch (FileNotFoundException e1) {
+//			e1.printStackTrace();
+//		}
+//		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos));
+//		try {
+//			bw.write(cal.toString());
+//		} catch (IOException e1) {
+//			System.out.println("Error writing to file: "+ e1.getMessage());
+//		}
+//		try {
+//			bw.close();
+//		} catch (IOException e1) {
+//			e1.printStackTrace();
+//		}
 		
 	}	
 }

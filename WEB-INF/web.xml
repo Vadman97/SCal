@@ -62,7 +62,7 @@
     </servlet>
     
     <servlet>
-        <servlet-name>ICSUploadServlet</servlet-name>
+        <servlet-name>ICSServlet</servlet-name>
         <servlet-class>calendar.ICSServlet</servlet-class>
     </servlet>
 
@@ -122,7 +122,7 @@
     </servlet-mapping>
     
     <servlet-mapping>
-        <servlet-name>ICSUploadServlet</servlet-name>
-        <url-pattern>/icsUpload</url-pattern>
+        <servlet-name>ICSServlet</servlet-name>
+        <url-pattern>/ics</url-pattern>
     </servlet-mapping>
 </web-app>

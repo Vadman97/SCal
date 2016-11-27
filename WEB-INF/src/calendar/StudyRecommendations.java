@@ -97,9 +97,10 @@ public class StudyRecommendations {
 		for (int d = java.util.Calendar.SUNDAY; d <= java.util.Calendar.SUNDAY + 6; d++) {
 			DenseMatrix matrix = zeros(users.size(), TIME_QUANTS);
 			for (int i = 0; i < users.size(); i++) {
+				if (users.get(i) == null) continue;
 				Calendar calendar = new Calendar(users.get(i));
 				cal = resetCal(cal, focusDay, d);
-				calendar.getDayEvents(currentUser, cal.getTime());
+				calendar.getDayEvents(users.get(i), cal.getTime());
 				ArrayList<Event> events = calendar.events;
 				for (Event e: events) {
 					cal.setTime(e.getStartTimestamp());
@@ -108,7 +109,7 @@ public class StudyRecommendations {
 					int end = (cal.get(java.util.Calendar.HOUR_OF_DAY) - START_HOUR) * 4 + cal.get(java.util.Calendar.MINUTE / 15);
 					// fill row region from start to end with 1s
 					for (int k = start; k <= end; k++) {
-						if (k >= TIME_QUANTS)
+						if (k >= TIME_QUANTS || k < 0)
 							break;
 						matrix.set(i, k, 1.0);
 					}
@@ -129,8 +130,10 @@ public class StudyRecommendations {
 			 * 			ranging from START_HOUR to END_HOUR
 			 */
 			String friends = "";
-			for (User u: users)
-				friends += u.getUsername() + " ";
+			for (User u: users) {
+				if (u != null)
+					friends += u.getUsername() + " ";
+			}
 			
 			int start = 0;
 			boolean val = false;

@@ -27,14 +27,12 @@ public class Calendar {
 	public Date viewDate;
 	
 	public ArrayList<Event> events; // used for GSON object serialization
-	private transient User current_user;
 	public static final String ERROR_JSON = "{\"success\": false}";
 	public static final String EVENT_SELECT_SQL = "SELECT * FROM Events JOIN EventRelationships ON Events.id=EventRelationships.event_id WHERE EventRelationships.user_id=?";
 	public static final String CLASS_COLOR = "#00ff00", EXAM_COLOR = "#ff0000";
 	public static final String[] TYPES_OF_ENROLLMENTS = {"EnrolledClasses", "EnrolledDiscussions", "EnrolledLabs"};
 
 	public Calendar(User u) {
-		current_user = u;
 		events = new ArrayList<Event>();
 	}
 
@@ -47,7 +45,7 @@ public class Calendar {
 				st = conn.prepareStatement(EVENT_SELECT_SQL + " AND start_time>=? AND start_time <=?");
 			else 
 				st = conn.prepareStatement(EVENT_SELECT_SQL);
-			st.setLong(1, current_user.getId());
+			st.setLong(1, user.getId());
 			
 			Timestamp startTs = null;
 			Timestamp endTs = null;

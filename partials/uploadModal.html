@@ -1,12 +1,49 @@
 <div class="modal-upload modal-content">
     <span class="close"><i class="fa fa-close fa-md"></i></span>
     <div class="modal-upload-content">
+    <script>
+	    $('#upload').click(function(){
+	        var formData = new FormData($('form')[0]);
+	        console.log(formData);
+	        $.ajax({
+	            url: '/ics',  //Server script to process data
+	            xhr: function() {  // Custom XMLHttpRequest
+	                var myXhr = $.ajaxSettings.xhr();
+	                if(myXhr.upload){ // Check if upload property exists
+	                    myXhr.upload.addEventListener('progress',function(){}, false); // For handling the progress of the upload
+	                }
+	                return myXhr;
+	            },
+	            type: 'POST',
+	            //Ajax events
+	            // Form data
+	            data: formData,
+	            //Options to tell jQuery not to process data or worry about content-type.
+	            cache: false,
+	            contentType: false,
+	            processData: false
+	        }).done(function() {
+	        	console.log("Uploaded");
+	        	angular.element($('#bodyTagID')).scope().loadAllEvents();
+	            $('#modal').toggleClass("modal-active");
+	    		$('#modal').html("<div></div>")
+	        }).fail(function() {
+	        	console.log("Error");
+	        });
+	    });
+    </script>
 
 
-        <form class="modal-upload-content-file" action="index.html" method="post">
+        <form class="modal-upload-content-file" action="/ics" method="POST" enctype="multipart/form-data" onsubmit="return false;">
             <label for="modal-upload-content-file-chooser">File: </label>
-            <input type="file" id="modal-upload-content-file-chooser">
+            <input type="file" id="file" name="file">
+            <div class="modal-upload-content-buttongroup">
+                <button id="upload">Upload</button>
+            </div>
         </form>
+        
+        <br><br><br>
+        <h3><a href="/ics" target="_blank">Download (export) your current calendar!</a></h3>
 
 
     </div>

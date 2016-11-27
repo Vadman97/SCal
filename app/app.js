@@ -51,6 +51,7 @@ app.controller('calendarCtrl', function($scope, $http, $timeout, $compile, uiCal
 	 }
 
      $scope.loadAllEvents = function() {
+    	 $scope.events.events.splice(0);
     	 $scope.loggedIn(function () {
     		 WebsocketConnection.initialize();
             $.get("/calendar?view=all", function(data) {
@@ -60,7 +61,7 @@ app.controller('calendarCtrl', function($scope, $http, $timeout, $compile, uiCal
                     for (var event in events) {
                         $scope.addEvent($scope.parseServerEvent(events[event]));
                     }
-                    $scope.renderCalendar();
+            		$scope.renderCalendar();
                 }
             });
     	 }, function () {
@@ -98,6 +99,19 @@ app.controller('calendarCtrl', function($scope, $http, $timeout, $compile, uiCal
 	   		 }
 	   	 });
     };
+    
+    $scope.shareEvent = function(id, username) {
+    	$.ajax({
+            url: '/share',
+            type: username == "None" ? 'DELETE' : 'POST',
+            data: JSON.stringify({
+                event_id: id,
+                target_username: username
+            }),
+        }).done(function() {
+        	console.log((username == "None" ? 'Unshared' : 'Shared') + " event");
+        });
+    }
 
     $scope.pushAllGuestData = function() {
     	if (window.localStorage) {

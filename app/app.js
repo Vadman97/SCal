@@ -56,7 +56,7 @@ app.controller('calendarCtrl', function($scope, $http, $timeout, $compile, uiCal
             $.get("/calendar?view=all", function(data) {
                 if (JSON.parse(data).success) {
                     var events = JSON.parse(data).events;
-
+                    $scope.events.events.splice(0);
                     for (var event in events) {
                         $scope.addEvent($scope.parseServerEvent(events[event]));
                     }

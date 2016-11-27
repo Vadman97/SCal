@@ -48,19 +48,30 @@ function updateEvent()
             relationship: "owned",
             notify: true,
             id: scope.selectedEvent.id
-        }),
+        })
     }).done(function() {
         console.log('Event edited');
-        scope.events.events.splice(0);
         scope.loadAllEvents();
-        scope.renderCalendar();
+        $('#modal').html("<div></div>")
+        $('#modal').toggleClass("modal-active");
     });
 }
 
 /* deletes event from the server with ajax DELETE request*/
 function deleteEvent()
 {
-console.log(scope.selectedEvent);
+    $.ajax({
+        url: '/event',
+        type: 'DELETE',
+        data: JSON.stringify({
+            id: scope.selectedEvent.id
+        })
+    }).done(function() {
+        console.log('Event deleted');
+        scope.loadAllEvents();
+        $('#modal').html("<div></div>")
+        $('#modal').toggleClass("modal-active");
+    });
 }
 
 

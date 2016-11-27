@@ -14,7 +14,7 @@ app.controller('calendarCtrl', function($scope, $http, $timeout, $compile, uiCal
 
     /* event source that contains custom events on the scope */
     $scope.events = {
-      events: [{title: 'Birthday Party',start: new Date(y, m, d + 1, 19, 0),end: new Date(y, m, d + 1, 22, 30),allDay: false}]
+      events: [{title: 'Birthday Party',start: new Date(y, m, d + 1, 19, 0),end: new Date(y, m, d + 1, 22, 30),allDay: false, color: '#2196F3'}]
     };
 
     /* event sources array*/

@@ -30,7 +30,7 @@ public class StudyRecommendations {
 	public static final int START_HOUR = 9;
 	public static final int END_HOUR = 22;
 	public static final int TIME_QUANTS = (END_HOUR - START_HOUR) * 4;
-	public static final String REC_COLOR = "$ffa500";
+	public static final String REC_COLOR = "#0177ff";
 	
 	// recommendations for users from your classes for week of focusDay
 	public static Map<String, Object> getRecommendations(User currentUser, Timestamp focusDay) {
@@ -99,8 +99,11 @@ public class StudyRecommendations {
 					cal.setTime(e.getEndTimestamp());
 					int end = (cal.get(java.util.Calendar.HOUR_OF_DAY) - START_HOUR) * 4 + cal.get(java.util.Calendar.MINUTE / 15);
 					// fill row region from start to end with 1s
-					for (int k = start; k <= end; k++)
+					for (int k = start; k <= end; k++) {
+						if (k >= TIME_QUANTS)
+							break;
 						matrix.set(i, k, 1.0);
+					}
 				}
 			}
 			cal = resetCal(cal, focusDay, d);
@@ -117,6 +120,10 @@ public class StudyRecommendations {
 			 * 			In these calculations, each column is assumed 15 minutes, 
 			 * 			ranging from START_HOUR to END_HOUR
 			 */
+			String friends = "";
+			for (User u: users)
+				friends += u.getUsername() + " ";
+			
 			int start = 0;
 			boolean val = false;
 			//find continuous blocks of no-conflicts and create events from those
@@ -124,20 +131,20 @@ public class StudyRecommendations {
 				val = matrix.get(0, i) == 0.0;
 				if (!val) {
 					if ((i - 1) > start) {
-						eventCalculation(cal, i, start, result);
+						eventCalculation(cal, i, start, result, friends);
 					}
 					start = i;
 				}
 			}
 			if (!val) {
-				eventCalculation(cal, matrix.cols, start, result);
+				eventCalculation(cal, matrix.cols, start, result, friends);
 			}
 		}
 		
 		return result;
 	}
 	
-	private static void eventCalculation(java.util.Calendar cal, int idx, int start, Vector<Event> result) {
+	private static void eventCalculation(java.util.Calendar cal, int idx, int start, Vector<Event> result, String frs) {
 		int eventEnd = idx - 1;
 		cal.set(java.util.Calendar.HOUR_OF_DAY, start / 4 + START_HOUR);
 		cal.set(java.util.Calendar.MINUTE, (start * 15 % 60));
@@ -145,7 +152,7 @@ public class StudyRecommendations {
 		cal.set(java.util.Calendar.HOUR_OF_DAY, eventEnd / 4 + START_HOUR);
 		cal.set(java.util.Calendar.MINUTE, (eventEnd * 15 % 60));
 		Timestamp endTs = new Timestamp(cal.getTime().getTime());
-		Event e = new Event(0, "Study Recommendation", startTs, endTs, "TBD", "TBD", REC_COLOR, true, "owned");
+		Event e = new Event(0, "Study Recommendation with " + frs, startTs, endTs, "TBD", "Study with your friends " + frs, REC_COLOR, true, "owned");
 		result.add(e);
 	}
 	

@@ -38,7 +38,7 @@ app.controller('calendarCtrl', function($scope, $http, $timeout, $compile, uiCal
     // helper function to parse data from server format
     $scope.parseServerEvent = function(event)
 	 {
-	     var result = event;
+	     var result = JSON.parse(JSON.stringify(event));
 	     result.title = result.name;
 	     result.start = result.start_time;
 	     result.end = result.end_time;

@@ -18,7 +18,7 @@ import util.Util;
 import websockets.UserConnect;
 
 public class Event {
-	public final class RelationshipType {
+	public static final class RelationshipType {
 		public final static String OWNED = "owned";
 		public final static String SHARED = "shared";
 	}
@@ -58,9 +58,11 @@ public class Event {
 	}
 
 	public static Event parse(String json) {
+		System.out.println(json);
 		Event e = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create().fromJson(json, Event.class);
 		if (e != null) {
 			e.shared = new Vector<User>(); 
+			e.id = 0;
 			e.loadSharedWith();
 		}
 		return e;
@@ -191,6 +193,7 @@ public class Event {
 			st2.setString(6, color);
 			st2.setBoolean(7, notify);
 			st2.executeUpdate();
+			System.out.println(st2);
 			conn.commit();
 			if (insert) {
 				ResultSet keys = st2.getGeneratedKeys();

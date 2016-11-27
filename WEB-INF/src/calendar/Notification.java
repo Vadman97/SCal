@@ -74,7 +74,7 @@ public class Notification {
 		Connection con = null;
 		try { 
 			con = Util.getConn();
-			PreparedStatement st = con.prepareStatement("INSERT INTO Notification (user_id, event_id, notification_type, completed) VALUES (?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
+			PreparedStatement st = con.prepareStatement("INSERT INTO Notifications (user_id, event_id, notification_type, completed) VALUES (?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
 			st.setLong(1, user_id);
 			st.setLong(2, event_id);
 			st.setString(3, notification_type);

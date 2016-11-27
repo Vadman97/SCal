@@ -35,7 +35,7 @@ public class Event {
 	private String relationship;
 	private boolean notify;
 	
-	private transient Vector<User> shared = new Vector<User>();
+	public transient Vector<User> shared = new Vector<User>();
 	
 	// used from Calendar when loading all events from db
 	public Event(long id, String name, Timestamp start, Timestamp end, String location, String description, String color, boolean notify, String relationship) {
@@ -58,7 +58,6 @@ public class Event {
 	}
 
 	public static Event parse(String json) {
-		System.out.println(json);
 		Event e = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create().fromJson(json, Event.class);
 		if (e != null) {
 			e.shared = new Vector<User>(); 
@@ -193,7 +192,6 @@ public class Event {
 			st2.setString(6, color);
 			st2.setBoolean(7, notify);
 			st2.executeUpdate();
-			System.out.println(st2);
 			conn.commit();
 			if (insert) {
 				ResultSet keys = st2.getGeneratedKeys();

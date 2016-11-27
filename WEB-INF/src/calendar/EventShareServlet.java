@@ -3,6 +3,7 @@ package calendar;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -76,17 +77,23 @@ public class EventShareServlet extends HttpServlet {
 		Connection con = null;
 		try {
 			con = Util.getConn();
-			User shareTarget = User.getUser(con, obj.get("target_username").getAsString());
-			if (shareTarget == null) {
-				Util.close(res, false);
-				return;
-			}
+//			User shareTarget = User.getUser(con, obj.get("target_username").getAsString());
+//			if (shareTarget == null) {
+//				Util.close(res, false);
+//				return;
+//			}
 			Event e = new Event(obj.get("event_id").getAsLong());
 			if (e.getId() == 0) {
 				Util.close(res, false);
 				return;
 			}
-			e.removeShare(shareTarget);
+			//REMOVE ALL
+			ArrayList<User> copy = new ArrayList<User>();
+			for (User user: e.shared)
+				copy.add(user);
+			for (User user: copy)
+				e.removeShare(user);
+			
 			Util.close(res, true);
 		} catch (SQLException e1) {
 			e1.printStackTrace();

@@ -8,7 +8,29 @@ var endTime     = document.getElementById('editEndTime');
 var loc         = document.getElementById('editLocation');
 var description = document.getElementById('editDescription');
 var color       = document.getElementById('editColorSelect');
+var friendDatalist  = document.getElementById("modal-editEvent-friends-list");
+var friendInput     = document.getElementById("modal-editEvent-friends-searchbar");
 var scope = angular.element($('#bodyTagID')).scope();
+
+/* populate friends data list for event creation/sharing */
+$(function() {
+    var none = document.createElement('option');
+    none.value = "None";
+    friendDatalist.append(none);
+});
+
+$.get("/friends", function(data) {
+    if (JSON.parse(data).success === true) {
+        var friends = JSON.parse(data).friends;
+        for (var x in friends) {
+            if (friends[x].status === "accepted") {
+                var option = document.createElement('option');
+                option.value = friends[x].username;
+                friendDatalist.appendChild(option);
+            }
+        }
+    }
+});
 
 $(function() {
     var event = scope.selectedEvent;
@@ -51,9 +73,10 @@ function updateEvent()
         })
     }).done(function() {
         console.log('Event edited');
+        scope.shareEvent(scope.selectedEvent.id, $(friendInput).val());
         scope.loadAllEvents();
-        $('#modal').html("<div></div>")
         $('#modal').toggleClass("modal-active");
+		$('#modal').html("<div></div>")
     });
 }
 

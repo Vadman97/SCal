@@ -37,7 +37,7 @@ WebsocketConnection.connect = (function(host) {
 	    	    WebsocketConnection.alerted.add(jsobj.id);
     		}
     	} else 
-    		WebsocketConnection.printer.newShare();
+    		WebsocketConnection.printer.newShare(jsobj);
     };
     
     console.log("Websocket connected!");

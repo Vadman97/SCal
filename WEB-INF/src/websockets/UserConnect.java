@@ -30,15 +30,15 @@ public class UserConnect implements Runnable{
 	private static Map<User, Session> userToSession = new ConcurrentHashMap<>();
 	private Session session;
 	private HttpSession httpSession;
-	private Thread thread;
+	private volatile boolean running = false;
 
 	public UserConnect() {}
 
 	@OnOpen
 	public void open(Session session, EndpointConfig config) {
-		if (thread == null) {
-			thread = new Thread(this);
-			thread.start();
+		if (!running) {
+			running = true;
+			new Thread(this).start();
 		}
 		
 		this.session = session;
@@ -67,6 +67,8 @@ public class UserConnect implements Runnable{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		if (allUsers.size() == 0)
+			running = false;
 	}
 
 	@OnError
@@ -86,7 +88,7 @@ public class UserConnect implements Runnable{
 
 	@Override
 	public void run() {
-		while (true) {
+		while (running) {
 			for (Entry<User, Session> e: userToSession.entrySet()) {
 				Calendar c = new Calendar(e.getKey());
 				c.getAll(e.getKey());

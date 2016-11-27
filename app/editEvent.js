@@ -38,17 +38,17 @@ function updateEvent()
     $.ajax({
         url: '/event',
         type: 'PUT',
-        data: {
-            "name": name.value,
-            "start_time": startDate.value + " " + startTime.value + ":00",
-            "end_time": endDate.value + " " + endTime.value + ":00",
-            "location": loc.value,
-            "description": description.value,
-            "color": color.value,
-            "relationship": "owned",
-            "notify": true,
-            "id": scope.selectedEvent.id
-        }
+        data: JSON.stringify({
+            name: $('#editEventTitle').val,
+            start_time: startDate.value + " " + startTime.value + ":00",
+            end_time: endDate.value + " " + endTime.value + ":00",
+            location: loc.value,
+            description: description.value,
+            color: color.value,
+            relationship: "owned",
+            notify: true,
+            id: scope.selectedEvent.id
+        }),
     }).done(function() {
         console.log('Event edited');
     });

@@ -352,13 +352,9 @@ table {
         display: flex;
         -ms-flex-flow: row nowrap;
             flex-flow: row nowrap;
-        -ms-flex-line-pack: stretch;
-            align-content: stretch;
         width: 100%; }
         .modal-friends-content-main-tablist li {
           cursor: pointer;
-          display: -ms-flexbox;
-          display: flex;
           -ms-flex-positive: 1;
               flex-grow: 1;
           text-align: center;
@@ -372,8 +368,8 @@ table {
             border-top-right-radius: 1em; }
       .modal-friends-content-main-tabcontent {
         display: none;
-        margin: 0 0 0 2%;
-        overflow-y: auto; }
+        margin: 2% 0 0 2%;
+        overflow: scroll; }
 
 .friendnotif {
   margin: 10px; }

@@ -31,11 +31,11 @@
             &-tablist {
                 display: flex;
                 flex-flow: row nowrap;
-                align-content: stretch;
+                // align-content: stretch;
+                // height: 3vh;
                 width: 100%;
                 li {
                     cursor: pointer;
-                    display: flex;
                     flex-grow: 1;
                     text-align: center;
                     padding: 2.5%;
@@ -52,8 +52,8 @@
             }
             &-tabcontent {
                 display: none;
-                margin: 0 0 0 2%;
-                overflow-y: auto;
+                margin: 2% 0 0 2%;
+                overflow: scroll;
             }
         }
     }

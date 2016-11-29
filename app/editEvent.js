@@ -1,13 +1,13 @@
 // editEvent.js
 
-var name        = document.getElementById('editEventTitle');
-var startDate   = document.getElementById('editStartDate');
-var startTime   = document.getElementById('editStartTime');
-var endDate     = document.getElementById('editEndDate');
-var endTime     = document.getElementById('editEndTime');
-var loc         = document.getElementById('editLocation');
-var description = document.getElementById('editDescription');
-var color       = document.getElementById('editColorSelect');
+var name            = document.getElementById('editEventTitle');
+var startDate       = document.getElementById('editStartDate');
+var startTime       = document.getElementById('editStartTime');
+var endDate         = document.getElementById('editEndDate');
+var endTime         = document.getElementById('editEndTime');
+var loc             = document.getElementById('editLocation');
+var description     = document.getElementById('editDescription');
+var color           = document.getElementById('editColorSelect');
 var friendDatalist  = document.getElementById("modal-editEvent-friends-list");
 var friendInput     = document.getElementById("modal-editEvent-friends-searchbar");
 var scope = angular.element($('#bodyTagID')).scope();

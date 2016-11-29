@@ -37,11 +37,11 @@
       <!-- Load all .js files here --><script type="text/javascript">
         $(function() {
             $("#sidebar").load("partials/sidebar.html");
-            
+
             $.getScript("app/modal.js");
 
             angular.element($('#bodyTagID')).scope().loggedIn(
-            		angular.element($('#bodyTagID')).scope().loadAllEvents, 
+            		angular.element($('#bodyTagID')).scope().loadAllEvents,
             		angular.element($('#bodyTagID')).scope().loadAllEvents
             );
         });

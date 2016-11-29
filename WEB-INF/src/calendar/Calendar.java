@@ -29,7 +29,7 @@ public class Calendar {
 	public ArrayList<Event> events; // used for GSON object serialization
 	public static final String ERROR_JSON = "{\"success\": false}";
 	public static final String EVENT_SELECT_SQL = "SELECT * FROM Events JOIN EventRelationships ON Events.id=EventRelationships.event_id WHERE EventRelationships.user_id=?";
-	public static final String CLASS_COLOR = "#00ff00", EXAM_COLOR = "#ff0000";
+	public static final String CLASS_COLOR = "#4baf4b", EXAM_COLOR = "#ff0000";
 	public static final String[] TYPES_OF_ENROLLMENTS = {"EnrolledClasses", "EnrolledDiscussions", "EnrolledLabs"};
 
 	public Calendar(User u) {

@@ -58,8 +58,12 @@ public class UserConnect implements Runnable{
 		// remove that user from the hashmap of user to sessions
 		for (Map.Entry<User, Session> entry : userToSession.entrySet()) {
 			if (session.getId().equals(entry.getValue().getId())) {
-				User tmp = entry.getKey();
-				userToSession.remove(tmp);
+				try {
+					session.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				userToSession.remove(entry.getKey());
 			}
 		}
 		try {
@@ -107,7 +111,8 @@ public class UserConnect implements Runnable{
 							JsonObject event = ev.toJsonObj();
 							event.addProperty("eventAlert", true);
 							try {
-								e.getValue().getBasicRemote().sendText(event.toString());
+								if (e.getValue().isOpen())
+									e.getValue().getBasicRemote().sendText(event.toString());
 							} catch (IOException e1) {
 								e1.printStackTrace();
 							}

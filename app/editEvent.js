@@ -57,44 +57,67 @@ $(function() {
 /* updates event on the server with ajax PUT request*/
 function updateEvent()
 {
-    $.ajax({
-        url: '/event',
-        type: 'PUT',
-        data: JSON.stringify({
-            name: $('#editEventTitle').val(),
-            start_time: startDate.value + " " + startTime.value + ":00",
-            end_time: endDate.value + " " + endTime.value + ":00",
-            location: loc.value,
-            description: description.value,
-            color: color.value,
-            relationship: "owned",
-            notify: true,
-            id: scope.selectedEvent.id
-        })
-    }).done(function() {
-        console.log('Event edited');
-        scope.shareEvent(scope.selectedEvent.id, $(friendInput).val());
-        scope.loadAllEvents();
-        $('#modal').toggleClass("modal-active");
-		$('#modal').html("<div></div>")
-    });
+	obj =  {
+        name: $('#editEventTitle').val(),
+        start_time: startDate.value + " " + startTime.value + ":00",
+        end_time: endDate.value + " " + endTime.value + ":00",
+        location: loc.value,
+        description: description.value,
+        color: color.value,
+        relationship: "owned",
+        notify: true,
+        id: scope.selectedEvent.id
+    };
+	scope.loggedIn(function () {
+		// LOGGED IN
+		$.ajax({
+	        url: '/event',
+	        type: 'PUT',
+	        data: JSON.stringify(obj)
+	    }).done(function() {
+	        console.log('Event edited');
+	        scope.shareEvent(scope.selectedEvent.id, $(friendInput).val());
+	        scope.loadAllEvents();
+	        $('#modal').toggleClass("modal-active");
+			$('#modal').html("<div></div>")
+	    });
+   	 }, function () {
+   		 //IN GUEST MODE
+//   		 if (window.localStorage) {
+//   			 var events = JSON.parse(window.localStorage.getItem("events"));
+//   			 if (events == null) events = [];
+//   			 events.push(event);
+//   			 window.localStorage.setItem("events", JSON.stringify(events));
+//   		 }
+   	 });
 }
 
 /* deletes event from the server with ajax DELETE request*/
 function deleteEvent()
-{
-    $.ajax({
-        url: '/event',
-        type: 'DELETE',
-        data: JSON.stringify({
-            id: scope.selectedEvent.id
-        })
-    }).done(function() {
-        console.log('Event deleted');
-        scope.loadAllEvents();
-        $('#modal').html("<div></div>")
-        $('#modal').toggleClass("modal-active");
-    });
+{	
+	scope.loggedIn(function () {
+		// LOGGED IN
+		$.ajax({
+	        url: '/event',
+	        type: 'DELETE',
+	        data: JSON.stringify({
+	            id: scope.selectedEvent.id
+	        })
+	    }).done(function() {
+	        console.log('Event deleted');
+	        scope.loadAllEvents();
+	        $('#modal').html("<div></div>")
+	        $('#modal').toggleClass("modal-active");
+	    });
+   	 }, function () {
+   		 //IN GUEST MODE
+//   		 if (window.localStorage) {
+//   			 var events = JSON.parse(window.localStorage.getItem("events"));
+//   			 if (events == null) events = [];
+//   			 events.push(event);
+//   			 window.localStorage.setItem("events", JSON.stringify(events));
+//   		 }
+   	 });
 }
 
 

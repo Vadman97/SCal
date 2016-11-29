@@ -102,7 +102,11 @@ public class User {
 	
 	@Override
 	public boolean equals(Object o) {
+		if (o == null)
+			return false;
 		if (o instanceof User) {
+			if (((User) o).username == null || username == null)
+				return false;
 			return ((User) o).username.equals(username);
 		}
 		return false;

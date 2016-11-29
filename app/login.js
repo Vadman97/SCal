@@ -48,9 +48,9 @@ function validateUser() {
             data : formData,
             success: function(data, textStatus, jqXHR)
             {
-                $('#sidebarUser').html(user);
-
                 if(JSON.parse(data)["success"]) {
+                	$('#sidebarUser').html(user);
+                	
                 	scope.pushAllGuestData();
                 	scope.loadAllEvents();
 
@@ -59,7 +59,6 @@ function validateUser() {
 
                     return true;
                 } else {
-
                     alert("Invalid: Username or Password");
                 }
             },
@@ -88,6 +87,9 @@ function validateUser() {
                 //data: data from server
                 if(JSON.parse(data)["success"]) {
                     $('#sidebarUser').html(user);
+                    
+                	scope.pushAllGuestData();
+                	scope.loadAllEvents();
 
                     $('#modal').toggleClass("modal-active");
                     $('#modal').html("<div></div>")

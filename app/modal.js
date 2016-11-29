@@ -3,7 +3,7 @@ var modal = document.getElementById('modal');
 var createEventBtn = document.getElementById('createButton');
 var loginBtn = document.getElementById('loginButton');
 var uploadBtn = document.getElementById('uploadButton');
-var friendsBtn = document.getElementById('friendsButton');
+// var friendsBtn = document.getElementById('friendsButton');
 var enrollBtn = document.getElementById('enrollButton');
 var commonBtn = document.getElementById('commonButton');
 
@@ -34,10 +34,10 @@ uploadBtn.onclick = function() {
 	// modal.style.display = "block";
 }
 
-friendsBtn.onclick = function() {
+/* friendsBtn.onclick = function() {
 	$('#modal').load("partials/friendsModal.html", closeModal);
 	$('#modal').toggleClass("modal-active");
-}
+} */
 
 enrollBtn.onclick = function() {
 	$('#modal').load("partials/enrollModal.html", closeModal);

@@ -120,8 +120,8 @@ app.controller('calendarCtrl', function($scope, $http, $timeout, $compile, uiCal
   				 for (var event of events) {
   					 $scope.postEvent(event, function() {});
   				 }
-  				 window.localStorage.clear();
   			 }
+			 window.localStorage.clear();
   		 }
     }
 

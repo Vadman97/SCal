@@ -140,6 +140,8 @@ public class User {
 
 	@Override
 	public int hashCode() {
+		if (username == null)
+			return super.hashCode();
 		return username.hashCode();
 	}
 

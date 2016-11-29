@@ -105,6 +105,8 @@ public class User {
 		if (o == null)
 			return false;
 		if (o instanceof User) {
+			if (((User) o).username == null || username == null)
+				return false;
 			return ((User) o).username.equals(username);
 		}
 		return false;

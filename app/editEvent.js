@@ -68,7 +68,7 @@ function updateEvent()
         notify: true,
         id: scope.selectedEvent.id
     };
-	$scope.loggedIn(function () {
+	scope.loggedIn(function () {
 		// LOGGED IN
 		$.ajax({
 	        url: '/event',
@@ -95,7 +95,7 @@ function updateEvent()
 /* deletes event from the server with ajax DELETE request*/
 function deleteEvent()
 {	
-	$scope.loggedIn(function () {
+	scope.loggedIn(function () {
 		// LOGGED IN
 		$.ajax({
 	        url: '/event',

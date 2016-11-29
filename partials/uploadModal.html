@@ -35,13 +35,15 @@
 
 
         <form class="modal-upload-content-file" action="/ics" method="POST" enctype="multipart/form-data" onsubmit="return false;">
-            <label for="modal-upload-content-file-chooser">File: </label>
-            <input type="file" id="file" name="file">
+            <div class="modal-upload-content-file-chooser">
+                <label for="file">File: </label>
+                <input type="file" id="file" name="file">
+            </div>
             <div class="modal-upload-content-buttongroup">
                 <button id="upload">Upload</button>
             </div>
         </form>
-        
+
         <br><br><br>
         <h3><a href="/ics" target="_blank">Download (export) your current calendar!</a></h3>
 

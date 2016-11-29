@@ -318,6 +318,17 @@ table {
   width: 30%;
   height: 50%;
   border-radius: 15px; }
+  .modal-upload-content-file-chooser {
+    text-align: center;
+    width: 100%;
+    margin: 0 auto; }
+    .modal-upload-content-file-chooser #file {
+      font-size: 16px; }
+  .modal-upload-content-buttongroup {
+    text-align: center; }
+    .modal-upload-content-buttongroup button {
+      padding: 1.5vh 2.5vh;
+      cursor: pointer; }
 
 .modal-friends {
   background-color: #fefefe;

@@ -8,4 +8,23 @@
     width: 30%;
     height: 50%;
     border-radius: 15px;
+    &-content {
+        &-file-chooser {
+            text-align: center;
+            width: 100%;
+            margin: 0 auto;
+            #file {
+                font: {
+                    size: 16px;
+                }
+            }
+        }
+        &-buttongroup {
+            text-align: center;
+            button {
+                padding: 1.5vh 2.5vh;
+                cursor: pointer;
+            }
+        }
+    }
 }

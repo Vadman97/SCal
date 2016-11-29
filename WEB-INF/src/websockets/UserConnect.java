@@ -93,6 +93,8 @@ public class UserConnect implements Runnable{
 				Calendar c = new Calendar(e.getKey());
 				c.getAll(e.getKey());
 				ArrayList<Event> events = c.events;
+				if (events.size() == 0)
+					continue;
 				java.util.Calendar cal = java.util.Calendar.getInstance();
 				cal.setTimeInMillis(System.currentTimeMillis());
 				Date now = cal.getTime();

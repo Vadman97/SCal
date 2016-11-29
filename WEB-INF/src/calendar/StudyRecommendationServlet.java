@@ -21,7 +21,7 @@ public class StudyRecommendationServlet extends HttpServlet {
 	private static final long serialVersionUID = 5229439913621174381L;
 	
 	private class RecommendationJson {
-		public Vector<String> users;
+		public Vector<String> users = new Vector<String>();
 		public Timestamp day;
 		public boolean smart = false;
 		public transient Vector<User> user_objs;
@@ -31,8 +31,10 @@ public class StudyRecommendationServlet extends HttpServlet {
 			try {
 				con = Util.getConn();
 				user_objs = new Vector<>();
-				for (String s: users) {
-					user_objs.add(User.getUser(con, s));
+				if (users != null) {
+					for (String s: users) {
+						user_objs.add(User.getUser(con, s));
+					}
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();

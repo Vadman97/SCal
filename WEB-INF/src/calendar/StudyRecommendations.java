@@ -28,8 +28,9 @@ public class StudyRecommendations {
 			+ "AND USCClasses.class_id = EnrolledClasses.class_id";
 
 	public static final int START_HOUR = 9;
-	public static final int END_HOUR = 22;
+	public static final int END_HOUR = 23;
 	public static final int TIME_QUANTS = (END_HOUR - START_HOUR) * 4;
+	public static final int MIN_THRESH = 2;
 	public static final String REC_COLOR = "#0177ff";
 	
 	// recommendations for users from your classes for week of focusDay
@@ -104,10 +105,11 @@ public class StudyRecommendations {
 				ArrayList<Event> events = calendar.events;
 				for (Event e: events) {
 					cal.setTime(e.getStartTimestamp());
-					int start = (cal.get(java.util.Calendar.HOUR_OF_DAY) - START_HOUR) * 4 + cal.get(java.util.Calendar.MINUTE / 15);
+					int start = (cal.get(java.util.Calendar.HOUR_OF_DAY) - START_HOUR) * 4 + (int) Math.floor(cal.get(java.util.Calendar.MINUTE) / 15.0);
 					cal.setTime(e.getEndTimestamp());
-					int end = (cal.get(java.util.Calendar.HOUR_OF_DAY) - START_HOUR) * 4 + cal.get(java.util.Calendar.MINUTE / 15);
+					int end = (cal.get(java.util.Calendar.HOUR_OF_DAY) - START_HOUR) * 4 + (int) Math.ceil(cal.get(java.util.Calendar.MINUTE) / 15.0);
 					// fill row region from start to end with 1s
+					System.out.println("Start: " + start + " end: " + end);
 					for (int k = start; k <= end; k++) {
 						if (k >= TIME_QUANTS || k < 0)
 							break;
@@ -141,9 +143,8 @@ public class StudyRecommendations {
 			for (int i = 0; i < matrix.cols; i++) {
 				val = matrix.get(0, i) == 0.0;
 				if (!val) {
-					if ((i - 1) > start) {
+					if ((i-1-start) > MIN_THRESH)
 						eventCalculation(cal, i, start, result, friends);
-					}
 					start = i;
 				}
 			}

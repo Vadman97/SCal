@@ -40,6 +40,8 @@ public class Calendar {
 		Connection conn = null;
 		try {
 			conn = Util.getConn();
+			if (conn == null)
+				return null;
 			PreparedStatement st = null;
 			if (start != null)
 				st = conn.prepareStatement(EVENT_SELECT_SQL + " AND start_time>=? AND start_time <=?");

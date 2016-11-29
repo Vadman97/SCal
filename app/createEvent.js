@@ -72,7 +72,8 @@ function create() {
 
 
     scope.postEvent(eventToPost, scope.addEvent(event));
-    scope.shareEvent(scope.selectedEvent.id, $(friendInput).val());
+    if (scope.selectedEvent)
+    	scope.shareEvent(scope.selectedEvent.id, $(friendInput).val());
     scope.renderCalendar();
 
     $('#modal').html("<div></div>")
